@@ -11,12 +11,13 @@ import Layout from "@/components/sign-up/Layout";
 import bigPetsImage from "@/assets/signup/signupImage.png";
 import backgroundLines from "@/assets/common/signUpLoginLines.png";
 import leftArrow from "@/assets/common/leftArrow.png";
+import Uploader from "@/components/Uploader";
 
 export default function SignUp() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const toggleSubmitState = () => setIsSubmitting((currState) => !currState);
   const router = useRouter();
-  const [step,setStep] = useState(1)
+  const [step,setStep] = useState(5)
   const backHandler = () => {
     step > 1 ? setStep(step-1) : router.push('/')
   }
@@ -285,15 +286,9 @@ export default function SignUp() {
               >گواهی مالیات</a>
 
             </div>
-              <FloatLabelInput
-                type={"text"}
-                placeholder={"نام"}
-                name="firstname"
-                onChange={formik.handleChange}
-                value={formik.values.firstname}
-                required={true}
-                h={"h-[12%] lg:h-[15%]"}
-              />
+              <div>
+                <Uploader/>
+              </div>
               
               <button
                 type="submit"
