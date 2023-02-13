@@ -7,8 +7,8 @@ import { useFormik } from "formik";
 import FloatLabelInput from "../../components/common/input";
 import DashboardLayout from '../../components/DashboardLayout';
 //media
-import PetPic from '../../assets/dashboard/PetPic.svg';
-import PetPicPreserve from '../../assets/dashboard/PetPicPreserve.svg';
+import PetPic from '../../assets/common/PetPic.svg';
+import PetPicPreserve from '../../assets/common/PetPicPreserve.svg';
 import Upload_Icon from '../../assets/common/uploadIcon.svg';
 import ArrowLeftWhite_Icon from '../../assets/common/leftArrowWhite.svg';
 const MyPetEdit = () => {

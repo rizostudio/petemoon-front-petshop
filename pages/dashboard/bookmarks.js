@@ -4,9 +4,9 @@ import Image from 'next/image';
 //component
 import DashboardLayout from '../../components/DashboardLayout';
 //media
-import ProductPic from '../../assets/dashboard/Capture 1.svg';
+import ProductPic from '../../assets/common/Capture 1.svg';
 import Trash_Icon from '../../assets/common/trash.svg';
-import ShopCart_Icon from '../../assets/dashboard/shopping-cart.svg';
+import ShopCart_Icon from '../../assets/common/shopping-cart.svg';
 
 const Bookmarks = () => {
     // fake data

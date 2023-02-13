@@ -1,33 +1,38 @@
 import React,{useState} from 'react';
-import Link from 'next/link';
+import Link from 'next/link'
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import clsx from 'clsx'; //for dynamic style
 import {v4} from 'uuid';// for produce unique key
 
+//component
+import BottomNavigation from './common/BottomNavigation';
+
 //media
-import Home_Icon from '../assets/dashboard/home.svg';
+import Home_Icon from '../assets/common/home.svg';
 import Profile_Icon from '../assets/common/user-edit.svg';
-import Address_Icon from '../assets/dashboard/location.svg';
-import MyPet_Icon from '../assets/dashboard/pet.svg';
-import Wallet_Icon from '../assets/dashboard/empty-wallet.svg';
-import Orders_Icon from '../assets/dashboard/shopping-bag.svg';
+import Address_Icon from '../assets/common/location.svg';
+import MyPet_Icon from '../assets/common/pet.svg';
+import Wallet_Icon from '../assets/common/empty-wallet.svg';
+import Orders_Icon from '../assets/common/shopping-bag.svg';
 import Favorite_Icon from '../assets/common/like.svg';
 import Message_Icon from '../assets/common/sms.svg';
 import Help_Icon from '../assets/common/alarm.svg';
 import Search_Icon from '../assets/common/search-icon.svg'
 import ArrowLeft_Icon from '../assets/common/arrow-left.svg';
 import ArrowLeftWhite_Icon from '../assets/common/leftArrowWhite.svg'
-import Profile_Alt_Pic from '../assets/dashboard/profile-pic-alt.svg';
-import Logout_Btn from '../assets/dashboard/logout-btn.svg';
-import Petemoon_Logo from '../assets/dashboard/Petemoon.svg';
-import Userpanel_Logo from '../assets/dashboard/user-panel.svg';
-import ShopBag_Icon from '../assets/dashboard/bagHeader.svg';
-
+import Profile_Alt_Pic from '../assets/common/profile-pic-alt.svg';
+import Logout_Btn from '../assets/common/logout-btn.svg';
+import Petemoon_Logo from '../assets/common/Petemoon.svg';
+import Userpanel_Logo from '../assets/common/user-panel.svg';
+import SellerPanel_Logo from '../assets/common/SellerPanelLogo.svg';
+import ShopBag_Icon from '../assets/common/bagHeader.svg';
+import ShopWhite_Icon from '../assets/common/shop2white.svg';
+import OrdersWhite_Icon from '../assets/common/shopping-cartWhite.svg';
 
 
 const DashboardLayout = ({children}) => {
-    const [openly,setOpenly] = useState(false); //for open and close dashboard in mobile
+    const [openly,setOpenly] = useState(true); //for open and close dashboard in mobile
     const router = useRouter()
     const [Minify, setMinify] = useState(false); // for minify dashboard
     const openHandler = () => {
@@ -35,24 +40,24 @@ const DashboardLayout = ({children}) => {
     }
     //dashboard menu
     const menuArr = [   {id:"home", name:"داشبورد", icon:Home_Icon},
-                        {id:"my-profile", name:"حساب کاربری", icon:Profile_Icon,notification:0},
-                        {id:"addresses", name:"آدرس ها", icon:Address_Icon},
-                        {id:"my-pets", name:"پت من", icon:MyPet_Icon},
+                        {id:"products", name:"محصولات", icon:ShopWhite_Icon,notification:0},
+                        {id:"orders", name:"سفارش های من", icon:OrdersWhite_Icon},
                         {id:"wallet", name:"کیف پول", icon:Wallet_Icon},
-                        {id:"orders", name:"سفارش ها", icon:Orders_Icon, notification:5},
-                        {id:"bookmarks", name:"علاقه مندی ها", icon:Favorite_Icon},
                         {id:"my-messages", name:"پیام های من", icon:Message_Icon, notification:10},
                         {id:"support", name:"پشتیبانی", icon:Help_Icon},
                     ]
     const pageName = menuArr.find(item => router.asPath.includes(item.id)) // for showing the title of page in mobile
     return (
-        <div className='w-full h-full flex flex-row justify-between items-stretch'>
+        <div className='w-full h-screen flex flex-row justify-between items-stretch relative'>
             {/* Drawer */}
-            <div id="Drawer" className={clsx('lg:flex h-full w-full lg:w-auto lg:overflow-x-hidden flex-col justify-between items-stretch bg-fourth lg:bg-[#313131]',{
-                'flex' : openly == false,
-                'hidden' : openly == true
-            })}>
-                <div className='hidden lg:flex justify-center h-full w-full py-10 px-12'>
+            <div id="Drawer" className='h-screen w-auto overflow-y-scroll scrollbar hidden lg:flex flex-col justify-between items-stretch py-10 bg-fourth lg:bg-[#313131]'>
+                {/* LogoBox  */}
+                <div className='flex justify-center h-full w-full px-12'>
+                    <Image 
+                        src={SellerPanel_Logo} 
+                        alt="SellerPanelLogo" 
+                        className='w-10 ml-3'
+                    />
                     <Image 
                         src={Petemoon_Logo} 
                         alt="PetemoonLogo" 
@@ -61,26 +66,17 @@ const DashboardLayout = ({children}) => {
                             'hidden' : Minify == true
                         })}
                     />
-                    <Image 
-                        src={Userpanel_Logo} 
-                        alt="UserPanelLogo" 
-                        className='w-10 mr-3'
-                    />
                 </div>
-                <div className='p-10 h-full flex lg:hidden flex-row justify-start items-center border-b-[1px] border-silver solid'>
-                    <Image 
-                        src={Profile_Alt_Pic} 
-                        alt="Profile-Pic-Alt" 
-                        height={50} 
-                        width={50}
-                    />
-                    <div className='mr-5 flex flex-col'>
-                        <p className='text-base text-black text-right font-black'>علی حسینی نسب</p>
-                        <p className='text-base text-gray-400 text-right font-medium'>۰۹۳۰۱۲۳۴۵۶۷</p>
-                    </div>
+                {/* Store Credit */}
+                <div className={clsx('flex-col mx-10 my-1 border-b-[1px] border-[#eeeeee26] py-3',{
+                    'flex' : Minify == false,
+                    'hidden' : Minify == true
+                })}>
+                    <h3 className='text-lg text-white font-bold leading-8'><bdi>اعتبار فروشگاه:</bdi></h3>
+                    <p className='text-xl text-warning font-extrabold leading-9 self-end mt-1 after:content-["تومان"] after:text-sm after:mr-1'><bdi>{(2200300).toLocaleString()}</bdi></p>
                 </div>
                 {/* menu */}
-                <ul className='w-full h-full lg:mt-[75px]'>
+                <ul className='w-full h-full'>
                     {menuArr.map(item => 
                         <li 
                             key={v4()}  
@@ -103,7 +99,7 @@ const DashboardLayout = ({children}) => {
                                         alt={item.name} 
                                         width='20' 
                                         height='20' 
-                                        className={clsx('lg:invert',{
+                                        className={clsx('',{
 
                                         })}
                                     />
@@ -130,30 +126,26 @@ const DashboardLayout = ({children}) => {
                         </li>
                     )}
                 </ul>
-                <div className='w-full h-full flex flex-col justify-center items-stretch lg:mt-[50px]'>
+                <div className='w-full h-full flex flex-col justify-center items-stretch mt-5'>
                     {/* user information */}
-                    <div className='p-10 lg:py-4 h-full hidden lg:flex flex-row justify-start items-center border-b-[1px] border-[#eeeeee26] solid lg:border-none'>
-                        <div className='mr-5 lg:mr-0 flex flex-col'>
-                            <div className={clsx({
-                                'block' : Minify == false,
-                                'lg:hidden' : Minify == true
-                            })}>
-                                <p className='text-base text-white text-right font-black'>علی حسینی نسب</p>
-                                <p className='text-base text-gray-400 text-right font-medium'>۰۹۳۰۱۲۳۴۵۶۷</p>
-                            </div>
-                        </div>
+                    <div className={clsx('flex-col mr-10', {
+                        'flex' : Minify == false,
+                        'hidden' : Minify == true
+                    })}>
+                        <p className='text-base text-white text-right font-black'>علی حسینی نسب</p>
+                        <p className='text-base text-gray-400 text-right font-medium'>۰۹۳۰۱۲۳۴۵۶۷</p>
                     </div>
                     {/* logout */}
                     <div 
-                        className={clsx("flex justify-center lg:justify-between items-center self-center bg-primary w-3/4 h-full lg:mx-auto mt-20 lg:mt-2 mb-10 rounded-[12px]",{
-                            ' lg:bg-[#3A4750] p-4 lg:py-2 mx-10'   : Minify == false,
-                            'lg:bg-transparent lg:flex-col p-4 lg:p-0 mx-10 lg:mx-0' : Minify == true
+                        className={clsx("flex justify-between items-center self-center w-3/4 mx-auto mt-2 py-2 rounded-[12px]",{
+                            'bg-[#3A4750] px-4 py-2 mx-10'   : Minify == false,
+                            'bg-transparent flex-col p-0 mx-0' : Minify == true
                         })}
                     >
                         <p 
                             className={clsx('text-base text-white font-medium leading-7 ml-3',{
                                 'block' : Minify == false,
-                                'lg:hidden' : Minify == true
+                                'hidden' : Minify == true
                             })}
                         >خروج از حساب</p>
                         <Image 
@@ -172,7 +164,7 @@ const DashboardLayout = ({children}) => {
                 'flex' : openly == true 
                 })}
             >
-                <div className='w-full h-full bg-white hidden lg:flex flex-row justify-between items-center px-12 py-5 relative'>
+                <div className='w-full h-[140px] bg-white hidden lg:flex flex-row justify-between items-center px-12 py-5 relative'>
                         {/* for minify dashboard in desktop */}
                         <Image 
                             src={ArrowLeft_Icon} 
@@ -200,17 +192,13 @@ const DashboardLayout = ({children}) => {
                                     className='text-base text-right text-black opacity-[0.8] font-bold p-2 w-full border-none bg-transparent peer-focus:border-none'
                                 />
                             </div>
-                            <div className='p-3 border-[1px] solid border-thirdly rounded-[15px] mr-8'>
-                                <Image 
-                                    src={ShopBag_Icon} 
-                                    alt="ShopBagPic"
-                                />
-                            </div>
+                            <div className='w-0.5 h-10 bg-[#3A4750] opacity-50 mx-2.5 rounded-[5px]'></div>
+                            <button className='text-base text-white font-bold leading-7 px-10 py-2.5 bg-primary rounded-[15px]'><bdi>افزودن محصول</bdi></button>
                         </div>
                 </div>
-                <div className=' w-full h-full p-10 pb-10 lg:px-20 lg:py-12'>
+                <div className=' w-full h-screen overflow-y-scroll p-10 pb-[100px] lg:px-20 lg:py-12 '>
                     {/* for showing page title and return to home */}
-                    {pageName && 
+                    {/* {pageName && 
                         <div className='w-full flex lg:hidden flex-row justify-between items-center mb-10'>
                             <p className='text-lg text-black font-black leading-7 align-middle before:inline-block before:w-2 before:h-5 before:bg-primary before:ml-1 before:rounded-[2px]'>{pageName.name}</p>
                             <Link 
@@ -225,11 +213,12 @@ const DashboardLayout = ({children}) => {
                                 />
                             </Link>
                         </div>
-                    }
+                    } */}
 
                     {children}
                 </div>
             </div>
+            <BottomNavigation/>
         </div>
     );
 };

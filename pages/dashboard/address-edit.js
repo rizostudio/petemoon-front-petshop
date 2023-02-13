@@ -7,8 +7,8 @@ import FloatLabelInput from "../../components/common/input";
 import DashboardLayout from '../../components/DashboardLayout';
 //media 
 import ArrowLeftWhite_Icon from '../../assets/common/leftArrowWhite.svg';
-import MapPreserve_Pic from '../../assets/dashboard/mapPicPreserve.svg';
-import Map_Pic from "../../assets/dashboard/mapPic.svg";
+import MapPreserve_Pic from '../../assets/common/mapPicPreserve.svg';
+import Map_Pic from "../../assets/common/mapPic.svg";
 
 const AddressEdit = () => {
     const [inputError, setInputError] = useState(false)

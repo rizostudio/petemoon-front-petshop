@@ -6,10 +6,10 @@ import {v4} from 'uuid';
 //components
 import DashboardLayout from '../../components/DashboardLayout';
 //media
-import PetPic from '../../assets/dashboard/PetPic.svg';
-import PetPicPreserve from '../../assets/dashboard/PetPicPreserve.svg';
-import PetAdd_Icon from '../../assets/dashboard/AddPet.svg';
-import PetAdd_IconWhite from '../../assets/dashboard/PetAddWhite.svg';
+import PetPic from '../../assets/common/PetPic.svg';
+import PetPicPreserve from '../../assets/common/PetPicPreserve.svg';
+import PetAdd_Icon from '../../assets/common/AddPet.svg';
+import PetAdd_IconWhite from '../../assets/common/PetAddWhite.svg';
 import TrashRed_Icon from '../../assets/common/TrashIconRed.svg';
 import Edit2_Icon from '../../assets/common/EditIcon2.svg';
 import More_Icon from '../../assets/common/more.svg';

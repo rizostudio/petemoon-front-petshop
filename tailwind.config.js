@@ -29,11 +29,14 @@ module.exports = {
           'shadowA': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
           'shadowB': '0 20px 50px -10px rgba(58, 71, 80, 0.15)',
           'shadowC': '0px 20px 50px rgba(234, 99, 82, 0.2)',
+          'shadowD': '0px -8px 32px rgba(0, 0, 0, 0.12)',
         },
         content: {
         },
         backgroundImage: {
-          'dashbackground': "url('../assets/dashboard/dash-bg-mobile.svg')",
+          'dashbackground': "url('../assets/common/dash-bg-mobile.svg')",
+          'walletBG': "url('../assets/common/walletBG.png')",
+
         }
     },
   },
@@ -55,6 +58,12 @@ module.exports = {
         '.scrollbar::-webkit-scrollbar-track-piece': {
             backgroundColor: theme('colors.blue.200'),
         },
+        '.scrollbar-position-left' : {
+          scrollbarYPosition: 'left'
+        },
+        '.scrollbar-position-right' : {
+          scrollbarYPosition: 'right'
+        }
     });
 }),
 ], 

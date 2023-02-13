@@ -6,8 +6,8 @@ import { useFormik } from 'formik';
 import DashboardLayout from '../../components/DashboardLayout';
 import FloatLabelInput from '../../components/common/input';
 //media
-import Profile_Alt_Pic from '../../assets/dashboard/profile-pic-alt.svg';
-import Cake_Icon from '../../assets/dashboard/cake.svg';
+import Profile_Alt_Pic from '../../assets/common/profile-pic-alt.svg';
+import Cake_Icon from '../../assets/common/cake.svg';
 import PenEdit_Icon from '../../assets/common/PenEditIcon.svg';
 
 const profile = () => {

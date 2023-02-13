@@ -1,97 +1,231 @@
 import React,{useState} from 'react';
 import Image from 'next/image';
+import clsx from 'clsx';
+import { v4 } from 'uuid';
 //component
 import DashboardLayout from '../../components/DashboardLayout';
 //media
-import WalletAdd_Icon from '../../assets/dashboard/wallet-add.svg';
-import CloseButton_Icon from '../../assets/common/close-button.svg';
+import BagTick_Icon from '../../assets/common/bag-tick2.svg';
+import CartTotal_Icon from '../../assets/common/card-receive2.svg';
+import search_Icon from '../../assets/common/searchIcon3.svg';
+import logout_Icon from '../../assets/common/logoutIconRed.svg';
+
 
 const wallet = () => {
-    const [increaseAmount, setIncreaseAmount] = useState()
-    console.log(increaseAmount)
+    const [data,setData] = useState([
+            {month:"فروردین", sumIncome:"57600500", sumSaleAmount:"7654",
+            salesDetail:[
+                {date:"۰۸/۱۰/۱۴۰۱", sumSale:220000, benefit:125000, checkoutDate:"۱۸ آبان ۱۴۰۱", checkoutStatus:"تسویه شده"},
+                {date:"۰۸/۱۰/۱۴۰۱", sumSale:220000, benefit:125000, checkoutDate:"۱۸ آبان ۱۴۰۱", checkoutStatus:"تسویه شده"},
+                {date:"۰۸/۱۰/۱۴۰۱", sumSale:220000, benefit:125000, checkoutDate:"۱۸ آبان ۱۴۰۱", checkoutStatus:"تسویه شده"},
+                {date:"۰۸/۱۰/۱۴۰۱", sumSale:220000, benefit:125000, checkoutDate:"۱۸ آبان ۱۴۰۱", checkoutStatus:"تسویه شده"}]
+            },
+            {month:"اردیبهشت", sumIncome:"57600500", sumSaleAmount:"7654",salesDetail:[{date:"۰۸/۱۰/۱۴۰۱", sumSale:220000, benefit:125000, checkoutDate:"۱۸ آبان ۱۴۰۱", checkoutStatus:"تسویه شده"}]},
+            {month:"خرداد", sumIncome:"57600500", sumSaleAmount:"7654",salesDetail:[{date:"۰۸/۱۰/۱۴۰۱", sumSale:220000, benefit:125000, checkoutDate:"۱۸ آبان ۱۴۰۱", checkoutStatus:"تسویه شده"}]},
+            {month:"تیر", sumIncome:"57600500", sumSaleAmount:"7654",salesDetail:[
+                {date:"۰۸/۱۰/۱۴۰۱", sumSale:220000, benefit:125000, checkoutDate:"۱۸ آبان ۱۴۰۱", checkoutStatus:"تسویه شده"},
+                {date:"۰۸/۱۰/۱۴۰۱", sumSale:220000, benefit:125000, checkoutDate:"۱۸ آبان ۱۴۰۱", checkoutStatus:"تسویه شده"},
+                {date:"۰۸/۱۰/۱۴۰۱", sumSale:220000, benefit:125000, checkoutDate:"۱۸ آبان ۱۴۰۱", checkoutStatus:"تسویه شده"},
+                {date:"۰۸/۱۰/۱۴۰۱", sumSale:220000, benefit:125000, checkoutDate:"۱۸ آبان ۱۴۰۱", checkoutStatus:"تسویه شده"}]
+            },,
+            {month:"مرداد",sumIncome:"", sumSaleAmount:"",salesDetail:[]},
+            {month:"شهریور",sumIncome:"", sumSaleAmount:"",salesDetail:[]},
+            {month:"مهر",sumIncome:"", sumSaleAmount:"",salesDetail:[]},
+            {month:"آبان",sumIncome:"", sumSaleAmount:"",salesDetail:[]},
+            {month:"آذر", sumIncome:"", sumSaleAmount:"",salesDetail:[]},
+            {month:"دی", sumIncome:"57600500", sumSaleAmount:"7654",salesDetail:[
+                {date:"۰۸/۱۰/۱۴۰۱", sumSale:220000, benefit:125000, checkoutDate:"۱۸ آبان ۱۴۰۱", checkoutStatus:"تسویه شده"},
+                {date:"۰۸/۱۰/۱۴۰۱", sumSale:220000, benefit:125000, checkoutDate:"۱۸ آبان ۱۴۰۱", checkoutStatus:"تسویه شده"},
+                {date:"۰۸/۱۰/۱۴۰۱", sumSale:220000, benefit:125000, checkoutDate:"۱۸ آبان ۱۴۰۱", checkoutStatus:"تسویه شده"},
+                {date:"۰۸/۱۰/۱۴۰۱", sumSale:220000, benefit:125000, checkoutDate:"۱۸ آبان ۱۴۰۱", checkoutStatus:"تسویه شده"}]
+            },
+            {month:"بهمن", sumIncome:"", sumSaleAmount:"",salesDetail:[]},
+            {month:"اسفند", sumIncome:"", sumSaleAmount:"",salesDetail:[]},
+    ])
+    const months = ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"]
+    const years = []
+    for(let i=1390; i <= 1403; i++) {
+        years.push(i)
+    }    
+    // for select the date
+    const [monthSelected,setMonthSelected] = useState("فروردین")
+    const [yearSelected,setYearSelected] = useState(1401)
+    const dataSelected = data.filter(item => item.month == monthSelected)[0]
+
+    // for open and close the box
+    const [dateShowBox,setDateShowBox] = useState(true)
+    const [monthselectorBox,setMonthSelectorBox] = useState(false)
+    const [yearselectorBox,setYearSelectorBox] = useState(false)
+
     return (
         <DashboardLayout>
-            <div className='h-screen lg:h-full flex flex-col lg:flex-row justify-between items-stretch'>
-                {/* show user's money */}
-                <div className='flex flex-col lg:w-2/3'>
-                    <div className='h-[200px] lg:h-full w-full flex flex-col justify-between items-center p-5 rounded-[15px] lg:rounded-[25px] text-white bg-gradient-to-r from-[#FA5456] to-[#FFA000]'>
-                        <p className='self-start text-base font-black leading-12'>کیف پول<sup className='text-xs font-normal leading-6'>پتمون</sup></p>
-                        <p className='self-center text-3xl font-black leading-16'><bdi>{"۲۵۲.۵۰۰"} تومان</bdi></p>
-                        <p className='self-end text-[12px] font-medium leading-5'><bdi>*موجودی کیف پول قابل بازگردانی به حساب نیست</bdi></p>
+            <div className='h-screen lg:h-full flex flex-col items-stretch'>
+                {/* Heading for mobile  */}
+                <div className='lg:hidden flex items-center'>
+                    <div className='flex h-12 w-full px-5 py-3 bg-[#F2CDC8] rounded-[15px]'>
+                        <input                             
+                            type="text" 
+                            placeholder="جستجوی محصول، فروشگاه و..."
+                            className='h-full w-full text-base text-right text-white placeholder:text-primary placeholder:opacity-50 font-bold border-none bg-transparent appearance-none focus:ring-0 focus:outline-none focus:border-none peer'
+                        />
+                        <Image 
+                            src={search_Icon} 
+                            alt="SearchIcon" 
+                        />
+                    </div>
+                    <div 
+                        className='p-3 bg-[#F2CDC8] rounded-[15px] mr-1'
+                    >
+                        <Image src={logout_Icon} alt="LogOut Icon"/>
+                    </div> 
+                </div>
+                {/* summary Information */}
+                <div className='flex flex-col lg:flex-row items-stretch lg:justify-center mt-10'>
+                    {/* orders sum */}
+                    <div className='order-2 lg:order-1 w-full lg:w-1/4 h-full flex flex-row-reverse lg:flex-col justify-between items-stretch bg-white px-6 py-5 lg:py-7.5 my-1 rounded-[15px] lg:rounded-[25px] shadow-shadowB'>
+                        <Image 
+                            src={CartTotal_Icon} 
+                            alt="CartTotalIcon" 
+                        />
+                        <div className='text-right flex flex-col lg:mt-10'>
+                            <p className='text-base lg:text-lg text-[#3A4750] font-bold leading-6'>مجموع درآمد فروشگاه</p>
+                            <p className='text-xl lg:text-2xl text-[#3A4750] font-extrabold leading-10 mt-1.5 after:content-["تومان"] after:text-sm after:mr-2'><bdi>{(+dataSelected.sumIncome).toLocaleString()}</bdi></p>
+                        </div>
+                        <p className='hidden lg:block text-base text-black font-noramal opacity-60 mt-4 self-end'><bdi>{dataSelected.month}</bdi></p>
+                    </div>
+                    {/* Date Show Box  */}
+                    <div className={clsx('order-1 lg:order-2 w-full lg:w-2/4 h-full flex-col justify-between items-stretch relative bg-white py-3 px-7 lg:px-10 lg:mr-5 my-1 lg:my-0 lg:mx-5 rounded-[15px] lg:rounded-[25px] shadow-shadowB',{
+                       "flex" : dateShowBox,
+                       "hidden" : dateShowBox == false
+                    })}>
+                        <p></p>
+                        <p className='text-xl lg:text-3xl text-black font-black leading-10 opacity-90 self-center'><bdi>{monthSelected + " " + yearSelected}</bdi></p>
+                        <button
+                            onClick={() => {
+                                    setMonthSelectorBox(true)
+                                    setDateShowBox(false)
+                                }
+                            } 
+                            className='self-end text-base lg:text-lg text-info font-normal leading-8 opacity-90'
+                        ><bdi>انتخاب ماه</bdi></button>
+                    </div>
+                    {/* Month Selector Box  */}
+                    <div className={clsx('order-1 lg:order-2 w-full lg:w-2/4 h-full grid-cols-4 justify-between items-stretch relative bg-white p-6 lg:p-10 lg:mr-5 my-1 lg:my-0 lg:mx-5 border-[1px] border-primary rounded-[15px] lg:rounded-[25px] shadow-shadowB',{
+                       "grid" : monthselectorBox ,
+                       "hidden" : monthselectorBox == false
+                    })}>
+                        {months.map((item,index) => 
+                            <p  
+                                key={v4()}
+                                onClick={() => {
+                                    setMonthSelected(item)
+                                    setMonthSelectorBox(false)
+                                    setDateShowBox(true)
+                                    }
+                                }
+                                className={clsx('text-base lg:text-xl font-medium leading-7', {
+                                    "text-primary" : item == monthSelected ,
+                                    "text-black" : item !== monthSelected
+                                })}
+                            ><bdi>{item}</bdi></p>
+                        )}
+                        <button
+                            onClick={() => {
+                                    setYearSelectorBox(true)
+                                    setMonthSelectorBox(false)
+                                }
+                            } 
+                            className='text-base lg:text-lg text-info font-normal leading-8 opacity-90 absolute bottom-3 left-3 lg:bottom-5 lg:left-10'
+                        ><bdi>{yearSelected}</bdi></button>
+                    </div>
+                    {/* Year Selector Box  */}
+                    <div className={clsx('order-1 lg:order-2 w-full lg:w-2/4 h-full grid-cols-4 justify-between items-stretch relative bg-white p-6 lg:p-10 lg:mr-5 my-1 lg:my-0 lg:mx-5 border-[1px] border-primary rounded-[15px] lg:rounded-[25px] shadow-shadowB',{
+                       "grid" : yearselectorBox ,
+                       "hidden" : yearselectorBox == false
+                    })}>
+                        {years.map((item,index) => 
+                            <p  
+                                key={v4()}
+                                onClick={() => {
+                                    setYearSelected(item)
+                                    setMonthSelectorBox(true)
+                                    setYearSelectorBox(false)
+                                    }
+                                }
+                                className={clsx('text-base lg:text-xl font-medium leading-7', {
+                                    "text-primary" : item == yearSelected ,
+                                    "text-black" : item !== yearSelected
+                                })}
+                            ><bdi>{item}</bdi></p>
+                        )}
+                    </div>
+                    {/* orders number */}
+                    <div className='order-2 lg:order-3 w-full lg:w-1/4 h-full flex flex-row-reverse lg:flex-col justify-between items-stretch bg-white px-6 py-5 lg:py-7.5 my-1 rounded-[15px] lg:rounded-[25px] shadow-shadowB'>
+                        <Image 
+                            src={BagTick_Icon} 
+                            alt="BagTickIcon" 
+                        />
+                        <div className='text-right flex flex-col lg:mt-10'>
+                            <p className='text-base lg:text-lg text-[#3A4750] font-bold leading-6'>تعداد سفارشات فروشگاه</p>
+                            <p className='text-xl lg:text-2xl text-[#3A4750] font-extrabold leading-10 mt-1.5 after:content-["عدد"] after:text-sm after:mr-2'><bdi>{(+dataSelected.sumSaleAmount).toLocaleString()}</bdi></p>
+                        </div>
+                        <p className='hidden lg:block text-base text-black font-noramal opacity-60 mt-4 self-end'><bdi>{dataSelected.month}</bdi></p>
                     </div>
                 </div>
-                {/* button that opens the modal */}
-                <label 
-                    htmlFor="add-wallet-modal" 
-                    className='w-full lg:w-1/3 flex flex-row lg:flex-col-reverse justify-between lg:justify-center items-center px-10 lg:px-20 py-5 lg:py-8 lg:mr-5 bg-white border-[2px] solid border-primary rounded-[12px] lg:rounded-[25px] cursor-pointer'
-                >
-                    <p className='text-2xl lg:text-base text-primary font-bold leading-8 lg:mt-10'>افزایش موجودی</p>
-                    <Image 
-                        src={WalletAdd_Icon} 
-                        alt="WalletAddPic" 
-                        className='lg:w-40'
-                    />
-                </label>
-            </div>
-            {/* Modal*/}
-            <div>
-                <input 
-                    type="checkbox" 
-                    id="add-wallet-modal" 
-                    className="modal-toggle" 
-                />
-                <label 
-                    htmlFor="add-wallet-modal" 
-                    className="modal cursor-pointer"
-                >
-                    <label className="modal-box w-full absolute lg:relative inset-x-0 bottom-0 px-10 py-4 lg:p-8 mx-auto bg-white rounded-none rounded-t-[15px] lg:rounded-[20px]">
-                        <div className='w-full flex flex-row justify-between items-center'>
-                            <p className='text-base lg:text-base text-black font-medium lg:font-black leading-7 before:hidden lg:before:inline-block before:w-2 before:h-4 before:bg-primary before:ml-2 before:align-middle before:rounded-[2px]'>افزایش موجودی</p>
-                            <label htmlFor="add-wallet-modal">
-                                <Image 
-                                    src={CloseButton_Icon} 
-                                    alt="CloseIcon"
-                                />
-                            </label>
-                        </div>
-                        <form 
-                            onSubmit={event => event.preventDefault()} 
-                            className="flex flex-col"
-                        >
-                            <div className='flex flex-col items-stretch justify-center p-4 lg:p-10'>
-                                <p className='text-base lg:text-lg text-black text-center font-medium leading-7 mb-7'><bdi>مبلغ مورد نظر جهت افزایش موجودی را وارد نمایید:</bdi></p>
-                                <input 
-                                    type="number" 
-                                    value={increaseAmount} 
-                                    onChange={event => setIncreaseAmount(event.target.value)}    
-                                    placeholder="100000"
-                                    className='w-full p-3 mb-2 lg:mb-3 bg-white text-base text-center text-gray-400 font-medium border-[1px] solid border-thirdly rounded-[12px] lg:rounded-[5px] focus:border-error focus:text-black before:content-["fu"] before:text-lg before:text-error'
-                                />
-                                <div className='w-full flex mb-3'>
-                                    <button 
-                                        onClick={() => setIncreaseAmount(500000)} 
-                                        className="w-full p-3 bg-white text-sm text-center text-gray-400 font-medium border-[1px] solid border-thirdly rounded-[12px] lg:rounded-[5px]"
-                                    ><bdi>{500000} تومان</bdi></button>
-                                    <button 
-                                        onClick={() => setIncreaseAmount(200000)} 
-                                        className="w-full p-3 mx-1 lg:mx-2 bg-white text-sm text-center text-gray-400 font-medium border-[1px] solid border-thirdly rounded-[12px] lg:rounded-[5px]"
-                                    ><bdi>{200000} تومان</bdi></button>
-                                    <button 
-                                        onClick={() => setIncreaseAmount(100000)} 
-                                        className="w-full p-3 bg-white text-sm text-center text-gray-400 font-medium border-[1px] solid border-thirdly rounded-[12px] lg:rounded-[5px] "
-                                    ><bdi>{100000} تومان</bdi></button>
+                {/* Sales Details */}
+                <div className='flex flex-col my-2 lg:my-4'>
+                    {dataSelected.salesDetail.length ? dataSelected.salesDetail.map((item,index) => 
+                        <div className='flex flex-col lg:flex-row lg:items-center justify-between w-full p-5 lg:px-[65px] lg:py-[75px] my-1 lg:my-2 bg-white border-[1px] border-secondary lg:border-none rounded-[15px] lg:rounded-[25px] shadow-shadowB'>
+                            <p className='text-xs lg:text-xl text-black font-extrabold leading-6 opacity-90 before:inline-block before:align-middle before:w-2.5 lg:before:w-2 before:h-2.5 lg:before:h-4 before:bg-primary before:rounded-full lg:before:rounded-[2px] before:ml-1 lg:before:mr-2'>
+                                <bdi>{item.date}</bdi>
+                            </p>
+                            {/* mobile */}
+                            <div key={v4()} className='lg:hidden flex text-[10px] xs:text-sm sm:text-base mt-4'>
+                                <div className='flex flex-col text-[10px] xs:text-sm sm:text-base'>
+                                    <div className='flex items-center'>
+                                        <p className='text-black font-medium leading-7 opacity-95'><bdi>مجموع فروش</bdi></p>
+                                        <p className='text-gray-400 font-medium leading-8 mr-2 after:content-["تومان"] after:text-xs after:mr-1'><bdi>{(+item.sumSale).toLocaleString()}</bdi></p>
+                                    </div>
+                                    <div className='flex items-center mt-2'>
+                                        <p className='text-black font-medium leading-7 opacity-95'><bdi>تاریخ تسویه</bdi></p>
+                                        <p className='text-gray-400 font-medium leading-8 mr-2'><bdi>{item.checkoutDate}</bdi></p>
+                                    </div>
+                                </div>
+                                <div className='flex flex-col mr-2 sm:mr-[80px]'>
+                                    <div className='flex items-center'>
+                                        <p className='text-black font-medium leading-7 opacity-95'><bdi>سود شما</bdi></p>
+                                        <p className='text-gray-400 font-medium leading-8 mr-2 after:content-["تومان"] after:text-xs after:mr-1'><bdi>{(+item.benefit).toLocaleString()}</bdi></p>
+                                    </div>
+                                    <div className='flex items-center mt-2'>
+                                        <p className='text-black font-medium leading-7 opacity-95'><bdi>وضعیت</bdi></p>
+                                        <p className='text-gray-400 font-medium leading-8 mr-2'><bdi>{item.checkoutStatus}</bdi></p>
+                                    </div>
                                 </div>
                             </div>
-                            <div className='flex flex-row items-center justify-between w-full lg:w-1/3 lg:self-left'>
-                                <button className='w-full text-sm text-white text-center font-semibold py-3 lg:py-2 rounded-[5px] bg-[#4DA4F4] border-[2px] solid border-[#4DA4F4] ml-2'>پرداخت</button>
-                                <label 
-                                    htmlFor="add-wallet-modal" 
-                                    className='w-full text-sm text-error text-center font-semibold py-3 lg:py-2 rounded-[5px] bg-white border-[2px] solid border-error'
-                                >انصراف</label>
+                            {/* desktop */}
+                            <div key={v4()} className='hidden lg:flex mr-10'>
+                                <div className='flex lg:flex-col items-center'>
+                                    <p className='text-base text-black font-medium leading-7 opacity-95 pb-4 px-3 xl:px-10 2xl:px-[100px] mx-0 border-b-[2.5px] border-[#D9D9D9]'><bdi>مجموع فروش</bdi></p>
+                                    <p className='text-lg text-[#3A4750] font-extrabold leading-8 pt-4'><bdi>{(+item.sumSale).toLocaleString()}</bdi></p>
+                                </div>
+                                <div className='flex lg:flex-col items-center'>
+                                    <p className='text-base text-black font-medium leading-7 opacity-95 pb-4 px-3 xl:px-10 2xl:px-[100px] mx-0 border-b-[2.5px] border-[#D9D9D9]'><bdi>سود شما</bdi></p>
+                                    <p className='text-lg text-[#3A4750] font-extrabold leading-8 pt-4'><bdi>{(+item.benefit).toLocaleString()}</bdi></p>
+                                </div>
+                                <div className='flex lg:flex-col items-center'>
+                                    <p className='text-base text-black font-medium leading-7 opacity-95 pb-4 px-3 xl:px-10 2xl:px-[100px] mx-0 border-b-[2.5px] border-[#D9D9D9]'><bdi>تاریخ تسویه</bdi></p>
+                                    <p className='text-lg text-[#3A4750] font-extrabold leading-8 pt-4'><bdi>{item.checkoutDate}</bdi></p>
+                                </div>
+                                <div className='flex lg:flex-col items-center'>
+                                    <p className='text-base text-black font-medium leading-7 opacity-95 pb-4 px-3 xl:px-10 2xl:px-[100px] mx-0 border-b-[2.5px] border-[#D9D9D9]'><bdi>وضعیت</bdi></p>
+                                    <p className='text-lg text-[#3A4750] font-extrabold leading-8 pt-4'><bdi>{item.checkoutStatus}</bdi></p>
+                                </div>
                             </div>
-                        </form>
-                    </label>
-                </label>
+                        </div>
+                    ) : 
+                    <p className='text-base lg:text-xl text-error font-black leading-10 mt-10'><bdi>در این ماه هیچ سفارشی برای فروشگاه شما ثبت نشده است!</bdi></p>
+                    }                    
+                </div>
             </div>
         </DashboardLayout>
     );

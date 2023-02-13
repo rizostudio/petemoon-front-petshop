@@ -4,13 +4,13 @@ import Link from 'next/link';
 //component
 import DashboardLayout from '../../components/DashboardLayout';
 //media
-import MapPreserve_Pic from '../../assets/dashboard/mapPicPreserve.svg';
-import Map_Pic from '../../assets/dashboard/mapPic.svg';
+import MapPreserve_Pic from '../../assets/common/mapPicPreserve.svg';
+import Map_Pic from '../../assets/common/mapPic.svg';
 import TrashRed_Icon from '../../assets/common/TrashIconRed.svg';
 import Edit2_Icon from '../../assets/common/EditIcon2.svg';
 import More_Icon from '../../assets/common/more.svg';
-import LocationAdd_Icon from '../../assets/dashboard/location-add.svg';
-import LocationAdd_White_Icon from '../../assets/dashboard/location-add-white.svg';
+import LocationAdd_Icon from '../../assets/common/location-add.svg';
+import LocationAdd_White_Icon from '../../assets/common/location-add-white.svg';
 import CloseButton_Icon from '../../assets/common/close-button.svg';
 
 const Addresses = () => {

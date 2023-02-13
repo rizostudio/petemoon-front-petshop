@@ -110,12 +110,12 @@ const FileUpload = ({
                             {!fileBool ? <p className="text-sm text-[#006CEC] font-semibold leading-6 after:content-['%'] after:text-xs">75</p> : null } 
                         </div>
                         {fileBool ? <p className="text-xs text-gray-400 font-normal leading-6">{files[fileName].size}B</p> : null}
-                        {/* <Image  src={progressBar} alt="progressBar" className="mt-2"/> */}
+                        <Image  src={progressBar} alt="progressBar" className="mt-2"/>
                     </div>
                 )}
                 </div>
+                <Image src={tick_Icon}/>
             </div>
-            // {fileBool ? <Image src={tick_Icon} /> : null }
             : null }
         </div>
     </div>

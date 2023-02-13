@@ -5,7 +5,8 @@ import Image from 'next/image';
 import DashboardLayout from '../../components/DashboardLayout';
 //media
 import Trash_Icon from '../../assets/common/trash.svg';
-
+import search_Icon from '../../assets/common/searchIcon3.svg';
+import logout_Icon from '../../assets/common/logoutIconRed.svg'
 const MyMessage = () => {
     // fake data
     const [messagesArr,setMessagesArr] = useState([   {key:0, from:"پیام از پتمون", date:"۱۸ آبان ۱۴۰۰", subject:"نظراتت برای بهبود سرویس دهی پتمون با ارزشه", text:"لطفا نظرت رو با ما به اشتراک بذار...",CTA:'ثبت نظر'},
@@ -24,7 +25,26 @@ const MyMessage = () => {
 
     return (
         <DashboardLayout>
-            <div className='flex flex-col items-stretch'>
+            <div className='flex flex-col items-stretch h-screen'>
+                {/* Heading for mobile  */}
+                <div className='lg:hidden flex items-center'>
+                    <div className='flex h-12 w-full px-5 py-3 bg-[#F2CDC8] rounded-[15px]'>
+                        <input                             
+                            type="text" 
+                            placeholder="جستجوی محصول، فروشگاه و..."
+                            className='h-full w-full text-base text-right text-white placeholder:text-primary placeholder:opacity-50 font-bold border-none bg-transparent appearance-none focus:ring-0 focus:outline-none focus:border-none peer'
+                        />
+                        <Image 
+                            src={search_Icon} 
+                            alt="SearchIcon" 
+                        />
+                    </div>
+                    <div 
+                        className='p-3 bg-[#F2CDC8] rounded-[15px] mr-1'
+                    >
+                        <Image src={logout_Icon} alt="LogOut Icon"/>
+                    </div> 
+                </div>
                 {messagesArr &&
                     messagesArr.map((item, index) => 
                         item.subject && 
