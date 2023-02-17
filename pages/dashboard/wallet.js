@@ -173,7 +173,7 @@ const wallet = () => {
                     </div>
                 </div>
                 {/* Sales Details */}
-                <div className='flex flex-col my-2 lg:my-4'>
+                <div className='flex flex-col my-2 lg:my-4 mb-[100px]'>
                     {dataSelected.salesDetail.length ? dataSelected.salesDetail.map((item,index) => 
                         <div className='flex flex-col lg:flex-row lg:items-center justify-between w-full p-5 lg:px-[65px] lg:py-[75px] my-1 lg:my-2 bg-white border-[1px] border-secondary lg:border-none rounded-[15px] lg:rounded-[25px] shadow-shadowB'>
                             <p className='text-xs lg:text-xl text-black font-extrabold leading-6 opacity-90 before:inline-block before:align-middle before:w-2.5 lg:before:w-2 before:h-2.5 lg:before:h-4 before:bg-primary before:rounded-full lg:before:rounded-[2px] before:ml-1 lg:before:mr-2'>

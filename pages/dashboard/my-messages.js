@@ -27,7 +27,7 @@ const MyMessage = () => {
         <DashboardLayout>
             <div className='flex flex-col items-stretch h-screen'>
                 {/* Heading for mobile  */}
-                <div className='lg:hidden flex items-center'>
+                <div className='lg:hidden flex items-center mb-5'>
                     <div className='flex h-12 w-full px-5 py-3 bg-[#F2CDC8] rounded-[15px]'>
                         <input                             
                             type="text" 

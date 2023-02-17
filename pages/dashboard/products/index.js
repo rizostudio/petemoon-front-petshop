@@ -19,7 +19,10 @@ import DownArrow_Icon from '@/assets/common/downArrow.svg';
 import Sort_Icon from '@/assets/common/sortIcon.svg';
 import leftArrow_Icon from '@/assets/common/leftArrowWhite.svg';
 import more_Icon from '@/assets/common/more.svg';
-
+import TrashRed_Icon from '../../../assets/common/TrashIconRed.svg';
+import CloseButton_Icon from '../../../assets/common/close-button.svg';
+import Edit2_Icon from '../../../assets/common/EditIcon2.svg'
+import addProduct_Icon from '../../../assets/common/shop-addPrimaryIcon.svg';
 
 
 //for open & close filterBox in desktop
@@ -116,13 +119,13 @@ const FilterBoxDialog = ({brand, petKind, setFilterPageOpen, setMainPageOpen}) =
 }
 
 const Prodcuts = () => {
-    const data = [
+    const [data,setData] = useState([
                     {title:"غذای سگ خشک 700 گرمی", Image:product_Image, code:"#750GH", price:"75000", availabilityAmount:"60"},
                     {title:"غذای سگ خشک 700 گرمی", Image:product_Image, code:"#750GH", price:"75000", availabilityAmount:"60"},
                     {title:"غذای سگ خشک 700 گرمی", Image:product_Image, code:"#750GH", price:"75000", availabilityAmount:"60"},
                     {title:"غذای سگ خشک 700 گرمی", Image:product_Image, code:"#750GH", price:"75000", availabilityAmount:"60"},
                     {title:"غذای سگ خشک 700 گرمی", Image:product_Image, code:"#750GH", price:"75000", availabilityAmount:"60"},
-    ]
+    ])
     const brand = [{name:"پت بازار", id:"petBazzar"}, {name:"پت شاپ۱", id:'petShop1'}, {name:"پت ایران",id:'petIran'}, {name:"تهران پت", id:'tehranPet'}, {name:"کافه پت",id:'petCafe'}]
     const petKind = ["سگ خانگی","سگ شکارچی","سگ وحشی","سگ گله","سگ نگهبان"]
 
@@ -131,6 +134,29 @@ const Prodcuts = () => {
     // for change the color of choosen option in sorting
     const [sortValue, setSortValue] = useState("پرفروش ترین")
 
+    // for remove data from list
+    const TrashHandler = (index) => {
+        const newArr = [...data];
+        newArr.splice(1,index);
+        setData(newArr)            
+        console.log("remove"+data)
+    }
+    // for edit the data
+    const [amount, setAmount] = useState(""); //for set the new amount
+    const [price, setPrice] = useState(""); // for set the new price
+    const [editMode,setEditMode]  = useState({status:false, index:""});
+    console.log(editMode.index)
+    const editHandler = () => {}
+    const saveEditHandler = (index) => {
+        setEditMode({status:false, index})
+        const newArr = [...data];
+        newArr[index].availabilityAmount = amount;
+        newArr[index].price = price;
+        setData(newArr);
+        setAmount("")
+        setPrice("")
+        console.log("edit"+data)
+    }
 
         // for showing stars
         const starsBoxHandler = (stars) => {
@@ -304,7 +330,8 @@ const Prodcuts = () => {
                 {!data ? 
                     <p className='text-base lg:text-xl text-error font-black leading-9 tracking-tight mt-8'><bdi>هنوز هیچ محصولی اضافه نکرده اید!</bdi></p>
                     :
-                    <div className=''>
+                    <div>
+                        <div className='flex flex-col lg:hidden'>
                         {/*Arrangment Box*/}
                         <div className='flex mt-5'>
                             {/* FilterBox */}
@@ -347,44 +374,277 @@ const Prodcuts = () => {
                                 </ul>
                             </div>
                         </div>
-                        <div className='flex flex-col mt-4'>
+                        <div className='flex lg:hidden flex-col mt-4'>
                             {data && data.map((item,index) => 
-                                <div className='flex w-full my-1 px-5 py-4 border-[1px] border-secondary rounded-[15px] shadow-shadowB'>
+                                <div key={v4()} className='flex w-full my-1 px-5 py-4 bg-white border-[1px] border-secondary rounded-[15px] shadow-shadowB'>
                                     <div className='w-[100px] h-[100px] border-[1px] border-primary rounded-[12px] overflow-hidden'>
                                         <Image src={product_Image} alt="Product Image" className='w-full h-full object-cover'/>
                                     </div>
                                     <div className='flex flex-col justify-between w-full mr-3.5'>
                                         <div className='flex flex-row justify-between items-start w-full'>
                                             <h1 className='text-base text-black font-medium leading-5'><bdi>{item.title}</bdi></h1>
-                                            <Image src={more_Icon} alt="More Icon" className=''/>
+                                            <label htmlFor='More-modal'>
+                                                <Image src={more_Icon} alt="More Icon" className=''/>
+                                            </label>
                                         </div>
                                         <div className='flex justify-between w-full mt-2'>
 
                                         <div className='flex flex-col'>
                                             <p className='text-xs text-primary font-medium leading-4 opacity-90 mb-2'><bdi>{`شناسه: ${item.code}`}</bdi></p>
-                                            <p className='text-xs text-primary font-medium leading-4 opacity-90'><bdi>{`موجودی: ${item.availabilityAmount}`}</bdi></p>
+                                            <p className={clsx('text-xs text-primary font-medium leading-4 opacity-90',{
+                                                    "border-b-[1px] border-gray-800" : editMode.status && editMode.index == index
+                                                })}
+                                            >
+                                                <bdi>موجودی: 
+                                                    <span className={clsx('mr-1',{
+                                                        // "inline" : editMode.status == false,
+                                                        // "hidden" : editMode.status && editMode.index == index
+                                                    })}
+                                                    >{item.availabilityAmount}</span>
+                                                    <input 
+                                                        type='number' 
+                                                        value={amount}
+                                                        onChange={event =>setAmount(event.target.value)}
+                                                        className={clsx('hidden text-xs text-gray-400 font-medium leading-4 opacity-90 bg-transparent border-none pr-1 appearance-none focus:border-[0px] focus:outline-none focus:ring-0 peer',{
+                                                            // "hidden" : editMode.status == false,
+                                                            // "inline" : editMode.status && editMode.index == index
+                                                        })}
+                                                    />
+                                                </bdi>
+                                            </p>
                                         </div>
                                         <div className='flex flex-col'>
                                             <p className='text-xs text-primary font-medium leading-4 opacity-90 mb-2'><bdi>قیمت:</bdi></p>
-                                            <p className='text-sm text-primary font-medium leading-4 opacity-90 after:content-["تومان"] after:text-xs after:mr-1'><bdi>{item.price.toLocaleString()}</bdi></p>
+                                            <p className={clsx('text-sm text-primary font-medium leading-4 opacity-90 after:content-["تومان"] after:text-xs after:mr-1', {
+                                                    // "border-b-[1px] border-gray-800" : editMode.status && editMode.index == index
+                                                })}
+                                            >
+                                                <bdi>
+                                                    <span className={clsx('mr-1',{
+                                                            // "inline" : editMode.status == false,
+                                                            // "hidden" : editMode.status && editMode.index == index
+                                                        })}
+                                                    >{item.price.toLocaleString()}</span>
+                                                    <input 
+                                                        type='number'
+                                                        value={price}
+                                                        onChange={event =>setPrice(event.target.value)}
+                                                        className={clsx('hidden text-xs text-gray-400 font-medium leading-4 opacity-90 bg-transparent border-none pr-1 appearance-none focus:border-[0px] focus:outline-none focus:ring-0 peer',{
+                                                            // "hidden" : editMode.status == false,
+                                                            // "inline" : editMode.status && editMode.index == index
+                                                        })}
+                                                    />
+                                                </bdi>
+                                            </p>
                                         </div>
                                         </div>
+                                    </div>
+                                    {/* Modals */}
+                                    <div>
+                                        {/* for'More-modal  */}
+                                        <input 
+                                            type="checkbox" 
+                                            id="More-modal" 
+                                            className="modal-toggle" 
+                                        />
+                                        <label 
+                                            htmlFor="More-modal" 
+                                            className="modal cursor-pointer"
+                                        >
+                                            <label className="modal-box w-full absolute lg:relative inset-x-0 bottom-0 mx-auto p-0 bg-white rounded-none">
+                                                <div className='w-full flex flex-col justify-between items-end'>  
+                                                    <label 
+                                                        htmlFor='Trash-modal'
+                                                        className="w-full flex flex-row items-center px-10 py-4 border-b-[1px] border-gray-400 solid"
+                                                    >
+                                                        <Image 
+                                                            src={TrashRed_Icon} 
+                                                            alt="TrashIcon" 
+                                                            width={15} 
+                                                            height={15}
+                                                        />
+                                                        <p className='text-base text-black font-medium leading-8 mr-2'>حذف محصول</p>
+                                                    </label>   
+                                                    <label 
+                                                        htmlFor='More-modal'
+                                                        className="w-full flex flex-row items-center px-9 py-3"
+                                                    >
+                                                        <button
+                                                            // htmlFor='More-modal'
+                                                            // onClick={() => setEditMode({status:true, index})}
+                                                            className='flex flex-row'
+                                                        >
+                                                            <Image 
+                                                                src={Edit2_Icon} 
+                                                                alt="EditIcon" 
+                                                                width={15} 
+                                                                height={15}
+                                                            />
+                                                            <p className='text-base text-black font-medium leading-8 mr-2'>ویرایش محصول</p>
+                                                        </button>
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </label>
+                                        {/* for trash-modal  */}
+                                        <input 
+                                            type="checkbox" 
+                                            id="Trash-modal" 
+                                            className="modal-toggle" 
+                                        />
+                                        <label 
+                                            htmlFor="Trash-modal" 
+                                            className="modal cursor-pointer"
+                                        >
+                                            <label className="modal-box w-full absolute lg:relative inset-x-0 bottom-0 px-10 py-4 lg:p-8 mx-auto bg-white rounded-none rounded-t-[15px] lg:rounded-[20px]">                
+                                                <div className='w-full flex flex-col justify-between items-stretch'>
+                                                    <div className='w-full flex flex-row justify-between items-center'>
+                                                        <p className='text-lg text-black font-medium lg:font-bold leading-7 before:hidden lg:before:inline-block before:w-2 before:h-4 before:bg-primary before:text-primary before:content-[""] before:ml-2 before:align-middle before:rounded-[2px]'>حذف محصول</p>
+                                                        <label htmlFor="Trash-modal">
+                                                            <Image 
+                                                                src={CloseButton_Icon} 
+                                                                alt="CloseIcon"
+                                                            />
+                                                        </label>
+                                                    </div>
+                                                    <p className='text-base lg:text-xl text-gray-400 text-right font-medium leading-8 my-2 lg:my-5'>آیا از حذف این محصول از لیست محصول ها، اطمینان دارید؟</p>
+                                                    <div className='flex flex-row items-center justify-between w-full lg:w-1/2'>
+                                                        <label 
+                                                            htmlFor='Trash-modal' 
+                                                            onClick={() => TrashHandler(index)} 
+                                                            className='w-full text-sm text-white text-center font-semibold py-3 lg:py-2 rounded-[5px] bg-error ml-2 border-[2px] solid border-error'
+                                                        >حذف محصول</label>
+                                                        <label 
+                                                            htmlFor="Trash-modal" 
+                                                            className='w-full text-sm text-error text-center font-semibold py-3 lg:py-2 rounded-[5px] bg-white border-[2px] solid border-error'
+                                                        >انصراف</label>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </label>
                                     </div>
                                 </div>
                             )}
                         </div>
+                        </div>
+                        <div className='hidden lg:flex flex-col items-stretch bg-[#fff] rounded-[25px] shadow-shadowB'>
+                            <div className='flex justify-between px-10 py-8 w-full'>
+                                <h5 className='text-base text-black font-black leading-7 before:inline-block before:w-2 before:h-4 before:bg-primary before:rounded-[2px] before:ml-2 before:align-middle'>
+                                    <bdi>لیست محصولات موجود</bdi>
+                                </h5>
+                                <div className='flex'>
+                                    <Link 
+                                        href='/dashboard/products/add'
+                                        className='flex justify-center items-center px-4 py-3 bg-[#EA635233] border-[1px] border-primary rounded-[12px]'
+                                    >
+                                        <p className='text-sm text-primary font-medium leading-5 ml-3.5'>محصول جدید</p>
+                                        <Image src={addProduct_Icon} alt="Add Product Icon"/>
+                                    </Link>
+                                    <select className='text-sm text-primary font-medium leading-5 appearance-none w-[100px] p-3 mx-4 border-[1px] border-primary rounded-[12px] focus:border-primary focus:outline-none focus:ring-0 peer'>
+                                        <option>سگ</option>
+                                        <option>سگ</option>
+                                        <option>سگ</option>
+                                    </select>
+                                    <select className='text-sm text-primary font-medium leading-5 w-[100px] p-3 border-[1px] border-primary rounded-[12px] focus:border-primary focus:outline-none focus:ring-0 peer'>
+                                        <option>rere</option>
+                                        <option>efef</option>
+                                        <option>yjhjy</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                        <table>
+                            <thead className='border-b-[2.5px] border-[#D9D9D9]'>
+                                <tr className='mx-10 py-3.5 text-base text-center text-black font-medium leading-6 opacity-90'>
+                                    <th>تصویر کالا</th>
+                                    <th>نام کالا</th>
+                                    <th>شناسه کالا</th>
+                                    <th>قیمت (تومان)</th>
+                                    <th> موجودی</th>
+                                    <th>ویرایش</th>
+                                </tr>
+                            </thead>
+                            <tbody className='text-base text-center text-black font-bold leading-7'>
+                                {data && data.map((item,index) => 
+                                    <tr key={v4()} className='border-b-[1px] border-[#D9D9D9] mx-5 p-5'>
+                                        <td className='inline-block m-1 w-[100px] h-[100px] border-[1px] border-primary rounded-[12px] overflow-hidden'>
+                                            <Image src={product_Image} alt="Product Image" className='w-full h-full object-cover'/>
+                                        </td>
+                                        <td>{item.title}</td>
+                                        <td>{item.code}</td>
+                                        <td>
+                                            <span className={clsx('mr-1',{
+                                                        // "inline" : editMode.status == false,
+                                                        // "hidden" : editMode.status && editMode.index == index
+                                                    })}>
+                                                    {(+item.price).toLocaleString()}
+                                            </span>
+                                            <input 
+                                                type='number' 
+                                                value={amount}
+                                                onChange={event =>setAmount(event.target.value)}
+                                                // disabled = {editMode.status && editMode.index == index ? false : true}
+                                                className={clsx('hidden text-xs text-gray-400 font-medium leading-4 opacity-90 bg-transparent border-none pr-1 appearance-none focus:border-[0px] focus:outline-none focus:ring-0 peer',{
+                                                // "hidden" : editMode.status == false,
+                                                // "inline" : editMode.status && editMode.index == index
+                                                })}
+                                            />
+                                        </td>
+                                        <td>
+                                            <span className={clsx('mr-1',{
+                                                        // "inline" : editMode.status == false,
+                                                        // "hidden" : editMode.status && editMode.index == index
+                                                    })}>
+                                                    {(+item.availabilityAmount).toLocaleString()}
+                                            </span>
+                                            <input 
+                                                type='number' 
+                                                value={price}
+                                                // disabled = {editMode.status && editMode.index == index ? false : true}
+                                                onChange={event =>setPrice(event.target.value)}
+                                                className={clsx('hidden text-xs text-gray-400 font-medium leading-4 opacity-90 bg-transparent border-none pr-1 appearance-none focus:border-[0px] focus:outline-none focus:ring-0 peer',{
+                                                // "hidden" : editMode.status == false,
+                                                // "inline" : editMode.status && editMode.index == index
+                                                })}
+                                            />
+                                        </td>
+                                        <td className='inline-block'>
+                                            <div className='flex items-center justify-center'>
+
+                                                <div className='bg-[#4DA4F41] p-1.5 border-[1px] border-info rounded-xl'>
+                                                    <Image src={Edit2_Icon} alt="Edit Icon"/>
+                                                </div>
+                                                <div className='p-1.5 border-[1px] border-error rounded-xl mr-2'>
+                                                    <Image src={TrashRed_Icon} alt="Trash Icon"/>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                        <div className='w-full h-10'></div>
+                        </div>
                     </div>
                 }
                 </div>
+
                 {/* Add new Product */}
+                {!data ? 
                 <div className='flex flex-row-reverse lg:flex-col items-center justify-center w-full mt-10 p-5 lg:p-[60px] bg-primary lg:bg-white rounded-[12px] lg:rounded-[25px] lg:shadow-shadowB'>
                     <Image src={boxRed_Icon} alt="Box Icon" className='hidden lg:block'/>
                     <Image src={boxWhite_Icon} alt="Box Icon" className='lg:hidden mr-1'/>
                     <p className='text-base lg:text-2xl lg:text-center text-white lg:text-primary font-medium lg:font-black leading-7 lg:leading-10 lg:mt-10'><bdi>ثبت محصول جدید</bdi></p>
                 </div>
+                :
+                <div className='lg:hidden flex flex-row-reverse lg:flex-col items-center justify-center w-full mt-10 p-5 lg:p-[60px] bg-primary lg:bg-white rounded-[12px] lg:rounded-[25px] lg:shadow-shadowB'>
+                    <Image src={boxRed_Icon} alt="Box Icon" className='hidden lg:block'/>
+                    <Image src={boxWhite_Icon} alt="Box Icon" className='lg:hidden mr-1'/>
+                    <p className='text-base lg:text-2xl lg:text-center text-white lg:text-primary font-medium lg:font-black leading-7 lg:leading-10 lg:mt-10'><bdi>ثبت محصول جدید</bdi></p>
+                </div>
+                }
             </div>
         </DashboardLayout>
-            
         </div>
 
     );

@@ -63,6 +63,9 @@ module.exports = {
         },
         '.scrollbar-position-right' : {
           scrollbarYPosition: 'right'
+        },
+        '.tableAlign' : {
+          textAlign : 'center'
         }
     });
 }),

@@ -29,6 +29,10 @@ import SellerPanel_Logo from '../assets/common/SellerPanelLogo.svg';
 import ShopBag_Icon from '../assets/common/bagHeader.svg';
 import ShopWhite_Icon from '../assets/common/shop2white.svg';
 import OrdersWhite_Icon from '../assets/common/shopping-cartWhite.svg';
+import WalletWhite_Icon from '../assets/common/walletWhiteIcon.svg';
+import HomeWhite_Icon from '../assets/common/homeWhiteIcon.svg';
+import MessageWhite_Icon from '../assets/common/messageWhiteIcon.svg';
+import SupportWhite_Icon from '../assets/common/supportWhiteIcon.svg';
 
 
 const DashboardLayout = ({children}) => {
@@ -39,12 +43,12 @@ const DashboardLayout = ({children}) => {
         setOpenly(true)
     }
     //dashboard menu
-    const menuArr = [   {id:"home", name:"داشبورد", icon:Home_Icon},
+    const menuArr = [   {id:"home", name:"داشبورد", icon:HomeWhite_Icon},
                         {id:"products", name:"محصولات", icon:ShopWhite_Icon,notification:0},
                         {id:"orders", name:"سفارش های من", icon:OrdersWhite_Icon},
-                        {id:"wallet", name:"کیف پول", icon:Wallet_Icon},
-                        {id:"my-messages", name:"پیام های من", icon:Message_Icon, notification:10},
-                        {id:"support", name:"پشتیبانی", icon:Help_Icon},
+                        {id:"wallet", name:"کیف پول", icon:WalletWhite_Icon},
+                        {id:"my-messages", name:"پیام های من", icon:MessageWhite_Icon, notification:10},
+                        {id:"support", name:"پشتیبانی", icon:SupportWhite_Icon},
                     ]
     const pageName = menuArr.find(item => router.asPath.includes(item.id)) // for showing the title of page in mobile
     return (
@@ -196,7 +200,7 @@ const DashboardLayout = ({children}) => {
                             <button className='text-base text-white font-bold leading-7 px-10 py-2.5 bg-primary rounded-[15px]'><bdi>افزودن محصول</bdi></button>
                         </div>
                 </div>
-                <div className=' w-full h-screen overflow-y-scroll p-10 pb-[100px] lg:px-20 lg:py-12 '>
+                <div className=' w-full h-screen overflow-y-scroll p-10 pb-[100px] lg:px-20 lg:py-12 lg:pb-[100px] '>
                     {/* for showing page title and return to home */}
                     {/* {pageName && 
                         <div className='w-full flex lg:hidden flex-row justify-between items-center mb-10'>

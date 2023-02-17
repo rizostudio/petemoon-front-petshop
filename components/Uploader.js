@@ -71,7 +71,7 @@ const FileUpload = ({
             ><bdi>انتخاب فایل</bdi>
             </button>
             <input
-            className="absolute inset-0 border-none focus:outline-none"
+            className="absolute text-[0px] border-none bg-transparent appearance-none focus:outline-none focus:ring-0 focus:border-none"
             type="file"
             ref={fileInputField}
             onChange={handleNewFileUpload}

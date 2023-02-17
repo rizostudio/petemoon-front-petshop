@@ -4,6 +4,8 @@ import Link from 'next/link';
 //component
 import DashboardLayout from '../../components/DashboardLayout';
 //media
+import search_Icon from '../../assets/common/searchIcon3.svg';
+import logout_Icon from '../../assets/common/logoutIconRed.svg'
 import WhatsApp_Icon from '../../assets/common/whatsapp.svg';
 import Instagram_Icon from '../../assets/common/instagram.svg';
 import Email_Icon from '../../assets/common/sms-notification.svg';
@@ -15,7 +17,26 @@ const Support = () => {
     return (
             <DashboardLayout>
                 <div className='flex flex-col items-stretch'>
-                    <div className='w-full h-full lg:h-[250px] flex flex-col lg:flex-row justify-between items-center lg:my-8'>
+                    {/* Heading for mobile */}
+                    <div className='lg:hidden flex items-center mb-5'>
+                        <div className='flex h-12 w-full px-5 py-3 bg-[#F2CDC8] rounded-[15px]'>
+                            <input                             
+                                type="text" 
+                                placeholder="جستجوی محصول، فروشگاه و..."
+                                className='h-full w-full text-base text-right text-white placeholder:text-primary placeholder:opacity-50 font-bold border-none bg-transparent appearance-none focus:ring-0 focus:outline-none focus:border-none peer'
+                            />
+                            <Image 
+                                src={search_Icon} 
+                                alt="SearchIcon" 
+                            />
+                        </div>
+                        <div 
+                            className='p-3 bg-[#F2CDC8] rounded-[15px] mr-1'
+                        >
+                            <Image src={logout_Icon} alt="LogOut Icon"/>
+                        </div> 
+                    </div>
+                    <div className='w-full h-full lg:h-[250px] flex flex-col lg:flex-row justify-between items-center lg:my-2'>
                         <div className='w-full h-full lg:w-3/4 flex flex-col items-stretch justify-between  p-4 lg:px-20 lg:py-8 bg-white rounded-[15px] lg:rounded-[25px] lg:shadow-shadowA border-[1px] border-secondary solid lg:border-none'>
                             <p className='hidden lg:block text-lg text-right text-black font-bold leading-8 opacity-90 before:hidden lg:before:inline-block before:w-2 before:h-4 before:bg-primary before:ml-2 before:align-middle before:rounded-[2px]'><bdi>سلام از پتمون&#128400;&#128400;</bdi></p>
                             <div className='text-right lg:py-5 lg:px-2'>
