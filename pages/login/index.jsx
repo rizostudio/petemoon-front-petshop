@@ -1,12 +1,12 @@
 import backgroundLines from "@/assets/common/signUpLoginLines.png";
 import { useFormik } from "formik";
-import FloatLabelInput from "@/components/common/input";
+import FloatLabelInput from "@/components/partials/input";
 import leftArrow from "@/assets/common/leftArrow.png";
 import bigPetsImage from "@/assets/signup/signupImage.png";
 import smallPetsImage from "@/assets/login/loginImage.png";
-import PetemoonLogo from "@/components/common/logo";
-import { postSendOTP } from "@/services/login";
-import { OtpId } from "@/localStorage";
+import PetemoonLogo from "@/components/partials/logo";
+// import { postSendOTP } from "@/services/login";
+import { OtpId } from "@/localStorage/auth";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -49,7 +49,10 @@ export default function Login() {
       <div className="flex relative justify-center items-center lg:hidden w-full p-10 h-[55%] z-10 bg-gradient-to-br from-primary via-primary to-[#acd4f7]">
         <div className="absolute left-10 top-10 lg:hidden">
           <div className="flex w-full justify-end lg:hidden">
-            <button onClick={() => router.push('/')} className="btn btn-square btn-md md:btn-lg border-0 rounded-2xl bg-[#ECA299] active:bg-primary focus:bg-primary">
+            <button
+              onClick={() => router.push("/")}
+              className="btn btn-square btn-md md:btn-lg border-0 rounded-2xl bg-[#ECA299] active:bg-primary focus:bg-primary"
+            >
               <img src={leftArrow.src} className="w-[15%]" />
             </button>
           </div>
@@ -72,7 +75,8 @@ export default function Login() {
             <div
               id="header"
               className="font-black text-[#333333] text-xl md:text-[40px]"
-            >فروشنده عزیز، خوش آمدید
+            >
+              فروشنده عزیز، خوش آمدید
             </div>
           </div>
           <form
