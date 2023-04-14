@@ -7,12 +7,12 @@ import { useFormik } from "formik";
 //login service
 import { login } from "@/services/auth/login";
 //localStorage
-import { OtpId } from "@/localSttorage/auth";
+import { OtpId } from "@/localStorage/auth";
 //history context
-import { useHistory } from "@/store/HistoryCtx/History";
+
 export default function LoginForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { history, back } = useHistory();
+
   const toggleSubmitState = () => setIsSubmitting((currState) => !currState);
   const router = useRouter();
   const formik = useFormik({
