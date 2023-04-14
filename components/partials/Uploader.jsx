@@ -10,49 +10,46 @@ import progressBar from "../../assets/common/progressBar.svg";
 
 const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 5000000;
 
-const FileUpload = ({
+const Uploader = ({
   maxFileSizeInBytes = DEFAULT_MAX_FILE_SIZE_IN_BYTES,
-  ...otherProps
+  id,
+  setFieldValue,
+  values,
+  // ...otherProps
 }) => {
+  console.log(values[id]);
   const fileInputField = useRef(null);
-  const [files, setFiles] = useState({});
+  // const [files, setFiles] = useState(values[id]);
   const [progress, setProgress] = useState(0);
 
   const handleUploadBtnClick = () => {
     fileInputField.current.click();
   };
 
-  const addNewFiles = (newFiles) => {
-    for (let file of newFiles) {
-      if (file.size <= maxFileSizeInBytes) {
-        if (!otherProps.multiple) {
-          return { file };
-        }
-        files[file.name] = file;
-      }
-    }
-    return { ...files };
-  };
+  // const addNewFiles = (newFiles) => {
+  //   for (let file of newFiles) {
+  //     if (file.size <= maxFileSizeInBytes) {
+  //       files[file.name] = file;
+  //     }
+  //   }
+  //   return { ...files };
+  // };
 
   const handleNewFileUpload = (e) => {
-    const { files: newFiles } = e.target;
-    if (newFiles.length) {
-      let updatedFiles = addNewFiles(newFiles);
-      setFiles(updatedFiles);
+    if (fileInputField.current) {
+      const file = fileInputField.current.files;
+      console.log(file[0]);
+      // setFiles(file[0]);
+      setFieldValue(id, file[0]);
     }
-    setProgress(100);
+    // const { files: newFiles } = e.target;
+    // if (newFiles.length) {
+    //   let updatedFiles = addNewFiles(newFiles);
+    //   setFiles(updatedFiles);
+    // }
+    // setProgress(100);
   };
 
-  const downloadHandler = (file) => {
-    fetch(file).then(() => {
-      const fileURL = window.URL.createObjectURL(file);
-      let alink = document.createElement("a");
-      alink.href = fileURL;
-      alink.download = file.name;
-      alink.click();
-    });
-  };
-  const fileBool = Object.keys(files) ? true : false;
   return (
     <div className="flex flex-col items-center justify-between">
       <div className="flex flex-col items-center justify-between relative w-full h-[200px] py-5 px-10 bg-[#EA63520D] border-[1px] border-dashed border-primary  rounded-[10px]">
@@ -72,15 +69,15 @@ const FileUpload = ({
         <input
           className="absolute text-[0px] border-none bg-transparent appearance-none focus:outline-none focus:ring-0 focus:border-none"
           type="file"
+          name={id}
           ref={fileInputField}
           onChange={handleNewFileUpload}
           title=""
           value=""
-          {...otherProps}
         />
       </div>
       {/* progress */}
-      <div className="progress my-10">
+      {/* <div className="progress my-10">
         <div
           className="progress-bar progress-bar-info progress-bar-striped"
           role="progressbar"
@@ -91,10 +88,10 @@ const FileUpload = ({
         >
           <p className="my-10 text-black text-3xl">{progress}%</p>
         </div>
-      </div>
+      </div> */}
       {/* for show */}
       <div className="flex flex-row-reverse justify-between items-center w-full">
-        {fileBool ? (
+        {values[id] ? (
           <div className="flex flex-row-reverse items-center">
             <div className="w-[35px] h-[45px] mr-5">
               <Image
@@ -104,26 +101,19 @@ const FileUpload = ({
               />
             </div>
             <div className="flex flex-col justify-center items-center mt-2.5">
-              {Object.keys(files).map((fileName, index) => (
-                <div className="flex flex-col items-end mr-2">
-                  <div className="flex flex-row-reverse justify-between items-center w-full">
-                    <p className="text-sm text-black font-medium leading-6">
-                      {files[fileName].name}
-                    </p>
-                    {!fileBool ? (
-                      <p className="text-sm text-[#006CEC] font-semibold leading-6 after:content-['%'] after:text-xs">
-                        75
-                      </p>
-                    ) : null}
-                  </div>
-                  {fileBool ? (
-                    <p className="text-xs text-gray-400 font-normal leading-6">
-                      {files[fileName].size}B
-                    </p>
-                  ) : null}
-                  <Image src={progressBar} alt="progressBar" className="mt-2" />
+              <div className="flex flex-col items-end mr-2">
+                <div className="flex flex-row-reverse justify-between items-center w-full">
+                  <p className="text-sm text-black font-medium leading-6">
+                    {values[id].name}
+                  </p>
                 </div>
-              ))}
+                {values[id].size ? (
+                  <p className="text-xs text-gray-400 font-normal leading-6">
+                    {values[id].size}B
+                  </p>
+                ) : null}
+                {/* <Image src={progressBar} alt="progressBar" className="mt-2" /> */}
+              </div>
             </div>
             <Image src={tick_Icon} />
           </div>
@@ -133,4 +123,4 @@ const FileUpload = ({
   );
 };
 
-export default FileUpload;
+export default Uploader;
