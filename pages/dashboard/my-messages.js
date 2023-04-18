@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 //component
-import DashboardLayout from "@/components/DashboardLayout";
+import DashboardLayout from "@/layout/DashboardLayout";
 //media
 import Trash_Icon from "../../assets/common/trash.svg";
 import search_Icon from "../../assets/common/searchIcon3.svg";

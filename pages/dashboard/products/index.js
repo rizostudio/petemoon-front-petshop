@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import clsx from "clsx";
 import { v4 } from "uuid";
 
-//components
-import DashboardLayout from "@/components/DashboardLayout";
+//component
+import DashboardLayout from "@/layout/DashboardLayout";
 
 //media
 import search_Icon from "@/assets/common/SearchRedIcon.svg";

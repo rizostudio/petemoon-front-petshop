@@ -43,7 +43,7 @@ const DashboardLayout = ({ children }) => {
   };
   //dashboard menu
   const menuArr = [
-    { id: "home", name: "داشبورد", icon: HomeWhite_Icon },
+    { id: "", name: "داشبورد", icon: HomeWhite_Icon },
     { id: "products", name: "محصولات", icon: ShopWhite_Icon, notification: 0 },
     { id: "orders", name: "سفارش های من", icon: OrdersWhite_Icon },
     { id: "wallet", name: "کیف پول", icon: WalletWhite_Icon },
