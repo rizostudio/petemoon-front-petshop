@@ -1,4 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+
+import clsx from "clsx";
+import { v4 } from "uuid";
+
+//media
+
+import Filter_Icon from "@/assets/common/filterIcon.svg";
+
+import leftArrow_Icon from "@/assets/common/leftArrowWhite.svg";
 
 export default function FilterPage() {
   return (
