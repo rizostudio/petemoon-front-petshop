@@ -6,7 +6,7 @@ import clsx from "clsx"; //for dynamic style
 import { v4 } from "uuid"; // for produce unique key
 
 //component
-import BottomNavigation from "./common/BottomNavigation";
+import BottomNavigation from "@/components/partials/BottomNavigation";
 
 //media
 import Home_Icon from "../assets/common/home.svg";
@@ -34,7 +34,7 @@ import HomeWhite_Icon from "../assets/common/homeWhiteIcon.svg";
 import MessageWhite_Icon from "../assets/common/messageWhiteIcon.svg";
 import SupportWhite_Icon from "../assets/common/supportWhiteIcon.svg";
 
-export default function DashboardLayout() {
+const DashboardLayout = ({ children }) => {
   const [openly, setOpenly] = useState(true); //for open and close dashboard in mobile
   const router = useRouter();
   const [Minify, setMinify] = useState(false); // for minify dashboard
@@ -272,4 +272,5 @@ export default function DashboardLayout() {
       <BottomNavigation />
     </div>
   );
-}
+};
+export default DashboardLayout;
