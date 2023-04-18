@@ -6,8 +6,9 @@ export default function UploadDocument({
   setFieldValue,
   isSubmitting,
   values,
+  handleSubmit,
 }) {
-  const [tab, setTab] = useState("IDCard"); //toggle between Tabs
+  const [tab, setTab] = useState("national_card"); //toggle between Tabs
   return (
     <form
       // onSubmit={formik.handleSubmit}
@@ -18,41 +19,41 @@ export default function UploadDocument({
         <div className="tabs self-center flex flex-row justify-center  w-full text-xs xl:text-sm text-black font-medium leading-6 my-3">
           <a
             className={clsx("tab tab-bordered", {
-              "tab-active": tab == "IDCard",
+              "tab-active": tab == "national_card",
             })}
-            onClick={() => setTab("IDCard")}
+            onClick={() => setTab("national_card")}
           >
             کارت ملی
           </a>
           <a
             className={clsx("tab tab-bordered", {
-              "tab-active": tab == "IDCertificate",
+              "tab-active": tab == "birth_certificate",
             })}
-            onClick={() => setTab("IDCertificate")}
+            onClick={() => setTab("birth_certificate")}
           >
             شناسنامه
           </a>
           <a
             className={clsx("tab tab-bordered", {
-              "tab-active": tab == "SaleCertificate",
+              "tab-active": tab == "business_license",
             })}
-            onClick={() => setTab("SaleCertificate")}
+            onClick={() => setTab("business_license")}
           >
             پروانه کسب
           </a>
           <a
             className={clsx("tab tab-bordered", {
-              "tab-active": tab == "SandicaCertificate",
+              "tab-active": tab == "union_license",
             })}
-            onClick={() => setTab("SandicaCertificate")}
+            onClick={() => setTab("union_license")}
           >
             مجوز اتحادیه
           </a>
           <a
             className={clsx("tab tab-bordered", {
-              "tab-active": tab == "TaxCertificate",
+              "tab-active": tab == "tax_certificate",
             })}
-            onClick={() => setTab("TaxCertificate")}
+            onClick={() => setTab("tax_certificate")}
           >
             گواهی مالیات
           </a>
@@ -60,43 +61,43 @@ export default function UploadDocument({
         <div>
           {(() => {
             switch (tab) {
-              case "IDCard":
+              case "national_card":
                 return (
                   <Uploader
                     values={values}
-                    id={"IDCard"}
+                    id={"national_card"}
                     setFieldValue={setFieldValue}
                   />
                 );
-              case "IDCertificate":
+              case "birth_certificate":
                 return (
                   <Uploader
                     values={values}
-                    id={"IDCertificate"}
+                    id={"birth_certificate"}
                     setFieldValue={setFieldValue}
                   />
                 );
-              case "SaleCertificate":
+              case "business_license":
                 return (
                   <Uploader
                     values={values}
-                    id={"SaleCertificate"}
+                    id={"business_license"}
                     setFieldValue={setFieldValue}
                   />
                 );
-              case "SandicaCertificate":
+              case "union_license":
                 return (
                   <Uploader
                     values={values}
-                    id={"SandicaCertificate"}
+                    id={"union_license"}
                     setFieldValue={setFieldValue}
                   />
                 );
-              case "TaxCertificate":
+              case "tax_certificate":
                 return (
                   <Uploader
                     values={values}
-                    id={"TaxCertificate"}
+                    id={"tax_certificate"}
                     setFieldValue={setFieldValue}
                   />
                 );
@@ -105,7 +106,8 @@ export default function UploadDocument({
         </div>
 
         <button
-          type="submit"
+          onClick={handleSubmit}
+          // type="submit"
           className={`btn md:h-[12%] lg:h-[15%] border-0 bg-primary hover:bg-primary-dark active:bg-primary focus:bg-primary w-full mt-4 lg:mt-0 rounded-lg text-base md:text-xl text-white font-normal ${
             isSubmitting && "loading"
           }`}

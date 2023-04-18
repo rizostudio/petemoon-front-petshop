@@ -29,7 +29,6 @@ export default function LoginForm() {
       if (response.success) {
         console.log("otp code: ", response.data);
         OtpId.set(response.data.otp_id);
-
         router.push("/auth/validation");
       } else {
         console.log("Error: ", response.errors);

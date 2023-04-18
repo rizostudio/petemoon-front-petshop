@@ -12,11 +12,13 @@ import ShopInfo from "./ShopInfo";
 import CommercialInfo from "./CommercialInfo";
 import ContractConfirmation from "./ContractConfirmation";
 import UploadDocument from "./UploadDocument";
-
+//services
+import { Register } from "@/services/auth/signUp";
 export default function SignUpForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const toggleSubmitState = () => setIsSubmitting((currState) => !currState);
   const router = useRouter();
-  const [step, setStep] = useState(5);
+  const [step, setStep] = useState(1);
   const backHandler = () => {
     step > 1 ? setStep(step - 1) : router.push("/");
   };
@@ -31,6 +33,11 @@ export default function SignUpForm() {
     store_name: Yup.string().required("فیلد الزامی است"),
     sheba_number: Yup.string().required("فیلد الزامی است"),
     estimated_item_count: Yup.string().required("فیلد الزامی است"),
+    national_card: Yup.string().required("فیلد الزامی است"),
+    birth_certificate: Yup.string().required("فیلد الزامی است"),
+    business_license: Yup.string().required("فیلد الزامی است"),
+    union_license: Yup.string().required("فیلد الزامی است"),
+    tax_certificate: Yup.string().required("فیلد الزامی است"),
   });
   const { handleChange, values, setFieldValue, handleSubmit, errors } =
     useFormik({
@@ -45,23 +52,20 @@ export default function SignUpForm() {
         store_name: "",
         sheba_number: "",
         estimated_item_count: "",
-        IDCard: "",
-        IDCertificate: "",
-        SaleCertificate: "",
-        SandicaCertificate: "",
-        TaxCertificate: "",
+        national_card: "",
+        birth_certificate: "",
+        business_license: "",
+        union_license: "",
+        tax_certificate: "",
       },
       onSubmit: async (values) => {
-        // toggleSubmitState();
-        // const response = await PatchRegister(values);
-        // toggleSubmitState();
-        // if (step < 6) {
-        //   // if (response.success) setStep(step + 1)
-        //   // else console.log("Errors: ", response.errors);
-        //   setStep(step + 1);
-        // } else {
-        //   router.push("/");
-        // }
+        console.log(values);
+        toggleSubmitState();
+        const response = await Register(values);
+        toggleSubmitState();
+        console.log(response);
+        if (response.success) setStep(6);
+        else console.log("Errors: ", response.errors);
       },
       validationSchema: Seller,
     });
@@ -130,6 +134,7 @@ export default function SignUpForm() {
             setFieldValue={setFieldValue}
             values={values}
             setStep={setStep}
+            handleSubmit={handleSubmit}
             errors={errors}
           />
         </SignUpLaypout>
@@ -148,7 +153,7 @@ export default function SignUpForm() {
               خواهد شد.
             </p>
             <button
-              onClick={() => router.push("/")}
+              onClick={() => router.push("/dashboard")}
               className={`btn md:h-[12%] lg:h-[15%] border-0 bg-primary hover:bg-primary-dark active:bg-primary focus:bg-primary w-full mt-4 lg:mt-0 rounded-lg text-base text-white md:text-xl font-normal ${
                 isSubmitting && "loading"
               }`}

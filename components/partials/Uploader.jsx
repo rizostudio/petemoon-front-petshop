@@ -38,7 +38,7 @@ const Uploader = ({
   const handleNewFileUpload = (e) => {
     if (fileInputField.current) {
       const file = fileInputField.current.files;
-      console.log(file[0]);
+
       // setFiles(file[0]);
       setFieldValue(id, file[0]);
     }
@@ -72,8 +72,6 @@ const Uploader = ({
           name={id}
           ref={fileInputField}
           onChange={handleNewFileUpload}
-          title=""
-          value=""
         />
       </div>
       {/* progress */}

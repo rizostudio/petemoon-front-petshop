@@ -5,6 +5,7 @@ export const login = async (phoneNumber) => {
   try {
     const response = await httpRequest.post("/accounts/otp/", {
       phone_number: phoneNumber,
+      user_type: "petshop",
     });
     const data = response.data.data;
     console.log(data);
