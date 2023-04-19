@@ -1,0 +1,120 @@
+import React, { useState } from "react";
+import clsx from "clsx";
+//component
+import Uploader from "@/components/partials/Uploader";
+export default function UploadDocument({
+  setFieldValue,
+  isSubmitting,
+  values,
+  handleSubmit,
+}) {
+  const [tab, setTab] = useState("national_card"); //toggle between Tabs
+  return (
+    <form
+      // onSubmit={formik.handleSubmit}
+      className="w-full h-[60%] lg:h-[50%] lg:w-[80%]"
+    >
+      <div className="flex flex-col h-full items-center justify-between">
+        {/* toggle between Tabs */}
+        <div className="tabs self-center flex flex-row justify-center  w-full text-xs xl:text-sm text-black font-medium leading-6 my-3">
+          <a
+            className={clsx("tab tab-bordered", {
+              "tab-active": tab == "national_card",
+            })}
+            onClick={() => setTab("national_card")}
+          >
+            کارت ملی
+          </a>
+          <a
+            className={clsx("tab tab-bordered", {
+              "tab-active": tab == "birth_certificate",
+            })}
+            onClick={() => setTab("birth_certificate")}
+          >
+            شناسنامه
+          </a>
+          <a
+            className={clsx("tab tab-bordered", {
+              "tab-active": tab == "business_license",
+            })}
+            onClick={() => setTab("business_license")}
+          >
+            پروانه کسب
+          </a>
+          <a
+            className={clsx("tab tab-bordered", {
+              "tab-active": tab == "union_license",
+            })}
+            onClick={() => setTab("union_license")}
+          >
+            مجوز اتحادیه
+          </a>
+          <a
+            className={clsx("tab tab-bordered", {
+              "tab-active": tab == "tax_certificate",
+            })}
+            onClick={() => setTab("tax_certificate")}
+          >
+            گواهی مالیات
+          </a>
+        </div>
+        <div>
+          {(() => {
+            switch (tab) {
+              case "national_card":
+                return (
+                  <Uploader
+                    values={values}
+                    id={"national_card"}
+                    setFieldValue={setFieldValue}
+                  />
+                );
+              case "birth_certificate":
+                return (
+                  <Uploader
+                    values={values}
+                    id={"birth_certificate"}
+                    setFieldValue={setFieldValue}
+                  />
+                );
+              case "business_license":
+                return (
+                  <Uploader
+                    values={values}
+                    id={"business_license"}
+                    setFieldValue={setFieldValue}
+                  />
+                );
+              case "union_license":
+                return (
+                  <Uploader
+                    values={values}
+                    id={"union_license"}
+                    setFieldValue={setFieldValue}
+                  />
+                );
+              case "tax_certificate":
+                return (
+                  <Uploader
+                    values={values}
+                    id={"tax_certificate"}
+                    setFieldValue={setFieldValue}
+                  />
+                );
+            }
+          })()}
+        </div>
+
+        <button
+          onClick={handleSubmit}
+          // type="submit"
+          className={`btn md:h-[12%] lg:h-[15%] border-0 bg-primary hover:bg-primary-dark active:bg-primary focus:bg-primary w-full mt-4 lg:mt-0 rounded-lg text-base md:text-xl text-white font-normal ${
+            isSubmitting && "loading"
+          }`}
+        >
+          ادامه
+        </button>
+      </div>
+    </form>
+  );
+}
