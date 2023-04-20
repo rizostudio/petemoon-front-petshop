@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import clsx from "clsx";
+import { v4 } from "uuid";
+//media
+import Sort_Icon from "@/assets/common/sortIcon.svg";
+import leftArrow_Icon from "@/assets/common/leftArrowWhite.svg";
 
-export default function SortPage() {
+export default function SortPage({
+  setSortPageOpen,
+  SortPageOpen,
+  sortArr,
+  sortValue,
+  setMainPageOpen,
+  setSortValue,
+}) {
   return (
     <div
       className={clsx("lg:hidden w-full h-screen bg-white", {
