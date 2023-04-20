@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import clsx from "clsx";
+import { v4 } from "uuid";
+//media
+import Filter_Icon from "@/assets/common/filterIcon.svg";
 
-export default function FilterPage() {
+import leftArrow_Icon from "@/assets/common/leftArrowWhite.svg";
+
+export default function FilterPage({
+  brand,
+  petKind,
+  FilterPageOpen,
+  setFilterPageOpen,
+  setMainPageOpen,
+}) {
   return (
     <div
       className={clsx("lg:hidden w-full h-screen bg-white", {
