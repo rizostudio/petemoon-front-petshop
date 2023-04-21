@@ -26,12 +26,18 @@ export default function SignUpForm() {
     first_name: Yup.string().required("فیلد الزامی است"),
     last_name: Yup.string().required("فیلد الزامی است"),
     gender: Yup.string().required("فیلد الزامی است"),
-    national_id: Yup.string().required("فیلد الزامی است"),
+    national_id: Yup.string()
+      .min(10, "کد ملی ۱۰ رقمی است")
+      .max(10, "کد ملی ۱۰ رقمی است")
+      .required("فیلد الزامی است"),
     city: Yup.string().required("فیلد الزامی است"),
     postal_region: Yup.string().required("فیلد الزامی است"),
     address: Yup.string().required("فیلد الزامی است"),
     store_name: Yup.string().required("فیلد الزامی است"),
-    sheba_number: Yup.string().required("فیلد الزامی است"),
+    sheba_number: Yup.string()
+      .min(26, " شماره شبا ۲۶ رقمی است")
+      .max(26, "شماره شبا ۲۶ رقمی است")
+      .required("فیلد الزامی است"),
     estimated_item_count: Yup.string().required("فیلد الزامی است"),
     national_card: Yup.string().required("فیلد الزامی است"),
     birth_certificate: Yup.string().required("فیلد الزامی است"),
