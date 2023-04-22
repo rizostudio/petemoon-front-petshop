@@ -4,194 +4,194 @@ import { v4 } from "uuid";
 //media
 import user_Image from "@/assets/common/user-square.svg";
 
-export default function SaleHistory() {
-  const [data, setData] = useState([
-    {
-      month: "فروردین",
-      sumIncome: "57600500",
-      sumSaleAmount: "7654",
-      salesDetail: [
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-      ],
-    },
-    {
-      month: "اردیبهشت",
-      sumIncome: "57600500",
-      sumSaleAmount: "7654",
-      salesDetail: [
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-      ],
-    },
-    {
-      month: "خرداد",
-      sumIncome: "57600500",
-      sumSaleAmount: "7654",
-      salesDetail: [
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-      ],
-    },
-    {
-      month: "تیر",
-      sumIncome: "57600500",
-      sumSaleAmount: "7654",
-      salesDetail: [
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-      ],
-    },
-    ,
-    { month: "مرداد", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-    { month: "شهریور", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-    { month: "مهر", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-    { month: "آبان", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-    { month: "آذر", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-    {
-      month: "دی",
-      sumIncome: "57600500",
-      sumSaleAmount: "7654",
-      salesDetail: [
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-      ],
-    },
-    { month: "بهمن", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-    { month: "اسفند", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-  ]);
-  const data2 = [
-    {
-      userFullname: "علی محبیان",
-      userImage: user_Image,
-      sumSaleAmount: 756000,
-      date: "۲۵ بهمن ۱۴۰۰",
-      status: "تراکنش موفق",
-    },
-    {
-      userFullname: "علی محبیان",
-      userImage: user_Image,
-      sumSaleAmount: 756000,
-      date: "۲۵ بهمن ۱۴۰۰",
-      status: "تراکنش موفق",
-    },
-    {
-      userFullname: "علی محبیان",
-      userImage: user_Image,
-      sumSaleAmount: 756000,
-      date: "۲۵ بهمن ۱۴۰۰",
-      status: "تراکنش موفق",
-    },
-    {
-      userFullname: "علی محبیان",
-      userImage: user_Image,
-      sumSaleAmount: 756000,
-      date: "۲۵ بهمن ۱۴۰۰",
-      status: "تراکنش موفق",
-    },
-    {
-      userFullname: "علی محبیان",
-      userImage: user_Image,
-      sumSaleAmount: 756000,
-      date: "۲۵ بهمن ۱۴۰۰",
-      status: "تراکنش موفق",
-    },
-    {
-      userFullname: "علی محبیان",
-      userImage: user_Image,
-      sumSaleAmount: 756000,
-      date: "۲۵ بهمن ۱۴۰۰",
-      status: "تراکنش موفق",
-    },
-  ];
+export default function SaleHistory({ data }) {
+  // const [data, setData] = useState([
+  //   {
+  //     month: "فروردین",
+  //     sumIncome: "57600500",
+  //     sumSaleAmount: "7654",
+  //     salesDetail: [
+  //       {
+  //         date: "۰۸/۱۰/۱۴۰۱",
+  //         sumSale: 220000,
+  //         benefit: 125000,
+  //         checkoutDate: "۱۸ آبان ۱۴۰۱",
+  //         checkoutStatus: "تسویه شده",
+  //       },
+  //       {
+  //         date: "۰۸/۱۰/۱۴۰۱",
+  //         sumSale: 220000,
+  //         benefit: 125000,
+  //         checkoutDate: "۱۸ آبان ۱۴۰۱",
+  //         checkoutStatus: "تسویه شده",
+  //       },
+  //       {
+  //         date: "۰۸/۱۰/۱۴۰۱",
+  //         sumSale: 220000,
+  //         benefit: 125000,
+  //         checkoutDate: "۱۸ آبان ۱۴۰۱",
+  //         checkoutStatus: "تسویه شده",
+  //       },
+  //       {
+  //         date: "۰۸/۱۰/۱۴۰۱",
+  //         sumSale: 220000,
+  //         benefit: 125000,
+  //         checkoutDate: "۱۸ آبان ۱۴۰۱",
+  //         checkoutStatus: "تسویه شده",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     month: "اردیبهشت",
+  //     sumIncome: "57600500",
+  //     sumSaleAmount: "7654",
+  //     salesDetail: [
+  //       {
+  //         date: "۰۸/۱۰/۱۴۰۱",
+  //         sumSale: 220000,
+  //         benefit: 125000,
+  //         checkoutDate: "۱۸ آبان ۱۴۰۱",
+  //         checkoutStatus: "تسویه شده",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     month: "خرداد",
+  //     sumIncome: "57600500",
+  //     sumSaleAmount: "7654",
+  //     salesDetail: [
+  //       {
+  //         date: "۰۸/۱۰/۱۴۰۱",
+  //         sumSale: 220000,
+  //         benefit: 125000,
+  //         checkoutDate: "۱۸ آبان ۱۴۰۱",
+  //         checkoutStatus: "تسویه شده",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     month: "تیر",
+  //     sumIncome: "57600500",
+  //     sumSaleAmount: "7654",
+  //     salesDetail: [
+  //       {
+  //         date: "۰۸/۱۰/۱۴۰۱",
+  //         sumSale: 220000,
+  //         benefit: 125000,
+  //         checkoutDate: "۱۸ آبان ۱۴۰۱",
+  //         checkoutStatus: "تسویه شده",
+  //       },
+  //       {
+  //         date: "۰۸/۱۰/۱۴۰۱",
+  //         sumSale: 220000,
+  //         benefit: 125000,
+  //         checkoutDate: "۱۸ آبان ۱۴۰۱",
+  //         checkoutStatus: "تسویه شده",
+  //       },
+  //       {
+  //         date: "۰۸/۱۰/۱۴۰۱",
+  //         sumSale: 220000,
+  //         benefit: 125000,
+  //         checkoutDate: "۱۸ آبان ۱۴۰۱",
+  //         checkoutStatus: "تسویه شده",
+  //       },
+  //       {
+  //         date: "۰۸/۱۰/۱۴۰۱",
+  //         sumSale: 220000,
+  //         benefit: 125000,
+  //         checkoutDate: "۱۸ آبان ۱۴۰۱",
+  //         checkoutStatus: "تسویه شده",
+  //       },
+  //     ],
+  //   },
+  //   ,
+  //   { month: "مرداد", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
+  //   { month: "شهریور", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
+  //   { month: "مهر", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
+  //   { month: "آبان", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
+  //   { month: "آذر", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
+  //   {
+  //     month: "دی",
+  //     sumIncome: "57600500",
+  //     sumSaleAmount: "7654",
+  //     salesDetail: [
+  //       {
+  //         date: "۰۸/۱۰/۱۴۰۱",
+  //         sumSale: 220000,
+  //         benefit: 125000,
+  //         checkoutDate: "۱۸ آبان ۱۴۰۱",
+  //         checkoutStatus: "تسویه شده",
+  //       },
+  //       {
+  //         date: "۰۸/۱۰/۱۴۰۱",
+  //         sumSale: 220000,
+  //         benefit: 125000,
+  //         checkoutDate: "۱۸ آبان ۱۴۰۱",
+  //         checkoutStatus: "تسویه شده",
+  //       },
+  //       {
+  //         date: "۰۸/۱۰/۱۴۰۱",
+  //         sumSale: 220000,
+  //         benefit: 125000,
+  //         checkoutDate: "۱۸ آبان ۱۴۰۱",
+  //         checkoutStatus: "تسویه شده",
+  //       },
+  //       {
+  //         date: "۰۸/۱۰/۱۴۰۱",
+  //         sumSale: 220000,
+  //         benefit: 125000,
+  //         checkoutDate: "۱۸ آبان ۱۴۰۱",
+  //         checkoutStatus: "تسویه شده",
+  //       },
+  //     ],
+  //   },
+  //   { month: "بهمن", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
+  //   { month: "اسفند", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
+  // ]);
+  // const data2 = [
+  //   {
+  //     userFullname: "علی محبیان",
+  //     userImage: user_Image,
+  //     sumSaleAmount: 756000,
+  //     date: "۲۵ بهمن ۱۴۰۰",
+  //     status: "تراکنش موفق",
+  //   },
+  //   {
+  //     userFullname: "علی محبیان",
+  //     userImage: user_Image,
+  //     sumSaleAmount: 756000,
+  //     date: "۲۵ بهمن ۱۴۰۰",
+  //     status: "تراکنش موفق",
+  //   },
+  //   {
+  //     userFullname: "علی محبیان",
+  //     userImage: user_Image,
+  //     sumSaleAmount: 756000,
+  //     date: "۲۵ بهمن ۱۴۰۰",
+  //     status: "تراکنش موفق",
+  //   },
+  //   {
+  //     userFullname: "علی محبیان",
+  //     userImage: user_Image,
+  //     sumSaleAmount: 756000,
+  //     date: "۲۵ بهمن ۱۴۰۰",
+  //     status: "تراکنش موفق",
+  //   },
+  //   {
+  //     userFullname: "علی محبیان",
+  //     userImage: user_Image,
+  //     sumSaleAmount: 756000,
+  //     date: "۲۵ بهمن ۱۴۰۰",
+  //     status: "تراکنش موفق",
+  //   },
+  //   {
+  //     userFullname: "علی محبیان",
+  //     userImage: user_Image,
+  //     sumSaleAmount: 756000,
+  //     date: "۲۵ بهمن ۱۴۰۰",
+  //     status: "تراکنش موفق",
+  //   },
+  // ];
   return (
     <div>
       <div>
@@ -239,8 +239,8 @@ export default function SaleHistory() {
                                 </div> */}
           </div>
           <div className="flex lg:hidden flex-col mt-4">
-            {data2 &&
-              data2.map((item, index) => (
+            {data.orders_history &&
+              data.orders_history.map((item, index) => (
                 <div
                   key={v4()}
                   className="flex flex-col items-stretch w-full my-1 p-5 bg-white border-[1px] border-secondary rounded-[15px] shadow-shadowB"
@@ -283,8 +283,8 @@ export default function SaleHistory() {
           </div>
           <table>
             <tbody className="text-base text-center text-[#3A4750] font-medium leading-7">
-              {data2 &&
-                data2.map((item, index) => (
+              {data.orders_history &&
+                data.orders_history.map((item, index) => (
                   <tr
                     key={v4()}
                     className="border-b-[1px] border-[#D9D9D9] mx-5"

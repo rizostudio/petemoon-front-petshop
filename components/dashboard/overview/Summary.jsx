@@ -8,7 +8,7 @@ import CartTotal_Icon from "@/assets/common/card-receive2.svg";
 import shop_Icon from "@/assets/common/shopIcon3.svg";
 import message_Icon from "@/assets/common/messageIcon3.svg";
 
-export default function Summary({ dataSelected }) {
+export default function Summary({ data }) {
   return (
     <div className="flex flex-col lg:flex-row items-stretch lg:justify-center mt-10">
       {/* orders sum */}
@@ -19,7 +19,7 @@ export default function Summary({ dataSelected }) {
             مجموع درآمد فروشگاه
           </p>
           <p className='text-xl lg:text-2xl text-[#3A4750] font-extrabold leading-10 mt-1.5 after:content-["تومان"] after:text-sm after:mr-2'>
-            <bdi>{(+dataSelected.sumIncome).toLocaleString()}</bdi>
+            <bdi>{data.income ? data.income : 0}</bdi>
           </p>
         </div>
         <p className="hidden lg:block text-base text-black font-noramal opacity-60 mt-4 self-end">
@@ -34,7 +34,7 @@ export default function Summary({ dataSelected }) {
             تعداد سفارشات فروشگاه
           </p>
           <p className='text-xl lg:text-2xl text-[#3A4750] font-extrabold leading-10 mt-1.5 after:content-["عدد"] after:text-sm after:mr-2'>
-            <bdi>{(+dataSelected.sumSaleAmount).toLocaleString()}</bdi>
+            <bdi>{data.orders_count ? data.orders_count : 0}</bdi>
           </p>
         </div>
         <p className="hidden lg:block text-base text-black font-noramal opacity-60 mt-4 self-end">
@@ -49,7 +49,7 @@ export default function Summary({ dataSelected }) {
             تعداد اجناس فروشگاه
           </p>
           <p className='text-xl lg:text-2xl text-[#3A4750] font-extrabold leading-10 mt-1.5 after:content-["عدد"] after:text-sm after:mr-2'>
-            <bdi>{(7565).toLocaleString()}</bdi>
+            <bdi>{data.products_count ? data.products_count : 0}</bdi>
           </p>
         </div>
         <p className="hidden lg:block text-base text-black font-noramal opacity-60 mt-4 self-end">
@@ -64,7 +64,7 @@ export default function Summary({ dataSelected }) {
             تعداد پیام های فروشگاه
           </p>
           <p className='text-xl lg:text-2xl text-[#3A4750] font-extrabold leading-10 mt-1.5 after:content-["عدد"] after:text-sm after:mr-2'>
-            <bdi>{(5000).toLocaleString()}</bdi>
+            <bdi>{data.messages ? data.messages : 0}</bdi>
           </p>
         </div>
         <p className="hidden lg:block text-base text-black font-noramal opacity-60 mt-4 self-end">

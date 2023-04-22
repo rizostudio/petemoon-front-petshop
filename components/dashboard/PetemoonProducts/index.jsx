@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
@@ -22,55 +22,10 @@ import FilterBoxDialog from "./FilterBoxDialog";
 import FilterPage from "./FilterPage";
 import EmptyResult from "./EmptyResult";
 import ProductList from "./ProductList";
+import { getPetemoonProducts } from "@/services/petemoonProducts/getPetemoonProducts";
 
 export default function PetemoonProducts() {
-  const [data, setData] = useState([
-    {
-      title: "غذای سگ خشک 700 گرمی",
-      Image: product_Image,
-      code: "#750GH",
-      price: 75000,
-      availabilityAmount: 60,
-      group: "دسته خوراکی",
-      score: 4,
-    },
-    {
-      title: "غذای سگ خشک 700 گرمی",
-      Image: product_Image,
-      code: "#750GH",
-      price: 75000,
-      availabilityAmount: 60,
-      group: "دسته خوراکی",
-      score: 3,
-    },
-    {
-      title: "غذای سگ خشک 700 گرمی",
-      Image: product_Image,
-      code: "#750GH",
-      price: 75000,
-      availabilityAmount: 60,
-      group: "دسته خوراکی",
-      score: 5,
-    },
-    {
-      title: "غذای سگ خشک 700 گرمی",
-      Image: product_Image,
-      code: "#750GH",
-      price: 75000,
-      availabilityAmount: 60,
-      group: "دسته خوراکی",
-      score: 2,
-    },
-    {
-      title: "غذای سگ خشک 700 گرمی",
-      Image: product_Image,
-      code: "#750GH",
-      price: 75000,
-      availabilityAmount: 0,
-      group: "دسته خوراکی",
-      score: 1,
-    },
-  ]);
+  const [data, setData] = useState([]);
   const brand = [
     { name: "پت بازار", id: "petBazzar" },
     { name: "پت شاپ۱", id: "petShop1" },
@@ -97,6 +52,18 @@ export default function PetemoonProducts() {
   const [MainPageOpen, setMainPageOpen] = useState(true); //for open & close Main Page in mobile
   const [FilterPageOpen, setFilterPageOpen] = useState(false); //for open & close filter Page in mobile
   const [SortPageOpen, setSortPageOpen] = useState(false); //for open & close Sort Page in mobile
+  useEffect(() => {
+    const getDate = async () => {
+      const response = await getPetemoonProducts();
+      if (response.success) {
+        console.log(response.data);
+        setData(response.data.products);
+      } else {
+        console.log(response.errors);
+      }
+    };
+    getDate();
+  }, []);
   return (
     <div>
       {/* Filter Page */}
