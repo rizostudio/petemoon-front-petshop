@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 //media
-import Trash_Icon from "../../assets/common/trash.svg";
-import search_Icon from "../../assets/common/searchIcon3.svg";
-import logout_Icon from "../../assets/common/logoutIconRed.svg";
+import Trash_Icon from "@/assets/common/trash.svg";
+import search_Icon from "@/assets/common/searchIcon3.svg";
+import logout_Icon from "@/assets/common/logoutIconRed.svg";
 
 export default function Messages() {
   const [messagesArr, setMessagesArr] = useState([
