@@ -52,7 +52,7 @@ export default function ProductList({ data }) {
             </div>
 
             <Link
-              href={`/dashboard/products/add/${index}`}
+              href={`/dashboard/products/add/${item.slug}`}
               className="text-sm lg:text-base text-center text-primary font-medium leading-6 w-full mt-2 lg:mt-5 px-5 py-1 bg-[#EA635233] rounded-[10px]"
             >
               <bdi>افزودن</bdi>

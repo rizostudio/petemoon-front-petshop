@@ -1,221 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 // media
-import StarEmpty_Icon from "@/assets/common/starEmpty.svg";
-import StarGold_Icon from "@/assets/common/startGold.svg";
-import leftArrow_Icon from "@/assets/common/leftArrowWhite.svg";
 import Properties_Icon from "@/assets/common/PropertiesIcon.svg";
-import StoreAlt_Logo from "@/assets/common/StoreLogoAlt.svg";
-import ProfileAlt_Pic from "@/assets/common/profilePicAlt.svg";
 import HeadingForMobile from "./HeadingForMobile";
+import { starsBoxHandler } from "@/services/products/starsOfProduct";
+import { getSingleProduct } from "@/services/petemoonProducts/getSingleProduct";
+import { createNewProduct } from "@/services/petShopProducts/createNewProduct";
+export default function SingleProduct({ query }) {
+  const [data, setDate] = useState({ property: [] });
+  useEffect(() => {
+    console.log(query);
+    const getData = async () => {
+      const response = await getSingleProduct(query);
+      if (response.success) {
+        console.log(response);
+        setDate(response.data);
+      } else {
+        console.log(response.errors);
+      }
+    };
+    getData();
+  }, []);
+  const product = Yup.object().shape({
+    price: Yup.string().required("فیلد الزامی است"),
+    inventory: Yup.string().required("فیلد الزامی است"),
+  });
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      product_id: data.id,
+      price: "",
+      price_after_sale: "55",
+      inventory: "1",
+    },
+    onSubmit: async (values) => {
+      console.log(values);
+      const response = await createNewProduct(values);
+      if (response.success) {
+        console.log(response);
+      }
+    },
+    validationSchema: product,
+  });
 
-export default function SingleProduct() {
-  const data = {
-    name: "غذای خشک سگ های خانگی",
-    group: "دسته خوراکی / سگ",
-    commentsNumber: 250,
-    stars: 3,
-    price: 123000,
-    discount: 20,
-    amount: 10,
-    property: [
-      { name: "for", title: "مخصوص", value: "سگ خانگی" },
-      { name: "kind", title: "نوع", value: "خوراکی حیوانی" },
-      { name: "MadeIn", title: "کشور سازنده", value: "تایوان" },
-      { name: "dimension", title: "ابعاد", value: "۲۰۰۰*۱۰۰۰" },
-      { name: "weight", title: "وزن", value: 2000 },
-    ],
-    description:
-      "فرمولی که سلبن برای سگ های بالغ نژاد کوچک ارائه کرده برای حیوانی فعال و بالغ مناسب است . در این فرمول علاوه بر ویتامین ها و مواد معدنی لازم از گلوکزامین و ال کارنتین استفاده شده که بهترین انتخاب برای سگ بالغ شما می باشد و وضعیت بدنی و وزنی حیوان را در جایگاهی سالم با تغذیه مناسب نگه می دارد. در این فرمول از حبوبات نیز استفاده شده که باعث هضم آرام غذا میشود. سگ های بالغ ، طعم و سایز کوچک غذای خشک را دوست خواهند داشت و شما هم ازاین غذا رضایتمند خواهید بود. شرکت پروتیین ایمن تاب در سال 1393 با ایده تولید غذای حیوانات خانگی با توجه به استاندارد های روز جهانی تاسیس و شروع به فعالیت نموده است. این شرکت از مجهزترین و بروز ترین ماشین آلات درکارخانه خود استفاده کرده و بعلاوه از بهترین مواد اولیه شرکتهای اروپایی و آمریکایی و کمک علمی آن ها بهره مند می باشد.",
-    seller: [
-      { name: "شهر پت", logo: StoreAlt_Logo, price: 135000 },
-      { name: "پتمون", logo: StoreAlt_Logo, price: 140000 },
-      { name: "پتجا", logo: StoreAlt_Logo, price: 150000 },
-    ],
-    comments: [
-      {
-        title: "عالی و بی نظیر",
-        stars: 5,
-        profilePic: ProfileAlt_Pic,
-        author: "حسین محمدی",
-        date: "۱۲ أذر ۱۴۰۱",
-        text: "بسیار عالی و باکیفیت بود مناسب سگ و بسیار دوست داشت. بسیار عالی و باکیفیت بود مناسب سگ و بسیار دوست داشت. بسیار عالی و باکیفیت بود مناسب سگ و بسیار دوست داشت. بسیار عالی و باکیفیت بود مناسب سگ و بسیار دوست داشت",
-      },
-      {
-        title: "عالی و بی نظیر",
-        stars: 5,
-        profilePic: ProfileAlt_Pic,
-        author: "حسین محمدی",
-        date: "۱۲ أذر ۱۴۰۱",
-        text: "بسیار عالی و باکیفیت بود مناسب سگ و بسیار دوست داشت. بسیار عالی و باکیفیت بود مناسب سگ و بسیار دوست داشت. بسیار عالی و باکیفیت بود مناسب سگ و بسیار دوست داشت. بسیار عالی و باکیفیت بود مناسب سگ و بسیار دوست داشت",
-      },
-      {
-        title: "عالی و بی نظیر",
-        stars: 5,
-        profilePic: ProfileAlt_Pic,
-        author: "حسین محمدی",
-        date: "۱۲ أذر ۱۴۰۱",
-        text: "بسیار عالی و باکیفیت بود مناسب سگ و بسیار دوست داشت. بسیار عالی و باکیفیت بود مناسب سگ و بسیار دوست داشت. بسیار عالی و باکیفیت بود مناسب سگ و بسیار دوست داشت. بسیار عالی و باکیفیت بود مناسب سگ و بسیار دوست داشت",
-      },
-      {
-        title: "عالی و بی نظیر",
-        stars: 5,
-        profilePic: ProfileAlt_Pic,
-        author: "حسین محمدی",
-        date: "۱۲ أذر ۱۴۰۱",
-        text: "بسیار عالی و باکیفیت بود مناسب سگ و بسیار دوست داشت. بسیار عالی و باکیفیت بود مناسب سگ و بسیار دوست داشت. بسیار عالی و باکیفیت بود مناسب سگ و بسیار دوست داشت. بسیار عالی و باکیفیت بود مناسب سگ و بسیار دوست داشت",
-      },
-    ],
-    similarProduct: [
-      {
-        title: "غذای خشک سگ",
-        group: "دسته خوراکی",
-        stars: 4,
-        store: "فروشگاه پتیار",
-        amount: 0,
-        discount: 20,
-        price: 125000,
-      },
-      {
-        title: "غذای خشک سگ",
-        group: "دسته خوراکی",
-        stars: 5,
-        store: "فروشگاه پتیار",
-        amount: 2,
-        discount: 20,
-        price: 125000,
-      },
-      {
-        title: "غذای خشک سگ",
-        group: "دسته خوراکی",
-        stars: 3,
-        store: "فروشگاه پتیار",
-        amount: 0,
-        discount: 20,
-        price: 125000,
-      },
-      {
-        title: "غذای خشک سگ",
-        group: "دسته خوراکی",
-        stars: 2,
-        store: "فروشگاه پتیار",
-        amount: 2,
-        discount: 20,
-        price: 125000,
-      },
-      {
-        title: "غذای خشک سگ",
-        group: "دسته خوراکی",
-        stars: 1,
-        store: "فروشگاه پتیار",
-        amount: 2,
-        discount: 20,
-        price: 125000,
-      },
-      {
-        title: "غذای خشک سگ",
-        group: "دسته خوراکی",
-        stars: 0,
-        store: "فروشگاه پتیار",
-        amount: 2,
-        discount: 20,
-        price: 125000,
-      },
-      {
-        title: "غذای خشک سگ",
-        group: "دسته خوراکی",
-        stars: 2,
-        store: "فروشگاه پتیار",
-        amount: 2,
-        discount: 20,
-        price: 125000,
-      },
-      {
-        title: "غذای خشک سگ",
-        group: "دسته خوراکی",
-        stars: 1,
-        store: "فروشگاه پتیار",
-        amount: 2,
-        discount: 20,
-        price: 125000,
-      },
-      {
-        title: "غذای خشک سگ",
-        group: "دسته خوراکی",
-        stars: 0,
-        store: "فروشگاه پتیار",
-        amount: 2,
-        discount: 20,
-        price: 125000,
-      },
-      {
-        title: "غذای خشک سگ",
-        group: "دسته خوراکی",
-        stars: 2,
-        store: "فروشگاه پتیار",
-        amount: 2,
-        discount: 20,
-        price: 125000,
-      },
-      {
-        title: "غذای خشک سگ",
-        group: "دسته خوراکی",
-        stars: 1,
-        store: "فروشگاه پتیار",
-        amount: 2,
-        discount: 20,
-        price: 125000,
-      },
-      {
-        title: "غذای خشک سگ",
-        group: "دسته خوراکی",
-        stars: 0,
-        store: "فروشگاه پتیار",
-        amount: 2,
-        discount: 20,
-        price: 125000,
-      },
-      {
-        title: "غذای خشک سگ",
-        group: "دسته خوراکی",
-        stars: 2,
-        store: "فروشگاه پتیار",
-        amount: 2,
-        discount: 20,
-        price: 125000,
-      },
-      {
-        title: "غذای خشک سگ",
-        group: "دسته خوراکی",
-        stars: 1,
-        store: "فروشگاه پتیار",
-        amount: 2,
-        discount: 20,
-        price: 125000,
-      },
-      {
-        title: "غذای خشک سگ",
-        group: "دسته خوراکی",
-        stars: 0,
-        store: "فروشگاه پتیار",
-        amount: 2,
-        discount: 20,
-        price: 125000,
-      },
-    ],
-  };
-  // for showing stars
-  const starsBoxHandler = (stars) => {
-    const starsBox = [];
-    for (let i = 0; i < stars; i++) {
-      starsBox.push(<Image src={StarGold_Icon} alt="GoldenStarIcon" />);
-    }
-    for (let i = 0; i < 5 - stars; i++) {
-      starsBox.push(<Image src={StarEmpty_Icon} alt="EmptyStarIcon" />);
-    }
-    return starsBox;
-  };
   return (
     <div className="w-full h-full flex flex-col justify-between items-stretch lg:px-10 lg:py-5">
       {/* Main */}
@@ -225,37 +55,45 @@ export default function SingleProduct() {
         {/* Summary box */}
         <div className="w-full flex flex-col lg:flex-row lg:justify-evenly items-stretch py-5 lg:py-10 border-b-[2px] border-secondary">
           {/* Gallery */}
-          <div className="self-center w-full lg:w-[450px] h-[200px] lg:h-[600px] rounded-[15px] border-[2px] border-primary solid"></div>
+          <div className="self-center w-full lg:w-[450px] h-[200px] lg:h-[600px] rounded-[15px] border-[2px] border-primary solid">
+            <Image
+              style={{ width: "100%", height: "100%" }}
+              width={100}
+              height={100}
+              src={`https://api.petemoon.com${data.picture}`}
+            />
+          </div>
           <div className="xl:w-full flex flex-col lg:mr-10">
             {/* Heading for desktop */}
             <div className="flex flex-row lg:flex-col justify-between items-center lg:items-start py-4  lg:px-4 border-b-[2px] border-none lg:border-solid border-secondary">
               <div className="flex flex-col">
                 <p className="text-base lg:text-lg text-gray-400 font-normal leading-6">
-                  <bdi>{data.group}</bdi>
+                  <bdi>
+                    {data.category}/{data.pet_type}
+                  </bdi>
                 </p>
                 <div className="w-full hidden lg:flex flex-row items-center justify-between mt-2">
                   <h2 className="text-3xl text-black font-bold leading-10 before:inline-block before:w-2 before:h-5 before:bg-primary before:ml-2  before:rounded-[2px]">
                     {data.name}
                   </h2>
-                  {data.discount > 0 && (
-                    <p className='text-base text-white font-medium leading-8 px-2 py-1 mr-3 rounded-[10px] bg-primary before:content-["%"] before:text-[14px]'>
-                      <bdi>{data.discount}</bdi>
-                    </p>
-                  )}
                 </div>
               </div>
               <div className="flex flex-row lg:flex-col justify-between items-center lg:items-start lg:mt-10">
                 <div className="hidden lg:flex flex-row items-center">
                   <div className="flex flex-row items-center">
-                    {starsBoxHandler(data.stars)}
+                    {data.rating
+                      ? starsBoxHandler(data.rating)
+                      : starsBoxHandler(5)}
                   </div>
-                  <p className="text-xl text-gray-400 font-medium leading-6 mr-2 align-middle">{`(${data.stars})`}</p>
+                  <p className="text-xl text-gray-400 font-medium leading-6 mr-2 align-middle">{`(${
+                    data.rating ? data.rating : 5
+                  })`}</p>
                 </div>
                 <Link
                   href="#cutomersComent"
                   className="text-base lg:text-lg text-info font-normal leading-6 lg:mt-2"
                 >
-                  <bdi>{`${data.commentsNumber} دیدگاه`}</bdi>
+                  <bdi>{`${data.comments?.length} دیدگاه`}</bdi>
                 </Link>
               </div>
             </div>
@@ -268,32 +106,39 @@ export default function SingleProduct() {
                     <bdi>ویژگی ها</bdi>
                   </p>
                 </div>
-                {data.property.map((item, index) => (
-                  <div
-                    key={index}
-                    className="lg:hidden flex flex-row items-center align-middle my-1 mr-5"
-                  >
-                    <p className='text-base lg:text-lg text-gray-400 font-bold leading-7 opacity-90 before:content-["."] before:text-4xl before:ml-2'>
-                      <bdi>{item.title}</bdi>
-                    </p>
-                    <p className="text-base lg:text-lg text-black font-bold leading-7 opacity-90 mr-4 lg:mr-2 align-bottom">
-                      <bdi>{item.value}</bdi>
-                    </p>
-                  </div>
-                ))}
-                {data.property.slice(0, 2).map((item, index) => (
-                  <div
-                    key={index}
-                    className="hidden lg:flex flex-row items-center align-middle my-1 mr-5"
-                  >
-                    <p className='text-base lg:text-lg text-gray-400 font-bold leading-7 opacity-90 before:content-["."] before:text-4xl before:ml-2'>
-                      <bdi>{item.title}</bdi>
-                    </p>
-                    <p className="text-base lg:text-lg text-black font-bold leading-7 opacity-90 mr-4 lg:mr-2 align-bottom">
-                      <bdi>{item.value}</bdi>
-                    </p>
-                  </div>
-                ))}
+
+                <div className="lg:hidden flex flex-row items-center align-middle my-1 mr-5">
+                  <p className='text-base lg:text-lg text-gray-400 font-bold leading-7 opacity-90 before:content-["."] before:text-4xl before:ml-2'>
+                    <bdi>مخصوص:</bdi>
+                  </p>
+                  <p className="text-base lg:text-lg text-black font-bold leading-7 opacity-90 mr-4 lg:mr-2 align-bottom">
+                    <bdi>{data.pet_type}</bdi>
+                  </p>
+                </div>
+                <div className="lg:hidden flex flex-row items-center align-middle my-1 mr-5">
+                  <p className='text-base lg:text-lg text-gray-400 font-bold leading-7 opacity-90 before:content-["."] before:text-4xl before:ml-2'>
+                    <bdi>نوع:</bdi>
+                  </p>
+                  <p className="text-base lg:text-lg text-black font-bold leading-7 opacity-90 mr-4 lg:mr-2 align-bottom">
+                    <bdi>{data.category}</bdi>
+                  </p>
+                </div>
+                <div className="hidden lg:flex flex-row items-center align-middle my-1 mr-5">
+                  <p className='text-base lg:text-lg text-gray-400 font-bold leading-7 opacity-90 before:content-["."] before:text-4xl before:ml-2'>
+                    <bdi>مخصوص:</bdi>
+                  </p>
+                  <p className="text-base lg:text-lg text-black font-bold leading-7 opacity-90 mr-4 lg:mr-2 align-bottom">
+                    <bdi> {data.pet_type}</bdi>
+                  </p>
+                </div>
+                <div className="hidden lg:flex flex-row items-center align-middle my-1 mr-5">
+                  <p className='text-base lg:text-lg text-gray-400 font-bold leading-7 opacity-90 before:content-["."] before:text-4xl before:ml-2'>
+                    <bdi>نوع:</bdi>
+                  </p>
+                  <p className="text-base lg:text-lg text-black font-bold leading-7 opacity-90 mr-4 lg:mr-2 align-bottom">
+                    <bdi> {data.category}</bdi>
+                  </p>
+                </div>
               </div>
               {/* Add Prodcut for desktop */}
               <div className="hidden lg:flex flex-col items-stretch order-1 w-full mb-3 py-5">
@@ -303,7 +148,10 @@ export default function SingleProduct() {
                   </p>
                   <div className="flex items-center">
                     <input
+                      name="price"
                       type="number"
+                      value={formik.values.price}
+                      onChange={formik.handleChange}
                       className="text-2xl text-primary font-medium leading-10 opacity-90 w-[100px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
                     />
                     <p className="text-sm text-primary font-normal leading-7">
@@ -317,6 +165,9 @@ export default function SingleProduct() {
                   </p>
                   <div className="flex items-center">
                     <input
+                      name="inventory"
+                      value={formik.values.inventory}
+                      onChange={formik.handleChange}
                       type="number"
                       className="text-2xl text-primary font-medium leading-10 opacity-90 w-[100px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
                     />
@@ -325,7 +176,10 @@ export default function SingleProduct() {
                     </p>
                   </div>
                 </div>
-                <button className="text-base text-white font-bold leading-7 w-full px-5 py-3 mt-5 bg-primary rounded-[15px]">
+                <button
+                  onClick={formik.handleSubmit}
+                  className="text-base text-white font-bold leading-7 w-full px-5 py-3 mt-5 bg-primary rounded-[15px]"
+                >
                   <bdi>افزودن به محصولات</bdi>
                 </button>
               </div>
@@ -341,7 +195,10 @@ export default function SingleProduct() {
               </p>
               <div className="flex items-center">
                 <input
+                  name="price"
                   type="number"
+                  value={formik.values.price}
+                  onChange={formik.handleChange}
                   className="text-base lg:text-2xl text-primary font-medium leading-10 opacity-90 w-[100px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
                 />
                 <p className="text-sm text-primary font-normal leading-7">
@@ -355,6 +212,9 @@ export default function SingleProduct() {
               </p>
               <div className="flex items-center">
                 <input
+                  name="inventory"
+                  value={formik.values.inventory}
+                  onChange={formik.handleChange}
                   type="number"
                   className="text-base lg:text-2xl text-primary font-medium leading-10 opacity-90 w-[100px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
                 />
@@ -364,7 +224,10 @@ export default function SingleProduct() {
               </div>
             </div>
           </div>
-          <button className="text-base text-white font-bold leading-7 w-full px-5 py-3 mt-5 bg-primary rounded-[15px]">
+          <button
+            onClick={formik.handleSubmit}
+            className="text-base text-white font-bold leading-7 w-full px-5 py-3 mt-5 bg-primary rounded-[15px]"
+          >
             <bdi>افزودن به محصولات</bdi>
           </button>
         </div>
