@@ -1,11 +1,10 @@
 import { errorResponse, successResponse } from "../error";
 import { httpRequest } from "../http";
 
-export const editProduct = async (product) => {
+export const getSinglrProductPricing = async (id) => {
   try {
-    const response = await httpRequest.patch(
-      `/petshop-dashboard/product-pricing`,
-      { ...product }
+    const response = await httpRequest.get(
+      `/petshop-dashboard/single-pricing/${id}`
     );
     const data = response.data.data;
     return successResponse(data);

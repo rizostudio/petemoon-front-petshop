@@ -10,7 +10,22 @@ import TrashRed_Icon from "../../../assets/common/TrashIconRed.svg";
 import CloseButton_Icon from "../../../assets/common/close-button.svg";
 import Edit2_Icon from "../../../assets/common/EditIcon2.svg";
 
-export default function ProductsListForMobile({ data, editMode }) {
+export default function ProductsListForMobile({ data }) {
+  const [price, setPrice] = useState("");
+  const [inventory, setInventory] = useState("");
+  const [editMode, setEditMode] = useState({ status: false, index: "" });
+  const handleEditProduct = async () => {
+    const response = await editProduct({
+      product_id: editMode.index,
+      price: price,
+      price_after_sale: "55",
+      inventory: inventory,
+    });
+    if (response.success) {
+      setEditMode({ status: false, index: "" });
+      console.log(response.success);
+    }
+  };
   return (
     <div className="flex lg:hidden flex-col mt-4">
       {data &&
@@ -53,8 +68,8 @@ export default function ProductsListForMobile({ data, editMode }) {
                       موجودی:
                       <span
                         className={clsx("mr-1", {
-                          // "inline" : editMode.status == false,
-                          // "hidden" : editMode.status && editMode.index == index
+                          inline: editMode.status == false,
+                          hidden: editMode.status && editMode.index == index,
                         })}
                       >
                         {item.availabilityAmount}

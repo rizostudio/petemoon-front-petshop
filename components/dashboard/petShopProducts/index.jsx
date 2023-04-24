@@ -30,6 +30,7 @@ import HeadingForMobile from "./HeadingForMobile";
 import SortBoxDialog from "./SortBoxDialog";
 import ProductsListForMobile from "./ProductsListForMobile";
 import ProductsListForDesktop from "./ProductsListForDesktop";
+import { getListProducts } from "@/services/petShopProducts/getListOfProducts";
 
 export default function PetShopProducts() {
   const [data, setData] = useState([
@@ -77,7 +78,6 @@ export default function PetShopProducts() {
     { name: "کافه پت", id: "petCafe" },
   ];
   const petKind = ["سگ خانگی", "سگ شکارچی", "سگ وحشی", "سگ گله", "سگ نگهبان"];
-
   // the array of sort options
   const [sortArr, setSortArr] = useState([
     { title: "پرفروش ترین" },
@@ -88,36 +88,20 @@ export default function PetShopProducts() {
   ]);
   // for change the color of choosen option in sorting
   const [sortValue, setSortValue] = useState("پرفروش ترین");
-
-  // for remove data from list
-  const TrashHandler = (index) => {
-    const newArr = [...data];
-    newArr.splice(1, index);
-    setData(newArr);
-    console.log("remove" + data);
-  };
-  // for edit the data
-  const [amount, setAmount] = useState(""); //for set the new amount
-  const [price, setPrice] = useState(""); // for set the new price
-  const [editMode, setEditMode] = useState({ status: false, index: "" });
-  console.log(editMode.index);
-  const editHandler = () => {};
-  const saveEditHandler = (index) => {
-    setEditMode({ status: false, index });
-    const newArr = [...data];
-    newArr[index].availabilityAmount = amount;
-    newArr[index].price = price;
-    setData(newArr);
-    setAmount("");
-    setPrice("");
-    console.log("edit" + data);
-  };
-
   //Dynamic
   const [MainPageOpen, setMainPageOpen] = useState(true); //for open & close Main Page in mobile
   const [FilterPageOpen, setFilterPageOpen] = useState(false); //for open & close filter Page in mobile
   const [SortPageOpen, setSortPageOpen] = useState(false); //for open & close Sort Page in mobile
-
+  useEffect(() => {
+    const getDate = async () => {
+      const response = await getListProducts();
+      if (response.success) {
+        console.log(response);
+        setData(response.data);
+      }
+    };
+    getDate();
+  }, []);
   return (
     <div className="h-screen">
       {/* Filter Page */}
@@ -175,7 +159,7 @@ export default function PetShopProducts() {
                       setMainPageOpen={setMainPageOpen}
                     />
                   </div>
-                  <ProductsListForMobile editMode={editMode} data={data} />
+                  <ProductsListForMobile data={data} />
                 </div>
                 <ProductsListForDesktop data={data} />
               </div>

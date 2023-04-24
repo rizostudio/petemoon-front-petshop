@@ -8,15 +8,15 @@ import * as Yup from "yup";
 import Properties_Icon from "@/assets/common/PropertiesIcon.svg";
 import HeadingForMobile from "./HeadingForMobile";
 import { starsBoxHandler } from "@/services/products/starsOfProduct";
-import { getSingleProduct } from "@/services/petemoonProducts/getSingleProduct";
 import { createNewProduct } from "@/services/petShopProducts/createNewProduct";
-export default function SingleProduct({ query }) {
-  const [data, setDate] = useState({ property: [] });
+import { getSinglrProductPricing } from "@/services/petShopProducts/getSinglrProductPricing";
+import { editProduct } from "@/services/petShopProducts/editProduct";
+export default function EditProduct({ query }) {
+  const [data, setDate] = useState({});
   const router = useRouter();
   useEffect(() => {
-    console.log(query);
     const getData = async () => {
-      const response = await getSingleProduct(query);
+      const response = await getSinglrProductPricing(query);
       if (response.success) {
         console.log(response);
         setDate(response.data);
@@ -25,7 +25,7 @@ export default function SingleProduct({ query }) {
       }
     };
     getData();
-  }, []);
+  }, [query]);
   const product = Yup.object().shape({
     price: Yup.string().required("فیلد الزامی است"),
     inventory: Yup.string().required("فیلد الزامی است"),
@@ -34,13 +34,13 @@ export default function SingleProduct({ query }) {
     enableReinitialize: true,
     initialValues: {
       product_id: data.id,
-      price: "",
-      price_after_sale: "55",
-      inventory: "1",
+      price: data.price,
+      price_after_sale: data.price_after_sale,
+      inventory: data.inventory,
     },
     onSubmit: async (values) => {
       console.log(values);
-      const response = await createNewProduct(values);
+      const response = await editProduct(values);
       if (response.success) {
         console.log(response);
         router.push("/dashboard/products");
@@ -70,18 +70,18 @@ export default function SingleProduct({ query }) {
             {/* Heading for desktop */}
             <div className="flex flex-row lg:flex-col justify-between items-center lg:items-start py-4  lg:px-4 border-b-[2px] border-none lg:border-solid border-secondary">
               <div className="flex flex-col">
-                <p className="text-base lg:text-lg text-gray-400 font-normal leading-6">
+                {/* <p className="text-base lg:text-lg text-gray-400 font-normal leading-6">
                   <bdi>
                     {data.category}/{data.pet_type}
                   </bdi>
-                </p>
+                </p> */}
                 <div className="w-full hidden lg:flex flex-row items-center justify-between mt-2">
                   <h2 className="text-3xl text-black font-bold leading-10 before:inline-block before:w-2 before:h-5 before:bg-primary before:ml-2  before:rounded-[2px]">
                     {data.name}
                   </h2>
                 </div>
               </div>
-              <div className="flex flex-row lg:flex-col justify-between items-center lg:items-start lg:mt-10">
+              {/* <div className="flex flex-row lg:flex-col justify-between items-center lg:items-start lg:mt-10">
                 <div className="hidden lg:flex flex-row items-center">
                   <div className="flex flex-row items-center">
                     {data.rating
@@ -98,7 +98,7 @@ export default function SingleProduct({ query }) {
                 >
                   <bdi>{`${data.comments?.length} دیدگاه`}</bdi>
                 </Link>
-              </div>
+              </div> */}
             </div>
             <div className="flex flex-col justify-between mt-5">
               {/* Summary Propertiese */}
