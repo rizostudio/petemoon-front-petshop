@@ -83,7 +83,6 @@ export default function ProductCardForDesktop({ item }) {
               <Image src={Edit2_Icon} alt="Edit Icon" />
             </div>
           </Link>
-
           <div
             onClick={deleteHandlear}
             className="p-1.5 border-[1px] border-error rounded-xl mr-2"

@@ -2,18 +2,38 @@ import React from "react";
 import Image from "next/image";
 import clsx from "clsx";
 import { v4 } from "uuid";
-
+import { useRouter } from "next/router";
 import filter_Icon from "@/assets/common/filterIcon.svg";
 import DownArrow_Icon from "@/assets/common/downArrow.svg";
-
+//services
+import * as queryString from "@/services/queryString";
 export default function FilterBoxDialog({
   brand,
-  petKind,
+  petCategory,
   setFilterPageOpen,
   setMainPageOpen,
   FilterBoxOpen,
   setFilterBoxOpen,
 }) {
+  const router = useRouter();
+  const filterProducts = (event, title, slug) => {
+    const query = event.target.checked
+      ? queryString.addListQueryArg(router.query, title, slug)
+      : queryString.removeListQueryArg(router.query, title, slug);
+    router.push({
+      pathname: router.pathname,
+      query,
+    });
+  };
+  const filterPriceProduct = (event, title, slug) => {
+    const query = event.target.value
+      ? queryString.addQueryArg(router.query, title, slug)
+      : queryString.removeListQueryArg(router.query, title, slug);
+    router.push({
+      pathname: router.pathname,
+      query,
+    });
+  };
   return (
     <div
       className={clsx("lg:w-[300px] lg:bg-white rounded-t-[25px] relative", {
@@ -58,6 +78,10 @@ export default function FilterBoxDialog({
               <div key={v4()} className="flex items-center">
                 <input
                   id={`brand${index}`}
+                  checked={router.query?.brand_slug?.includes(item.slug)}
+                  onChange={(e) => {
+                    filterProducts(e, "brand_slug", item.slug);
+                  }}
                   type="checkbox"
                   className="h-4 w-4 text-primary border-primary focus:ring-transparent rounded-[4px]"
                 />
@@ -67,7 +91,7 @@ export default function FilterBoxDialog({
               </div>
             ))}
           </div>
-          <label className="text-base text-black font-medium leading-7 mt-6">
+          {/* <label className="text-base text-black font-medium leading-7 mt-6">
             بازه قیمتی
           </label>
           <div className="w-full flex justify-between text-xs px-2">
@@ -76,22 +100,26 @@ export default function FilterBoxDialog({
             <span></span>
             <span></span>
             <span>2500</span>
-          </div>
-          <style jsx>{``}</style>
-          <input className="" type="range" min="1" max="100" step="1" />
+          </div> */}
+
+          {/* <input className="" type="range" min="1" max="100" step="1" /> */}
           <p className="text-base text-black font-medium leading-7 mt-6">
             نوع پت
           </p>
           <div>
-            {petKind.map((item, index) => (
+            {petCategory.map((item, index) => (
               <div key={v4()} className="flex items-center">
                 <input
                   id={`kind${index}`}
                   type="checkbox"
+                  checked={router?.query?.pet_types?.includes(item.slug)}
+                  onChange={(e) => {
+                    filterProducts(e, "pet_types", item.slug);
+                  }}
                   className="h-4 w-4 text-primary border-primary focus:ring-transparent rounded-[4px]"
                 />
                 <label htmlFor={`kind${index}`} className="mr-2">
-                  {item}
+                  {item.pet_category}
                 </label>
               </div>
             ))}

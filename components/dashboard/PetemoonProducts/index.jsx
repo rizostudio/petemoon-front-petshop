@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
 import { v4 } from "uuid";
-
+import { useRouter } from "next/router";
 //component
 import DashboardLayout from "@/layout/DashboardLayout";
 
@@ -23,30 +23,15 @@ import FilterPage from "./FilterPage";
 import EmptyResult from "./EmptyResult";
 import ProductList from "./ProductList";
 import { getPetemoonProducts } from "@/services/petemoonProducts/getPetemoonProducts";
+import { getProductFilter } from "@/services/petemoonProducts/getProductFilters";
 
 export default function PetemoonProducts() {
+  const router = useRouter();
   const [data, setData] = useState([]);
-  const brand = [
-    { name: "پت بازار", id: "petBazzar" },
-    { name: "پت شاپ۱", id: "petShop1" },
-    { name: "پت ایران", id: "petIran" },
-    { name: "تهران پت", id: "tehranPet" },
-    { name: "کافه پت", id: "petCafe" },
-  ];
-  const petKind = ["سگ خانگی", "سگ شکارچی", "سگ وحشی", "سگ گله", "سگ نگهبان"];
-  const [FilterBoxOpen, setFilterBoxOpen] = useState(false);
+  const [brand, setBrand] = useState([]);
+  const [petCategory, setPetCategory] = useState([]);
 
-  // for showing stars
-  const starsBoxHandler = (stars) => {
-    const starsBox = [];
-    for (let i = 0; i < stars; i++) {
-      starsBox.push(<Image src={StarGold_Icon} alt="GoldenStarIcon" />);
-    }
-    for (let i = 0; i < 5 - stars; i++) {
-      starsBox.push(<Image src={StarEmpty_Icon} alt="EmptyStarIcon" />);
-    }
-    return starsBox;
-  };
+  const [FilterBoxOpen, setFilterBoxOpen] = useState(false);
 
   //Dynamic
   const [MainPageOpen, setMainPageOpen] = useState(true); //for open & close Main Page in mobile
@@ -54,7 +39,8 @@ export default function PetemoonProducts() {
   const [SortPageOpen, setSortPageOpen] = useState(false); //for open & close Sort Page in mobile
   useEffect(() => {
     const getDate = async () => {
-      const response = await getPetemoonProducts();
+      const queryParams = new URLSearchParams(router.query);
+      const response = await getPetemoonProducts(queryParams.toString());
       if (response.success) {
         console.log(response.data);
         setData(response.data.products);
@@ -63,6 +49,15 @@ export default function PetemoonProducts() {
       }
     };
     getDate();
+  }, [router.query]);
+  useEffect(() => {
+    const getData = async () => {
+      const response = await getProductFilter();
+      console.log(response);
+      setBrand(response.data.brands);
+      setPetCategory(response.data.pet_types);
+    };
+    getData();
   }, []);
   return (
     <div>
@@ -72,7 +67,7 @@ export default function PetemoonProducts() {
         FilterPageOpen={FilterPageOpen}
         setFilterPageOpen={setFilterPageOpen}
         brand={brand}
-        petKind={petKind}
+        petCategory={petCategory}
       />
       <DashboardLayout>
         {/* Main Page */}
@@ -109,7 +104,7 @@ export default function PetemoonProducts() {
           <div className="hidden lg:flex items-center mb-5">
             <FilterBoxDialog
               brand={brand}
-              petKind={petKind}
+              petCategory={petCategory}
               FilterBoxOpen={FilterBoxOpen}
               setFilterBoxOpen={setFilterBoxOpen}
               setFilterPageOpen={setFilterPageOpen}
