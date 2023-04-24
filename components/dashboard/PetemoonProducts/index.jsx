@@ -4,6 +4,7 @@ import Link from "next/link";
 import clsx from "clsx";
 import { v4 } from "uuid";
 import { useRouter } from "next/router";
+import { debounce } from "lodash";
 //component
 import DashboardLayout from "@/layout/DashboardLayout";
 
@@ -24,6 +25,7 @@ import EmptyResult from "./EmptyResult";
 import ProductList from "./ProductList";
 import { getPetemoonProducts } from "@/services/petemoonProducts/getPetemoonProducts";
 import { getProductFilter } from "@/services/petemoonProducts/getProductFilters";
+import { search } from "@/services/petemoonProducts/search";
 
 export default function PetemoonProducts() {
   const router = useRouter();
@@ -59,6 +61,24 @@ export default function PetemoonProducts() {
     };
     getData();
   }, []);
+  const performSearch = debounce(async (keyword) => {
+    // setSearchLoading(true);
+    const response = await search(keyword);
+
+    if (response.success) {
+      console.log(response.data);
+      setData(response.data);
+      // setSearchLoading(false);
+    }
+  }, 1000);
+  const handleSearch = (e) => {
+    // setInputBlur(true);
+    if (!e.target.value) {
+      setData([]);
+    } else {
+      performSearch(e.target.value);
+    }
+  };
   return (
     <div>
       {/* Filter Page */}
@@ -90,6 +110,7 @@ export default function PetemoonProducts() {
             </div>
             <div className="flex items-center w-4/5 h-full px-5 bg-[#F2CDC8] rounded-[15px] mx-2">
               <input
+                onChange={handleSearch}
                 type="text"
                 placeholder="جستجوی محصول، فروشگاه و..."
                 className="h-full w-full text-base text-right text-white placeholder:text-primary placeholder:opacity-50 font-bold border-none bg-transparent appearance-none focus:ring-0 focus:outline-none focus:border-none peer"
@@ -113,6 +134,7 @@ export default function PetemoonProducts() {
             <div className="flex items-center w-4/5 h-full px-5 bg-white rounded-[20px] shadow-shadowB mr-5">
               <Image src={Search2_Icon} alt="SearchIcon" className="invert" />
               <input
+                onChange={handleSearch}
                 type="text"
                 placeholder="جستجو"
                 className="h-full w-full text-base text-right text-black placeholder:text-black placeholder:opacity-50 font-medium leading-7 border-none bg-transparent appearance-none focus:ring-0 focus:outline-none focus:border-none peer"
