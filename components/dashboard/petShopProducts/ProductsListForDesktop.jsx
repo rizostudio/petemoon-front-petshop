@@ -2,18 +2,21 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import clsx from "clsx";
-import { v4 } from "uuid";
-
+import * as queryString from "@/services/queryString";
 //media
-import product_Image from "@/assets/common/ProductPic1.svg";
-import TrashRed_Icon from "../../../assets/common/TrashIconRed.svg";
-import Edit2_Icon from "../../../assets/common/EditIcon2.svg";
 import addProduct_Icon from "../../../assets/common/shop-addPrimaryIcon.svg";
-import submitIcon from "../../../assets/common/tik.svg";
-import { editProduct } from "@/services/petShopProducts/editProduct";
 import ProductCardForDesktop from "./ProductCardForDesktop";
-export default function ProductsListForDesktop({ data }) {
+export default function ProductsListForDesktop({ data, brand, petCategory }) {
+  const router = useRouter();
+  const filterProducts = (title, slug) => {
+    console.log(slug);
+    const query = queryString.addQueryArg(router.query, title, slug);
+    console.log(query);
+    router.push({
+      pathname: router.pathname,
+      query,
+    });
+  };
   return (
     <div className="hidden lg:flex flex-col items-stretch bg-[#fff] rounded-[25px] shadow-shadowB">
       <div className="flex justify-between px-10 py-8 w-full">
@@ -30,15 +33,43 @@ export default function ProductsListForDesktop({ data }) {
             </p>
             <Image src={addProduct_Icon} alt="Add Product Icon" />
           </Link>
-          <select className="text-sm text-primary font-medium leading-5 appearance-none w-[100px] p-3 mx-4 border-[1px] border-primary rounded-[12px] focus:border-primary focus:outline-none focus:ring-0 peer">
-            <option>سگ</option>
-            <option>سگ</option>
-            <option>سگ</option>
+          <select
+            onChange={(e) => {
+              filterProducts("pet_category", e.target.value);
+            }}
+            placeholder="  نوع پت"
+            className="text-sm text-primary font-medium leading-5 appearance-none w-[100px] p-3 mx-4 border-[1px] border-primary rounded-[12px] focus:border-primary focus:outline-none focus:ring-0 peer"
+          >
+            <option disabled style={{ display: "none" }}>
+              نوع پت
+            </option>
+            {petCategory.map((item, index) => (
+              <option
+                value={item.slug}
+                key={index}
+                onClick={(e) => {
+                  console.log(e);
+                  // filterProducts("pet_category", item.slug);
+                }}
+              >
+                {item.pet_category}
+              </option>
+            ))}
           </select>
-          <select className="text-sm text-primary font-medium leading-5 w-[100px] p-3 border-[1px] border-primary rounded-[12px] focus:border-primary focus:outline-none focus:ring-0 peer">
-            <option>rere</option>
-            <option>efef</option>
-            <option>yjhjy</option>
+          <select
+            onChange={(e) => {
+              filterProducts("brand_slug", e.target.value);
+            }}
+            className="text-sm text-primary font-medium leading-5 w-[100px] p-3 border-[1px] border-primary rounded-[12px] focus:border-primary focus:outline-none focus:ring-0 peer"
+          >
+            <option selected disabled>
+              برند
+            </option>
+            {brand.map((item, index) => (
+              <option key={index} value={item.slug}>
+                {item.name}
+              </option>
+            ))}
           </select>
         </div>
       </div>

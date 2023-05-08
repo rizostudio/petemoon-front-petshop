@@ -31,8 +31,10 @@ import SortBoxDialog from "./SortBoxDialog";
 import ProductsListForMobile from "./ProductsListForMobile";
 import ProductsListForDesktop from "./ProductsListForDesktop";
 import { getListProducts } from "@/services/petShopProducts/getListOfProducts";
+import { getProductFilter } from "@/services/petemoonProducts/getProductFilters";
 
 export default function PetShopProducts() {
+  const router = useRouter();
   const [data, setData] = useState([
     {
       title: "غذای سگ خشک 700 گرمی",
@@ -70,13 +72,13 @@ export default function PetShopProducts() {
       availabilityAmount: "60",
     },
   ]);
-  const brand = [
-    { name: "پت بازار", id: "petBazzar" },
-    { name: "پت شاپ۱", id: "petShop1" },
-    { name: "پت ایران", id: "petIran" },
-    { name: "تهران پت", id: "tehranPet" },
-    { name: "کافه پت", id: "petCafe" },
-  ];
+  // const brand = [
+  //   { name: "پت بازار", id: "petBazzar" },
+  //   { name: "پت شاپ۱", id: "petShop1" },
+  //   { name: "پت ایران", id: "petIran" },
+  //   { name: "تهران پت", id: "tehranPet" },
+  //   { name: "کافه پت", id: "petCafe" },
+  // ];
   const petKind = ["سگ خانگی", "سگ شکارچی", "سگ وحشی", "سگ گله", "سگ نگهبان"];
   // the array of sort options
   const [sortArr, setSortArr] = useState([
@@ -86,6 +88,8 @@ export default function PetShopProducts() {
     { title: "ارزان ترین" },
     { title: "گران ترین" },
   ]);
+  const [brand, setBrand] = useState([]);
+  const [petCategory, setPetCategory] = useState([]);
   // for change the color of choosen option in sorting
   const [sortValue, setSortValue] = useState("پرفروش ترین");
   //Dynamic
@@ -94,14 +98,25 @@ export default function PetShopProducts() {
   const [SortPageOpen, setSortPageOpen] = useState(false); //for open & close Sort Page in mobile
   useEffect(() => {
     const getDate = async () => {
-      const response = await getListProducts();
+      const queryParams = new URLSearchParams(router.query);
+      const response = await getListProducts(queryParams);
       if (response.success) {
         console.log(response);
         setData(response.data);
       }
     };
     getDate();
+  }, [router.query]);
+  useEffect(() => {
+    const getData = async () => {
+      const response = await getProductFilter();
+      console.log(response);
+      setBrand(response.data.brands);
+      setPetCategory(response.data.pet_types);
+    };
+    getData();
   }, []);
+
   return (
     <div className="h-screen">
       {/* Filter Page */}
@@ -161,7 +176,11 @@ export default function PetShopProducts() {
                   </div>
                   <ProductsListForMobile data={data} />
                 </div>
-                <ProductsListForDesktop data={data} />
+                <ProductsListForDesktop
+                  brand={brand}
+                  petCategory={petCategory}
+                  data={data}
+                />
               </div>
             )}
           </div>

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { v4 } from "uuid";
-
+import { useRouter } from "next/router";
 //media
 import ArrowLeftWhite_Icon from "@/assets/common/leftArrowWhite.svg";
 import product_Image from "@/assets/common/ProductPic1.svg";
@@ -11,53 +11,31 @@ import CloseButton_Icon from "@/assets/common/close-button.svg";
 import ChangeStatusModal from "./ChangeStatusModal";
 import OrderDetails from "./OrderDetails";
 import OrdersProduct from "./OrdersProduct";
-
+import { getSingelorder } from "@/services/order/getSingleOrder";
+const status = {
+  SENDING: "در حال ارسال",
+  CANCELED: "لغو شده",
+  DELIVERED: "  تکمیل شده",
+  PAY_PENDING: "در انتظار ",
+  PROCESSING: "در حال ",
+};
 export default function SingleOrder() {
   const [showeModal, setShowModal] = useState(false);
-  const data = {
-    userFullname: "علی کریمی",
-    receiverFullName: "علی حسینی",
-    ordersCount: 5,
-    date: "23 آذر ۱۴۰۱",
-    ordersSum: 56000,
-    orderStatus: { title: "تحویل مشتری", value: "delivered" },
-    orderCode: "#750GH",
-    discount: 10000,
-    paymentAmount: 40000,
-    paymentkind: "اینترنتی",
-    paymentGate: "درگاه زرین پال",
-    paymentCode: 122456,
-    paymentDate: "۱۲ اسفند ۱۴۰۱",
-    description:
-      " مبلغ کالاهای سفارش شماره 750BV مورد تایید است. پرداخت موفق آمیز در انتظار تحویل مرسوله",
-    benefit: 10000,
-    orderList: [
-      {
-        title: "غذای سگ خشک 700 گرمی",
-        Image: product_Image,
-        code: "#750GH",
-        discount: 5000,
-        price: 75000,
-        amount: 60,
-      },
-      {
-        title: "غذای سگ خشک 700 گرمی",
-        Image: product_Image,
-        code: "#750GH",
-        discount: 5000,
-        price: 75000,
-        amount: 60,
-      },
-      {
-        title: "غذای سگ خشک 700 گرمی",
-        Image: product_Image,
-        code: "#750GH",
-        discount: 5000,
-        price: 75000,
-        amount: 60,
-      },
-    ],
-  };
+  const router = useRouter();
+  const [orderData, setOrderData] = useState({});
+
+  useEffect(() => {
+    const { order } = router.query;
+
+    const getData = async () => {
+      const response = await getSingelorder(order);
+      if (response.success) {
+        console.log(response.data);
+        setOrderData(response.data);
+      }
+    };
+    getData();
+  }, [router.query]);
   return (
     <div>
       {/* Heading for mobile */}
@@ -74,8 +52,8 @@ export default function SingleOrder() {
       </div>
       {/* Main */}
       <div className="flex flex-col lg:flex-row-reverse items-stretch w-full">
-        <OrderDetails data={data} />
-        <OrdersProduct data={data} />
+        <OrderDetails data={orderData} />
+        <OrdersProduct data={orderData} />
       </div>
       {/* benefit & Status Box */}
       <div className="flex flex-col lg:flex-row lg:justify-between items-stretch w-full lg:px-8 lg:py-10 mt-5 lg:bg-white lg:rounded-[25px]">
@@ -84,12 +62,12 @@ export default function SingleOrder() {
             <bdi>سود از این سفارش:</bdi>
           </p>
           <p className='text-base lg:text-xl text-warning font-semibold leading-8 lg:mr-10 after:content-["تومان"] after:mr-1 after:text-xs'>
-            <bdi>{(+data.benefit).toLocaleString()}</bdi>
+            <bdi>{orderData.finance?.toLocaleString()}</bdi>
           </p>
         </div>
         <div className="lg:hidden w-full h-[2px] bg-secondary my-5"></div>
         <label
-          onClick={() => setShowModal(true)}
+          // onClick={() => setShowModal(true)}
           htmlFor="Status-modal"
           className="flex items-center justify-center w-full lg:mr-10 px-10 lg:px-3 py-3 lg:py-2.5 bg-[#EA635233] border-[1px] border-primary rounded-[12px]"
         >
@@ -100,7 +78,7 @@ export default function SingleOrder() {
         </label>
       </div>
       {/* Modal  */}
-      <ChangeStatusModal showeModal={showeModal} setShowModal={setShowModal} />
+      {/* <ChangeStatusModal showeModal={showeModal} setShowModal={setShowModal} /> */}
     </div>
   );
 }

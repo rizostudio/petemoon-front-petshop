@@ -1,10 +1,10 @@
 import { errorResponse, successResponse } from "../error";
 import { httpRequest } from "../http";
 
-export const getListProducts = async (slug) => {
+export const getListorders = async (query) => {
   try {
     const response = await httpRequest.get(
-      `/petshop-dashboard/product-pricing?${slug}`
+      `/petshop-dashboard/orders?orders_type=recent`
     );
     const data = response.data.data;
     return successResponse(data);

@@ -35,12 +35,17 @@ export default function SingleProduct({ query }) {
     initialValues: {
       product_id: data.id,
       price: "",
-      price_after_sale: "55",
-      inventory: "1",
+      price_after_sale: "",
+      inventory: "",
     },
     onSubmit: async (values) => {
       console.log(values);
-      const response = await createNewProduct(values);
+      const response = await createNewProduct({
+        product_id: values.product_id,
+        price: values.price,
+        price_after_sale: values.price,
+        inventory: values.inventory,
+      });
       if (response.success) {
         console.log(response);
         router.push("/dashboard/products");

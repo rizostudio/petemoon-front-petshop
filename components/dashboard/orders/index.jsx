@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
 import { v4 } from "uuid";
+import { useRouter } from "next/router";
 //component
 import DashboardLayout from "@/layout/DashboardLayout";
 import FilterBoxDialog from "@/components/dashboard/orders/FilterBoxDialog";
@@ -21,175 +22,11 @@ import FilterPage from "./FilterPage";
 import SortPage from "./SortPage";
 import OrderItemsForMobile from "./OrderItemsForMobile";
 import OrderItemsForDesktop from "./OrderItemsForDesktop";
+import { getListorders } from "@/services/order/getListOfOrders";
 
 export default function OrdersList() {
-  const data = [
-    {
-      userFullname: "علی کریمی",
-      receiverFullName: "علی حسینی",
-      ordersCount: 5,
-      date: "23 آذر ۱۴۰۱",
-      ordersSum: 56000,
-      orderStatus: { title: "تحویل مشتری", value: "delivered" },
-      orderCode: "#750GH",
-      discount: 10000,
-      paymentAmount: 40000,
-      paymentkind: "اینترنتی",
-      paymentGate: "درگاه زرین پال",
-      paymentCode: 122456,
-      paymentDate: "۱۲ اسفند ۱۴۰۱",
-      description:
-        " مبلغ کالاهای سفارش شماره 750BV مورد تایید است. پرداخت موفق آمیز در انتظار تحویل مرسوله",
-      benefit: 10000,
-      orderList: [
-        {
-          title: "غذای سگ خشک 700 گرمی",
-          Image: product_Image,
-          code: "#750GH",
-          price: "75000",
-          availabilityAmount: "60",
-        },
-        {
-          title: "غذای سگ خشک 700 گرمی",
-          Image: product_Image,
-          code: "#750GH",
-          price: "75000",
-          availabilityAmount: "60",
-        },
-        {
-          title: "غذای سگ خشک 700 گرمی",
-          Image: product_Image,
-          code: "#750GH",
-          price: "75000",
-          availabilityAmount: "60",
-        },
-      ],
-    },
-    {
-      userFullname: "علی کریمی",
-      receiverFullName: "علی حسینی",
-      ordersCount: 5,
-      date: "23 آذر ۱۴۰۱",
-      ordersSum: 56000,
-      orderStatus: { title: "تحویل مشتری", value: "delivered" },
-      orderCode: "#750GH",
-      discount: 10000,
-      paymentAmount: 40000,
-      paymentkind: "اینترنتی",
-      paymentGate: "درگاه زرین پال",
-      paymentCode: 122456,
-      paymentDate: "۱۲ اسفند ۱۴۰۱",
-      description:
-        " مبلغ کالاهای سفارش شماره 750BV مورد تایید است. پرداخت موفق آمیز در انتظار تحویل مرسوله",
-      benefit: 10000,
-      orderList: [
-        {
-          title: "غذای سگ خشک 700 گرمی",
-          Image: product_Image,
-          code: "#750GH",
-          price: "75000",
-          availabilityAmount: "60",
-        },
-        {
-          title: "غذای سگ خشک 700 گرمی",
-          Image: product_Image,
-          code: "#750GH",
-          price: "75000",
-          availabilityAmount: "60",
-        },
-        {
-          title: "غذای سگ خشک 700 گرمی",
-          Image: product_Image,
-          code: "#750GH",
-          price: "75000",
-          availabilityAmount: "60",
-        },
-      ],
-    },
-    {
-      userFullname: "علی کریمی",
-      receiverFullName: "علی حسینی",
-      ordersCount: 5,
-      date: "23 آذر ۱۴۰۱",
-      ordersSum: 56000,
-      orderStatus: { title: "تحویل مشتری", value: "delivered" },
-      orderCode: "#750GH",
-      discount: 10000,
-      paymentAmount: 40000,
-      paymentkind: "اینترنتی",
-      paymentGate: "درگاه زرین پال",
-      paymentCode: 122456,
-      paymentDate: "۱۲ اسفند ۱۴۰۱",
-      description:
-        " مبلغ کالاهای سفارش شماره 750BV مورد تایید است. پرداخت موفق آمیز در انتظار تحویل مرسوله",
-      benefit: 10000,
-      orderList: [
-        {
-          title: "غذای سگ خشک 700 گرمی",
-          Image: product_Image,
-          code: "#750GH",
-          price: "75000",
-          availabilityAmount: "60",
-        },
-        {
-          title: "غذای سگ خشک 700 گرمی",
-          Image: product_Image,
-          code: "#750GH",
-          price: "75000",
-          availabilityAmount: "60",
-        },
-        {
-          title: "غذای سگ خشک 700 گرمی",
-          Image: product_Image,
-          code: "#750GH",
-          price: "75000",
-          availabilityAmount: "60",
-        },
-      ],
-    },
-    {
-      userFullname: "علی کریمی",
-      receiverFullName: "علی حسینی",
-      ordersCount: 5,
-      date: "23 آذر ۱۴۰۱",
-      ordersSum: 56000,
-      orderStatus: { title: "تحویل مشتری", value: "delivered" },
-      orderCode: "#750GH",
-      discount: 10000,
-      paymentAmount: 40000,
-      paymentkind: "اینترنتی",
-      paymentGate: "درگاه زرین پال",
-      paymentCode: 122456,
-      paymentDate: "۱۲ اسفند ۱۴۰۱",
-      description:
-        " مبلغ کالاهای سفارش شماره 750BV مورد تایید است. پرداخت موفق آمیز در انتظار تحویل مرسوله",
-      benefit: 10000,
-      orderList: [
-        {
-          title: "غذای سگ خشک 700 گرمی",
-          Image: product_Image,
-          code: "#750GH",
-          price: "75000",
-          availabilityAmount: "60",
-        },
-        {
-          title: "غذای سگ خشک 700 گرمی",
-          Image: product_Image,
-          code: "#750GH",
-          price: "75000",
-          availabilityAmount: "60",
-        },
-        {
-          title: "غذای سگ خشک 700 گرمی",
-          Image: product_Image,
-          code: "#750GH",
-          price: "75000",
-          availabilityAmount: "60",
-        },
-      ],
-    },
-  ];
-
+  const router = useRouter();
+  const [data, setData] = useState([]);
   // the array of sort options
   const [sortArr, setSortArr] = useState([
     { title: "پرفروش ترین" },
@@ -202,12 +39,7 @@ export default function OrdersList() {
   const [sortValue, setSortValue] = useState("پرفروش ترین");
 
   // for remove data from list
-  const TrashHandler = (index) => {
-    const newArr = [...data];
-    newArr.splice(1, index);
-    setData(newArr);
-    console.log("remove" + data);
-  };
+
   const brand = [
     { name: "پت بازار", id: "petBazzar" },
     { name: "پت شاپ۱", id: "petShop1" },
@@ -216,46 +48,39 @@ export default function OrdersList() {
     { name: "کافه پت", id: "petCafe" },
   ];
   const petKind = ["سگ خانگی", "سگ شکارچی", "سگ وحشی", "سگ گله", "سگ نگهبان"];
-  // for edit the data
-  const [amount, setAmount] = useState(""); //for set the new amount
-  const [price, setPrice] = useState(""); // for set the new price
-  const [editMode, setEditMode] = useState({ status: false, index: "" });
-  console.log(editMode.index);
-  const editHandler = () => {};
-  const saveEditHandler = (index) => {
-    setEditMode({ status: false, index });
-    const newArr = [...data];
-    newArr[index].availabilityAmount = amount;
-    newArr[index].price = price;
-    setData(newArr);
-    setAmount("");
-    setPrice("");
-    console.log("edit" + data);
-  };
 
   //Dynamic
   const [MainPageOpen, setMainPageOpen] = useState(true); //for open & close Main Page in mobile
   const [FilterPageOpen, setFilterPageOpen] = useState(false); //for open & close filter Page in mobile
   const [SortPageOpen, setSortPageOpen] = useState(false); //for open & close Sort Page in mobile
+  useEffect(() => {
+    const queryParams = new URLSearchParams(router.query);
+    const getDta = async () => {
+      const response = await getListorders(queryParams);
+      console.log(response.data);
+      setData(response.data);
+    };
+    getDta();
+  }, [router.query]);
   return (
     <div>
       {/* Filter Page */}
-      <FilterPage
+      {/* <FilterPage
         setMainPageOpen={setMainPageOpen}
         brand={brand}
         petKind={petKind}
         FilterPageOpen={FilterPageOpen}
         setFilterPageOpen={setFilterPageOpen}
-      />
+      /> */}
       {/* Sort Page */}
-      <SortPage
+      {/* <SortPage
         setMainPageOpen={setMainPageOpen}
         setSortPageOpen={setSortPageOpen}
         sortValue={sortValue}
         sortArr={sortArr}
         SortPageOpen={SortPageOpen}
         setSortValue={setSortValue}
-      />
+      /> */}
       <DashboardLayout>
         {/* Main page */}
         <div
@@ -299,14 +124,14 @@ export default function OrdersList() {
                 {/*Arrangment Box*/}
                 <div className="flex mt-5">
                   {/* FilterBox */}
-                  <FilterBoxDialog
+                  {/* <FilterBoxDialog
                     brand={brand}
                     petKind={petKind}
                     setFilterPageOpen={setFilterPageOpen}
                     setMainPageOpen={setMainPageOpen}
-                  />
+                  /> */}
                   {/* Sort Box */}
-                  <div className="flex items-center">
+                  {/* <div className="flex items-center">
                     <div
                       onClick={() => {
                         setSortPageOpen(true);
@@ -344,7 +169,7 @@ export default function OrdersList() {
                         </li>
                       ))}
                     </ul>
-                  </div>
+                  </div> */}
                 </div>
                 <OrderItemsForMobile data={data} />
               </div>
