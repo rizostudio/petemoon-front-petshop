@@ -3,195 +3,8 @@ import Image from "next/image";
 import { v4 } from "uuid";
 //media
 import user_Image from "@/assets/common/user-square.svg";
-
-export default function SaleHistory() {
-  const [data, setData] = useState([
-    {
-      month: "فروردین",
-      sumIncome: "57600500",
-      sumSaleAmount: "7654",
-      salesDetail: [
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-      ],
-    },
-    {
-      month: "اردیبهشت",
-      sumIncome: "57600500",
-      sumSaleAmount: "7654",
-      salesDetail: [
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-      ],
-    },
-    {
-      month: "خرداد",
-      sumIncome: "57600500",
-      sumSaleAmount: "7654",
-      salesDetail: [
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-      ],
-    },
-    {
-      month: "تیر",
-      sumIncome: "57600500",
-      sumSaleAmount: "7654",
-      salesDetail: [
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-      ],
-    },
-    ,
-    { month: "مرداد", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-    { month: "شهریور", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-    { month: "مهر", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-    { month: "آبان", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-    { month: "آذر", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-    {
-      month: "دی",
-      sumIncome: "57600500",
-      sumSaleAmount: "7654",
-      salesDetail: [
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-      ],
-    },
-    { month: "بهمن", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-    { month: "اسفند", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-  ]);
-  const data2 = [
-    {
-      userFullname: "علی محبیان",
-      userImage: user_Image,
-      sumSaleAmount: 756000,
-      date: "۲۵ بهمن ۱۴۰۰",
-      status: "تراکنش موفق",
-    },
-    {
-      userFullname: "علی محبیان",
-      userImage: user_Image,
-      sumSaleAmount: 756000,
-      date: "۲۵ بهمن ۱۴۰۰",
-      status: "تراکنش موفق",
-    },
-    {
-      userFullname: "علی محبیان",
-      userImage: user_Image,
-      sumSaleAmount: 756000,
-      date: "۲۵ بهمن ۱۴۰۰",
-      status: "تراکنش موفق",
-    },
-    {
-      userFullname: "علی محبیان",
-      userImage: user_Image,
-      sumSaleAmount: 756000,
-      date: "۲۵ بهمن ۱۴۰۰",
-      status: "تراکنش موفق",
-    },
-    {
-      userFullname: "علی محبیان",
-      userImage: user_Image,
-      sumSaleAmount: 756000,
-      date: "۲۵ بهمن ۱۴۰۰",
-      status: "تراکنش موفق",
-    },
-    {
-      userFullname: "علی محبیان",
-      userImage: user_Image,
-      sumSaleAmount: 756000,
-      date: "۲۵ بهمن ۱۴۰۰",
-      status: "تراکنش موفق",
-    },
-  ];
+import moment from "jalali-moment";
+export default function SaleHistory({ data }) {
   return (
     <div>
       <div>
@@ -239,21 +52,25 @@ export default function SaleHistory() {
                                 </div> */}
           </div>
           <div className="flex lg:hidden flex-col mt-4">
-            {data2 &&
-              data2.map((item, index) => (
+            {data.orders_history &&
+              data.orders_history.map((item, index) => (
                 <div
-                  key={v4()}
+                  key={item.id}
                   className="flex flex-col items-stretch w-full my-1 p-5 bg-white border-[1px] border-secondary rounded-[15px] shadow-shadowB"
                 >
                   <div className="grid grid-cols-2 gap-y-1">
                     <p className="text-base text-black font-medium leading-5 ml-2">
-                      <bdi>{item.userFullname}</bdi>
+                      <bdi>{item.user_order}</bdi>
                     </p>
                     <p className="text-base text-black font-medium leading-5 ml-2">
-                      <bdi>{item.sumSaleAmount.toLocaleString()}</bdi>
+                      <bdi>{item.price?.toLocaleString()}</bdi>
                     </p>
                     <p className="text-base text-black font-medium leading-5 ml-2">
-                      <bdi>{item.date}</bdi>
+                      <bdi>
+                        {moment(item.created_at, "YYYY/MM/DD")
+                          .locale("fa")
+                          .format("YYYY/MM/DD")}
+                      </bdi>
                     </p>
                     <p className="text-base text-verify font-medium leading-5 ml-2">
                       <bdi>{item.status}</bdi>
@@ -283,8 +100,8 @@ export default function SaleHistory() {
           </div>
           <table>
             <tbody className="text-base text-center text-[#3A4750] font-medium leading-7">
-              {data2 &&
-                data2.map((item, index) => (
+              {data.orders_history &&
+                data.orders_history.map((item, index) => (
                   <tr
                     key={v4()}
                     className="border-b-[1px] border-[#D9D9D9] mx-5"
@@ -292,17 +109,19 @@ export default function SaleHistory() {
                     <td className="py-10 flex items-center justify-center">
                       <div className="w-[50px] h-[50px] rounded-full bg-black overflow-hidden">
                         <Image
-                          src={item.userImage}
+                          src={user_Image}
                           alt="User Image"
                           className="w-full h-full object-cover"
                         />
                       </div>
                     </td>
-                    <td className="py-10">{item.userFullname}</td>
+                    <td className="py-10">{item.user_order}</td>
+                    <td className="py-10">{(+item.price).toLocaleString()}</td>
                     <td className="py-10">
-                      {(+item.sumSaleAmount).toLocaleString()}
+                      {moment(item.created_at, "YYYY/MM/DD")
+                        .locale("fa")
+                        .format("YYYY/MM/DD")}
                     </td>
-                    <td className="py-10">{item.date}</td>
                     <td className="py-10 text-verify">{item.status}</td>
                   </tr>
                 ))}

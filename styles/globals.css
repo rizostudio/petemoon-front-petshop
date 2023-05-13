@@ -130,7 +130,14 @@ p {
     color-scheme: dark;
   }
 }
+/* toast */
+.Toastify,
+.Toastify__toast-body {
+  font-family: "YekanBakh" !important;
+  font-size: 15px !important;
+}
 
-/* // */
-
-/* // */
+select {
+  background-position-x: 1%;
+  background-position-y: 46%;
+}

@@ -2,8 +2,16 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    unoptimized: true
-  }
-}
+    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "api.petemoon.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

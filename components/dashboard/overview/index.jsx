@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 //media
 import search_Icon from "@/assets/common/searchIcon3.svg";
@@ -6,151 +6,10 @@ import logout_Icon from "@/assets/common/logoutIconRed.svg";
 import user_Image from "@/assets/common/user-square.svg";
 import Summary from "@/components/dashboard/overview/Summary";
 import SaleHistory from "@/components/dashboard/overview/SaleHistory";
+import { getOverview } from "@/services/overview/getOverview";
 
 export default function OverView() {
-  const [data, setData] = useState([
-    {
-      month: "فروردین",
-      sumIncome: "57600500",
-      sumSaleAmount: "7654",
-      salesDetail: [
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-      ],
-    },
-    {
-      month: "اردیبهشت",
-      sumIncome: "57600500",
-      sumSaleAmount: "7654",
-      salesDetail: [
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-      ],
-    },
-    {
-      month: "خرداد",
-      sumIncome: "57600500",
-      sumSaleAmount: "7654",
-      salesDetail: [
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-      ],
-    },
-    {
-      month: "تیر",
-      sumIncome: "57600500",
-      sumSaleAmount: "7654",
-      salesDetail: [
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-      ],
-    },
-    ,
-    { month: "مرداد", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-    { month: "شهریور", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-    { month: "مهر", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-    { month: "آبان", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-    { month: "آذر", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-    {
-      month: "دی",
-      sumIncome: "57600500",
-      sumSaleAmount: "7654",
-      salesDetail: [
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-        {
-          date: "۰۸/۱۰/۱۴۰۱",
-          sumSale: 220000,
-          benefit: 125000,
-          checkoutDate: "۱۸ آبان ۱۴۰۱",
-          checkoutStatus: "تسویه شده",
-        },
-      ],
-    },
-    { month: "بهمن", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-    { month: "اسفند", sumIncome: "", sumSaleAmount: "", salesDetail: [] },
-  ]);
+  const [data, setData] = useState({});
   const data2 = [
     {
       userFullname: "علی محبیان",
@@ -198,12 +57,24 @@ export default function OverView() {
   // for select the date
   const [monthSelected, setMonthSelected] = useState("فروردین");
   const [yearSelected, setYearSelected] = useState(1401);
-  const dataSelected = data.filter((item) => item.month == monthSelected)[0];
+  // const dataSelected = data.filter((item) => item.month == monthSelected)[0];
 
   // for open and close the box
   const [dateShowBox, setDateShowBox] = useState(true);
   const [monthselectorBox, setMonthSelectorBox] = useState(false);
   const [yearselectorBox, setYearSelectorBox] = useState(false);
+  useEffect(() => {
+    const getDate = async () => {
+      const response = await getOverview();
+      if (response.success) {
+        console.log(response.data);
+        setData(response.data);
+      } else {
+        console.log(response.errors);
+      }
+    };
+    getDate();
+  }, []);
   return (
     <div className="h-screen lg:h-full flex flex-col items-stretch">
       {/* Heading for mobile  */}
@@ -221,8 +92,8 @@ export default function OverView() {
         </div>
       </div>
       {/* summary Information */}
-      <Summary dataSelected={dataSelected} />
-      <SaleHistory />
+      <Summary data={data} />
+      <SaleHistory data={data} />
     </div>
   );
 }

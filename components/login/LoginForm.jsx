@@ -8,7 +8,8 @@ import { useFormik } from "formik";
 import { login } from "@/services/auth/login";
 //localStorage
 import { OtpId } from "@/localStorage/auth";
-//history context
+//toast
+import { toast } from "react-toastify";
 
 export default function LoginForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,7 +32,20 @@ export default function LoginForm() {
         OtpId.set(response.data.otp_id);
         router.push("/auth/validation");
       } else {
-        console.log("Error: ", response.errors);
+        console.log("Error: ", response.errors[0]);
+        if (response.errors[0] === "user registered with different user type") {
+          console.log("first");
+          toast.error("این شماره از قبل در سیستم موجود است", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
       }
     },
   });

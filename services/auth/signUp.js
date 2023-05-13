@@ -17,7 +17,7 @@ export const Register = async (signupData) => {
   form.append("business_license", signupData.business_license);
   form.append("union_license", signupData.union_license);
   form.append("tax_certificate", signupData.tax_certificate);
-  // form.append("sheba_number", signupData.sheba_number);
+  form.append("sheba_number", signupData.sheba_number);
 
   try {
     const response = await httpRequest.patch(
