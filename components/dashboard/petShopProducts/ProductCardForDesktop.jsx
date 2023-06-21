@@ -25,9 +25,15 @@ export default function ProductCardForDesktop({ item }) {
     <tr className="border-b-[1px] border-[#D9D9D9] mx-5 p-5">
       <td className="inline-block m-1 w-[100px] h-[100px] border-[1px] border-primary rounded-[12px] overflow-hidden">
         <Image
-          src={product_Image}
+          src={
+            item.picture
+              ? `https://api.petemoon.com${item.picture}`
+              : product_Image
+          }
           alt="Product Image"
           className="w-full h-full object-cover"
+          width={100}
+          height={100}
         />
       </td>
       <td>{item.name}</td>
