@@ -4,7 +4,7 @@ import { httpRequest } from "../http";
 export const editProduct = async (product) => {
   try {
     const response = await httpRequest.patch(
-      `/petshop-dashboard/product-pricing`,
+      `/petshop-dashboard/product-pricing/${product.product_id}`,
       { ...product }
     );
     const data = response.data.data;
