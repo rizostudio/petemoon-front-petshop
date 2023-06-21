@@ -85,7 +85,7 @@ export default function SaleHistory({ data }) {
             <h5 className="text-xl text-black font-black leading-7 before:inline-block before:w-2 before:h-4 before:bg-primary before:rounded-[2px] before:ml-2 before:align-middle">
               <bdi>تاریخچه فروش</bdi>
             </h5>
-            <div className="flex">
+            {/* <div className="flex">
               <select className="text-sm text-primary font-medium leading-5 w-[100px] p-3 border-[1px] border-primary rounded-[12px] focus:border-primary focus:outline-none focus:ring-0 peer">
                 <option>۳۰ روز گذشته</option>
                 <option>efef</option>
@@ -96,7 +96,7 @@ export default function SaleHistory({ data }) {
                 <option>efef</option>
                 <option>yjhjy</option>
               </select>
-            </div>
+            </div> */}
           </div>
           <table>
             <tbody className="text-base text-center text-[#3A4750] font-medium leading-7">

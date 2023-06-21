@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import clsx from "clsx";
 import { v4 } from "uuid";
-
+import { useRouter } from "next/router";
 //media
 import Filter_Icon from "@/assets/common/filterIcon.svg";
 import leftArrow_Icon from "@/assets/common/leftArrowWhite.svg";
@@ -14,6 +14,7 @@ export default function FilterPage({
   brand,
   petKind,
 }) {
+  const router = useRouter();
   return (
     <div
       className={clsx("lg:hidden w-full h-screen bg-white", {
@@ -99,7 +100,12 @@ export default function FilterPage({
             <button className="w-2/3 text-base text-center text-black font-medium leading-7 p-3 bg-[#CFEBD8] border-[1px] border-solid border-verify rounded-[12px]">
               اعمال
             </button>
-            <p className="w-1/3 text-base text-center text-black font-medium leading-7 p-3 cursor-pointer">
+            <p
+              onClick={() => {
+                router.push("/dashboard/products");
+              }}
+              className="w-1/3 text-base text-center text-black font-medium leading-7 p-3 cursor-pointer"
+            >
               حذف فیلترها
             </p>
           </div>

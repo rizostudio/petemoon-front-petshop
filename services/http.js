@@ -11,7 +11,6 @@ httpRequest.interceptors.response.use(
     return response;
   },
   async function (error) {
-    console.log("first error");
     const originalReq = error.config;
     console.log(originalReq);
 

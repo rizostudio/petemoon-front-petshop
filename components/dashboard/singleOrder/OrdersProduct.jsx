@@ -13,7 +13,9 @@ export default function OrdersProduct({ data }) {
           >
             <div className="w-[100px] h-[100px] overflow-hidden border-[1px] border-primary rounded-[10px]">
               <Image
-                src={item.Image}
+                width={100}
+                height={100}
+                src={`https://api.petemoon.com${item.product.picture}`}
                 alt="Product Picture"
                 className="w-full h-full object-cover"
               />
@@ -77,7 +79,9 @@ export default function OrdersProduct({ data }) {
                 <td className="py-10 flex items-center justify-center">
                   <div className="w-[70px] h-[70px] rounded-[15px] overflow-hidden">
                     <Image
-                      src={item.Image}
+                      width={100}
+                      height={100}
+                      src={`https://api.petemoon.com${item.product.picture}`}
                       alt="Product Image"
                       className="w-full h-full object-cover"
                     />

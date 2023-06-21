@@ -118,6 +118,7 @@ export default function FilterPage({
           <div className="w-full flex justify-between items-center px-10 py-5">
             <button
               onClick={() => {
+                router.push("/dashboard/products/add");
                 setFilterPageOpen(false);
                 setMainPageOpen(true);
               }}
