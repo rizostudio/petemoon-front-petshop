@@ -58,7 +58,7 @@ export default function ProductsListForDesktop({ data, brand, petCategory }) {
           </select>
           <select
             onChange={(e) => {
-              filterProducts("brand_slug", e.target.value);
+              filterProducts("brand", e.target.value);
             }}
             className="text-sm text-primary font-medium leading-5 w-[100px] p-3 border-[1px] border-primary rounded-[12px] focus:border-primary focus:outline-none focus:ring-0 peer"
           >
