@@ -27,9 +27,15 @@ export default function ValidationForm() {
       if (response.success) {
         OtpId.remove();
         refreshTokenLS.set(response.data.refreshToken);
-        if (response.data.isRegistered) router.push("/");
+        if (response.data.isRegistered) router.push("/dashboard");
         else router.push("/auth/signUp");
-      } else console.log("Error: ", response.errors);
+      } else if (
+        response.errors[0] === "Petshop user has not been approved yet!"
+      ) {
+        router.push("/isApproved");
+      } else {
+        console.log(response.errors[0]);
+      }
     },
   });
   return (

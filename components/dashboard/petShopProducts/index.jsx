@@ -35,43 +35,7 @@ import { getProductFilter } from "@/services/petemoonProducts/getProductFilters"
 
 export default function PetShopProducts() {
   const router = useRouter();
-  const [data, setData] = useState([
-    {
-      title: "غذای سگ خشک 700 گرمی",
-      Image: product_Image,
-      code: "#750GH",
-      price: "75000",
-      availabilityAmount: "60",
-    },
-    {
-      title: "غذای سگ خشک 700 گرمی",
-      Image: product_Image,
-      code: "#750GH",
-      price: "75000",
-      availabilityAmount: "60",
-    },
-    {
-      title: "غذای سگ خشک 700 گرمی",
-      Image: product_Image,
-      code: "#750GH",
-      price: "75000",
-      availabilityAmount: "60",
-    },
-    {
-      title: "غذای سگ خشک 700 گرمی",
-      Image: product_Image,
-      code: "#750GH",
-      price: "75000",
-      availabilityAmount: "60",
-    },
-    {
-      title: "غذای سگ خشک 700 گرمی",
-      Image: product_Image,
-      code: "#750GH",
-      price: "75000",
-      availabilityAmount: "60",
-    },
-  ]);
+  const [data, setData] = useState([]);
   // const brand = [
   //   { name: "پت بازار", id: "petBazzar" },
   //   { name: "پت شاپ۱", id: "petShop1" },

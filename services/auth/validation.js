@@ -18,6 +18,6 @@ export const validationOtp = async (confirmationCode) => {
       refreshToken: data.refresh_token,
     });
   } catch (error) {
-    return errorResponse(err?.response?.data?.errors ?? ["Network Error!"]);
+    return errorResponse(error?.response?.data?.errors);
   }
 };

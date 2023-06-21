@@ -125,7 +125,10 @@ export default function FilterBoxDialog({
             ))}
           </div>
           <p
-            onClick={() => setFilterBoxOpen(false)}
+            onClick={() => {
+              router.push("/dashboard/products/add");
+              setFilterBoxOpen(false);
+            }}
             className="self-end text-base text-gray-400 font-medium leading-7 mt-5 cursor-pointer"
           >
             حذف فیلترها

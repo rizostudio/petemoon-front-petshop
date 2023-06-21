@@ -1,43 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import clsx from "clsx"; //for dynamic style
 import { v4 } from "uuid"; // for produce unique key
-
 //component
 import BottomNavigation from "@/components/partials/BottomNavigation";
-
 //media
-import Home_Icon from "../assets/common/home.svg";
-import Profile_Icon from "../assets/common/user-edit.svg";
-import Address_Icon from "../assets/common/location.svg";
-import MyPet_Icon from "../assets/common/pet.svg";
-import Wallet_Icon from "../assets/common/empty-wallet.svg";
-import Orders_Icon from "../assets/common/shopping-bag.svg";
-import Favorite_Icon from "../assets/common/like.svg";
-import Message_Icon from "../assets/common/sms.svg";
-import Help_Icon from "../assets/common/alarm.svg";
 import Search_Icon from "../assets/common/search-icon.svg";
 import ArrowLeft_Icon from "../assets/common/arrow-left.svg";
-import ArrowLeftWhite_Icon from "../assets/common/leftArrowWhite.svg";
-import Profile_Alt_Pic from "../assets/common/profile-pic-alt.svg";
 import Logout_Btn from "../assets/common/logout-btn.svg";
 import Petemoon_Logo from "../assets/common/Petemoon.svg";
-import Userpanel_Logo from "../assets/common/user-panel.svg";
 import SellerPanel_Logo from "../assets/common/SellerPanelLogo.svg";
-import ShopBag_Icon from "../assets/common/bagHeader.svg";
 import ShopWhite_Icon from "../assets/common/shop2white.svg";
 import OrdersWhite_Icon from "../assets/common/shopping-cartWhite.svg";
 import WalletWhite_Icon from "../assets/common/walletWhiteIcon.svg";
 import HomeWhite_Icon from "../assets/common/homeWhiteIcon.svg";
 import MessageWhite_Icon from "../assets/common/messageWhiteIcon.svg";
 import SupportWhite_Icon from "../assets/common/supportWhiteIcon.svg";
-
+import { getOverview } from "@/services/overview/getOverview";
+import AuthContext from "@/store/AuthCtx/AuthContext";
 const DashboardLayout = ({ children }) => {
   const [openly, setOpenly] = useState(true); //for open and close dashboard in mobile
   const router = useRouter();
   const [Minify, setMinify] = useState(false); // for minify dashboard
+  const [data, setData] = useState({});
+  const [user, setuser] = useState({});
+  const authCtx = useContext(AuthContext);
+  useEffect(() => {
+    const getDate = async () => {
+      const response = await getOverview();
+      if (response.success) {
+        console.log(response.data);
+        setData(response.data);
+      } else {
+        console.log(response.errors);
+      }
+    };
+    getDate();
+  }, []);
+  useEffect(() => {
+    setuser(authCtx.userData);
+  }, [authCtx]);
   const openHandler = () => {
     setOpenly(true);
   };
@@ -46,7 +50,7 @@ const DashboardLayout = ({ children }) => {
     { id: "", name: "داشبورد", icon: HomeWhite_Icon },
     { id: "products", name: "محصولات", icon: ShopWhite_Icon, notification: 0 },
     { id: "orders", name: "سفارش های من", icon: OrdersWhite_Icon },
-    { id: "wallet", name: "کیف پول", icon: WalletWhite_Icon },
+    { id: "wallet", name: " گزارشات مالی", icon: WalletWhite_Icon },
     {
       id: "my-messages",
       name: "پیام های من",
@@ -57,7 +61,7 @@ const DashboardLayout = ({ children }) => {
   ];
   const pageName = menuArr.find((item) => router.asPath.includes(item.id)); // for showing the title of page in mobile
   return (
-    <div className="w-full h-screen flex flex-row justify-between items-stretch relative">
+    <div className="w-full h-screen flex flex-row justify-between items-stretch relative ">
       {/* Drawer */}
       <div
         id="Drawer"
@@ -93,7 +97,7 @@ const DashboardLayout = ({ children }) => {
             <bdi>اعتبار فروشگاه:</bdi>
           </h3>
           <p className='text-xl text-warning font-extrabold leading-9 self-end mt-1 after:content-["تومان"] after:text-sm after:mr-1'>
-            <bdi>{(2200300).toLocaleString()}</bdi>
+            <bdi>{(data.income ? data.income : 0).toLocaleString()}</bdi>
           </p>
         </div>
         {/* menu */}
@@ -169,10 +173,10 @@ const DashboardLayout = ({ children }) => {
             })}
           >
             <p className="text-base text-white text-right font-black">
-              علی حسینی نسب
+              {`${user?.first_name} ${user?.last_name}`}
             </p>
             <p className="text-base text-gray-400 text-right font-medium">
-              ۰۹۳۰۱۲۳۴۵۶۷
+              {user?.phone_number}
             </p>
           </div>
           {/* logout */}
@@ -226,10 +230,10 @@ const DashboardLayout = ({ children }) => {
 
           <div className="flex flex-col">
             <p className="text-2xl text-black font-black leading-10">
-              خوش آمدی، علی عزیز
+              خوش آمدی، {user?.first_name} عزیز
             </p>
             <p className="text-base text-black font-light opacity-[0.9] leading-7">
-              ۰۹۳۰۱۲۳۴۵۶۷
+              {user?.phone_number}
             </p>
           </div>
           <div className="flex flex-row items-center">

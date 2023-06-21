@@ -10,59 +10,6 @@ import { getOverview } from "@/services/overview/getOverview";
 
 export default function OverView() {
   const [data, setData] = useState({});
-  const data2 = [
-    {
-      userFullname: "علی محبیان",
-      userImage: user_Image,
-      sumSaleAmount: 756000,
-      date: "۲۵ بهمن ۱۴۰۰",
-      status: "تراکنش موفق",
-    },
-    {
-      userFullname: "علی محبیان",
-      userImage: user_Image,
-      sumSaleAmount: 756000,
-      date: "۲۵ بهمن ۱۴۰۰",
-      status: "تراکنش موفق",
-    },
-    {
-      userFullname: "علی محبیان",
-      userImage: user_Image,
-      sumSaleAmount: 756000,
-      date: "۲۵ بهمن ۱۴۰۰",
-      status: "تراکنش موفق",
-    },
-    {
-      userFullname: "علی محبیان",
-      userImage: user_Image,
-      sumSaleAmount: 756000,
-      date: "۲۵ بهمن ۱۴۰۰",
-      status: "تراکنش موفق",
-    },
-    {
-      userFullname: "علی محبیان",
-      userImage: user_Image,
-      sumSaleAmount: 756000,
-      date: "۲۵ بهمن ۱۴۰۰",
-      status: "تراکنش موفق",
-    },
-    {
-      userFullname: "علی محبیان",
-      userImage: user_Image,
-      sumSaleAmount: 756000,
-      date: "۲۵ بهمن ۱۴۰۰",
-      status: "تراکنش موفق",
-    },
-  ];
-  // for select the date
-  const [monthSelected, setMonthSelected] = useState("فروردین");
-  const [yearSelected, setYearSelected] = useState(1401);
-  // const dataSelected = data.filter((item) => item.month == monthSelected)[0];
-
-  // for open and close the box
-  const [dateShowBox, setDateShowBox] = useState(true);
-  const [monthselectorBox, setMonthSelectorBox] = useState(false);
-  const [yearselectorBox, setYearSelectorBox] = useState(false);
   useEffect(() => {
     const getDate = async () => {
       const response = await getOverview();

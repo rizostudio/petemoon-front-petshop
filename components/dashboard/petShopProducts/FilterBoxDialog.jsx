@@ -1,11 +1,16 @@
 import React from "react";
-
+import { useRouter } from "next/router";
 export default function FilterBoxDialog({
   brand,
   petKind,
   setFilterPageOpen,
   setMainPageOpen,
 }) {
+  const router = useRouter();
+  const DeleteQuery = () => {
+    router.push("/dashboard/products");
+    setFilterBoxOpen(false);
+  };
   return (
     <div
       className={clsx(
@@ -92,7 +97,7 @@ export default function FilterBoxDialog({
             ))}
           </div>
           <p
-            onClick={() => setFilterBoxOpen(false)}
+            onClick={DeleteQuery}
             className="self-end text-base text-gray-400 font-medium leading-7 mt-5 cursor-pointer"
           >
             حذف فیلترها
