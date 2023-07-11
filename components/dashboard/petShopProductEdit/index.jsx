@@ -29,6 +29,7 @@ export default function EditProduct({ query }) {
   const product = Yup.object().shape({
     price: Yup.string().required("فیلد الزامی است"),
     inventory: Yup.string().required("فیلد الزامی است"),
+    price_after_sale: Yup.string(),
   });
   const formik = useFormik({
     enableReinitialize: true,
@@ -58,7 +59,7 @@ export default function EditProduct({ query }) {
         {/* Summary box */}
         <div className="w-full flex flex-col lg:flex-row lg:justify-evenly items-stretch py-5 lg:py-10 border-b-[2px] border-secondary">
           {/* Gallery */}
-          <div className="self-center w-full lg:w-[450px] h-[200px] lg:h-[600px] rounded-[15px] border-[2px] border-primary solid">
+          <div className="self-center w-full lg:w-[450px] h-[200px] lg:h-[400px] rounded-[15px] border-[2px] border-primary solid">
             <Image
               style={{ width: "100%", height: "100%" }}
               width={100}
@@ -164,6 +165,23 @@ export default function EditProduct({ query }) {
                 </div>
                 <div className="flex items-center justify-between w-full my-2 px-5 py-0.5 border-[1px] border-primary rounded-[15px]">
                   <p className="text-lg text-primary font-bold leading-7">
+                    <bdi>قیمت با تخفیف را وارد نمایید:</bdi>
+                  </p>
+                  <div className="flex items-center">
+                    <input
+                      name="price_after_sale"
+                      type="number"
+                      value={formik.values.price_after_sale}
+                      onChange={formik.handleChange}
+                      className="text-2xl text-primary font-medium leading-10 opacity-90 w-[100px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
+                    />
+                    <p className="text-sm text-primary font-normal leading-7">
+                      <bdi>تومان</bdi>
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between w-full my-2 px-5 py-0.5 border-[1px] border-primary rounded-[15px]">
+                  <p className="text-lg text-primary font-bold leading-7">
                     <bdi>موجودی را وارد نمایید:</bdi>
                   </p>
                   <div className="flex items-center">
@@ -183,7 +201,7 @@ export default function EditProduct({ query }) {
                   onClick={formik.handleSubmit}
                   className="text-base text-white font-bold leading-7 w-full px-5 py-3 mt-5 bg-primary rounded-[15px]"
                 >
-                  <bdi>افزودن به محصولات</bdi>
+                  <bdi>ویرایش محصول</bdi>
                 </button>
               </div>
             </div>
@@ -201,6 +219,23 @@ export default function EditProduct({ query }) {
                   name="price"
                   type="number"
                   value={formik.values.price}
+                  onChange={formik.handleChange}
+                  className="text-base lg:text-2xl text-primary font-medium leading-10 opacity-90 w-[100px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
+                />
+                <p className="text-sm text-primary font-normal leading-7">
+                  <bdi>تومان</bdi>
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center justify-between w-full my-2 px-5 py-0.5 border-[1px] border-primary rounded-[15px]">
+              <p className="text-base lg:text-lg text-primary font-bold leading-7">
+                <bdi>قیمت با تخفیف را وارد نمایید:</bdi>
+              </p>
+              <div className="flex items-center">
+                <input
+                  name="price_after_sale"
+                  type="number"
+                  value={formik.values.price_after_sale}
                   onChange={formik.handleChange}
                   className="text-base lg:text-2xl text-primary font-medium leading-10 opacity-90 w-[100px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
                 />
@@ -231,7 +266,7 @@ export default function EditProduct({ query }) {
             onClick={formik.handleSubmit}
             className="text-base text-white font-bold leading-7 w-full px-5 py-3 mt-5 bg-primary rounded-[15px]"
           >
-            <bdi>افزودن به محصولات</bdi>
+            <bdi>ویرایش محصول</bdi>
           </button>
         </div>
       </div>
