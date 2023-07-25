@@ -17,7 +17,7 @@ const status = {
   CANCELED: "لغو شده",
   DELIVERED: "  تکمیل شده",
   PAY_PENDING: "در انتظار ",
-  PROCESSING: "در حال ",
+  PROCESSING: "  در حال  آماده سازی",
 };
 export default function SingleOrder() {
   const [showeModal, setShowModal] = useState(false);
@@ -69,10 +69,22 @@ export default function SingleOrder() {
         <label
           // onClick={() => setShowModal(true)}
           htmlFor="Status-modal"
-          className="flex items-center justify-center w-full lg:mr-10 px-10 lg:px-3 py-3 lg:py-2.5 bg-[#EA635233] border-[1px] border-primary rounded-[12px]"
+          className={`flex items-center justify-center w-full lg:mr-10 px-10 lg:px-3 py-3 lg:py-2.5  border-[1px] rounded-[12px] ${
+            orderData.products?.status === "SENDING"
+              ? "border-cyan-600"
+              : orderData.products?.status === "CANCELLED"
+              ? "border-rose-700"
+              : orderData.products?.status === "DELIVERED"
+              ? "bborder-green-600"
+              : orderData.products?.status === "PAY_PENDING"
+              ? "border-yellow-400"
+              : orderData.products?.status === "PROCESSING"
+              ? "border-neutral-600"
+              : "border-neutral-600"
+          }}`}
         >
           <p className="text-base text-primary font-medium leading-8 ml-2">
-            <bdi>وضعیت سفارش</bdi>
+            <bdi> {status[orderData.products?.status]}</bdi>
           </p>
           <Image src={setting_Icon} alt="Order Status" />
         </label>

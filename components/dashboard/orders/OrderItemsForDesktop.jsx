@@ -10,10 +10,10 @@ import setting_Icon from "../../../assets/common/settingIconBlack.svg";
 import calendar_Icon from "../../../assets/common/calendar-search.svg";
 const status = {
   SENDING: "در حال ارسال",
-  CANCELED: "لغو شده",
+  CANCELLED: "لغو شده",
   DELIVERED: "  تکمیل شده",
   PAY_PENDING: "در انتظار ",
-  PROCESSING: "در حال ",
+  PROCESSING: "در حال آماده سازی",
 };
 export default function OrderItemsForDesktop({ data }) {
   return (
@@ -97,13 +97,27 @@ export default function OrderItemsForDesktop({ data }) {
                 </td>
                 <td>{(+item?.total_price).toLocaleString()}</td>
                 <td className="flex justify-center items-center m-auto py-10">
-                  <div className="flex items-center justify-center text-xs text-verify font-medium leading-4 w-auto px-2 py-1.5 bg-[#3BD8834D] border-verify border-[1px] rounded-[5px]">
-                    <p>{status[item.status]}</p>
-                    <Image
+                  <div
+                    className={`flex items-center justify-center text-xs text-verify font-medium leading-4 w-auto px-2 py-1.5 bg-[#3BD8834D] border-verify border-[1px] rounded-[5px] ${
+                      item.status === "SENDING"
+                        ? "bg-cyan-600"
+                        : item.status === "CANCELLED"
+                        ? "bg-rose-700"
+                        : item.status === "DELIVERED"
+                        ? "bg-green-600"
+                        : item.status === "PAY_PENDING"
+                        ? "bg-yellow-400"
+                        : item.status === "PROCESSING"
+                        ? "bg-neutral-600"
+                        : "bg-neutral-600"
+                    }`}
+                  >
+                    <p className="text-white">{status[item.status]}</p>
+                    {/* <Image
                       src={tick_Icon}
                       alt="Order Status"
                       className="mr-5"
-                    />
+                    /> */}
                   </div>
                   <div className="mr-0.5 p-1 border-[0.5px] border-[#3A4750] rounded-[5px]">
                     <Image src={setting_Icon} alt="Setting Icon" />

@@ -19,7 +19,7 @@ export default function ProductList({ data }) {
             <Image
               width={100}
               height={100}
-              src={`https://api.petemoon.com${item.picture}`}
+              src={`https://api.petemoon.com${item.picture_url}`}
               alt="Product Picture"
               className="w-full h-full object-cover"
             />
@@ -27,7 +27,7 @@ export default function ProductList({ data }) {
           <div className="flex flex-col items-stretch justify-between mr-5">
             <div className="flex flex-col items-stretch w-full mt-2 lg:mt-5">
               <p className="text-xs lg:text-base text-gray-400 font-normal leading-5 ">
-                <bdi>{item.category}</bdi>
+                <bdi>{item.category.pet_category}</bdi>
               </p>
               <div className="flex flex-row lg:flex-col items-center lg:items-start justify-between w-full">
                 <h2 className="text-base lg:text-xl text-black font-medium lg:font-bold leading-6">
