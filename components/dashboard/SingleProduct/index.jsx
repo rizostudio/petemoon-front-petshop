@@ -36,7 +36,7 @@ export default function SingleProduct({ query }) {
       }
     };
     getData();
-  }, []);
+  }, [query]);
   const product = Yup.object().shape({
     price: Yup.string().required("فیلد الزامی است"),
     inventory: Yup.string().required("فیلد الزامی است"),
@@ -93,7 +93,7 @@ export default function SingleProduct({ query }) {
                 style={{ width: "100%", height: "100%" }}
                 width={100}
                 height={100}
-                src={`https://api.petemoon.com${data.picture}`}
+                src={`https://api.petemoon.com${data.picture_url}`}
               />
             </div>
             <div className="xl:w-full flex flex-col lg:mr-10">
@@ -102,7 +102,7 @@ export default function SingleProduct({ query }) {
                 <div className="flex flex-col">
                   <p className="text-base lg:text-lg text-gray-400 font-normal leading-6">
                     <bdi>
-                      {data.category}/{data.pet_type}
+                      {data.category.pet_category}/{data.pet_type.pet_type}
                     </bdi>
                   </p>
                   <div className="w-full hidden lg:flex flex-row items-center justify-between mt-2">
@@ -126,7 +126,7 @@ export default function SingleProduct({ query }) {
                     href="#cutomersComent"
                     className="text-base lg:text-lg text-info font-normal leading-6 lg:mt-2"
                   >
-                    <bdi>{`${data.comments?.length} دیدگاه`}</bdi>
+                    {/* <bdi>{`${data.comments?.length} دیدگاه`}</bdi> */}
                   </Link>
                 </div>
               </div>
@@ -145,7 +145,7 @@ export default function SingleProduct({ query }) {
                       <bdi>مخصوص:</bdi>
                     </p>
                     <p className="text-base lg:text-lg text-black font-bold leading-7 opacity-90 mr-4 lg:mr-2 align-bottom">
-                      <bdi>{data.pet_type}</bdi>
+                      <bdi>{data.pet_type.pet_type}</bdi>
                     </p>
                   </div>
                   <div className="lg:hidden flex flex-row items-center align-middle my-1 mr-5">
@@ -153,7 +153,7 @@ export default function SingleProduct({ query }) {
                       <bdi>نوع:</bdi>
                     </p>
                     <p className="text-base lg:text-lg text-black font-bold leading-7 opacity-90 mr-4 lg:mr-2 align-bottom">
-                      <bdi>{data.category}</bdi>
+                      <bdi>{data.category.pet_category}</bdi>
                     </p>
                   </div>
                   <div className="hidden lg:flex flex-row items-center align-middle my-1 mr-5">
@@ -161,7 +161,7 @@ export default function SingleProduct({ query }) {
                       <bdi>مخصوص:</bdi>
                     </p>
                     <p className="text-base lg:text-lg text-black font-bold leading-7 opacity-90 mr-4 lg:mr-2 align-bottom">
-                      <bdi> {data.pet_type}</bdi>
+                      <bdi> {data.pet_type.pet_type}</bdi>
                     </p>
                   </div>
                   <div className="hidden lg:flex flex-row items-center align-middle my-1 mr-5">
@@ -169,7 +169,7 @@ export default function SingleProduct({ query }) {
                       <bdi>نوع:</bdi>
                     </p>
                     <p className="text-base lg:text-lg text-black font-bold leading-7 opacity-90 mr-4 lg:mr-2 align-bottom">
-                      <bdi> {data.category}</bdi>
+                      <bdi> {data.category.pet_category}</bdi>
                     </p>
                   </div>
                 </div>

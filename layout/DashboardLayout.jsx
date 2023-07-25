@@ -246,9 +246,11 @@ const DashboardLayout = ({ children }) => {
               />
             </div>
             <div className="w-0.5 h-10 bg-[#3A4750] opacity-50 mx-2.5 rounded-[5px]"></div>
-            <button className="text-base text-white font-bold leading-7 px-10 py-2.5 bg-primary rounded-[15px]">
-              <bdi>افزودن محصول</bdi>
-            </button>
+            <Link href={"/dashboard/products/add"}>
+              <button className="text-base text-white font-bold leading-7 px-10 py-2.5 bg-primary rounded-[15px]">
+                <bdi>افزودن محصول</bdi>
+              </button>
+            </Link>
           </div>
         </div>
         <div className=" w-full h-screen overflow-y-scroll p-10 pb-[100px] lg:px-20 lg:py-12 lg:pb-[100px] ">
