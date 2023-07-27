@@ -116,7 +116,7 @@ export default function EditProduct({ query }) {
                     <bdi>مخصوص:</bdi>
                   </p>
                   <p className="text-base lg:text-lg text-black font-bold leading-7 opacity-90 mr-4 lg:mr-2 align-bottom">
-                    <bdi>{data.pet_type.pet_type}</bdi>
+                    <bdi>{data.pet_type?.pet_type}</bdi>
                   </p>
                 </div>
                 <div className="lg:hidden flex flex-row items-center align-middle my-1 mr-5">
@@ -124,7 +124,7 @@ export default function EditProduct({ query }) {
                     <bdi>نوع:</bdi>
                   </p>
                   <p className="text-base lg:text-lg text-black font-bold leading-7 opacity-90 mr-4 lg:mr-2 align-bottom">
-                    <bdi>{data.category.pet_category}</bdi>
+                    <bdi>{data.category?.pet_category}</bdi>
                   </p>
                 </div>
                 <div className="hidden lg:flex flex-row items-center align-middle my-1 mr-5">
@@ -132,7 +132,7 @@ export default function EditProduct({ query }) {
                     <bdi>مخصوص:</bdi>
                   </p>
                   <p className="text-base lg:text-lg text-black font-bold leading-7 opacity-90 mr-4 lg:mr-2 align-bottom">
-                    <bdi> {data.pet_type.pet_type}</bdi>
+                    <bdi> {data.pet_type?.pet_type}</bdi>
                   </p>
                 </div>
                 <div className="hidden lg:flex flex-row items-center align-middle my-1 mr-5">
@@ -140,7 +140,7 @@ export default function EditProduct({ query }) {
                     <bdi>نوع:</bdi>
                   </p>
                   <p className="text-base lg:text-lg text-black font-bold leading-7 opacity-90 mr-4 lg:mr-2 align-bottom">
-                    <bdi>{data.category.pet_category}</bdi>
+                    <bdi>{data.category?.pet_category}</bdi>
                   </p>
                 </div>
               </div>
