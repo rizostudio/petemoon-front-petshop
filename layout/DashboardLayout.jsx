@@ -182,7 +182,7 @@ const DashboardLayout = ({ children }) => {
           {/* logout */}
           <div
             className={clsx(
-              "flex justify-between items-center self-center w-3/4 mx-auto mt-2 py-2 rounded-[12px]",
+              "flex cursor-pointer justify-between items-center self-center w-3/4 mx-auto mt-2 py-2 rounded-[12px]",
               {
                 "bg-[#3A4750] px-4 py-2 mx-10": Minify == false,
                 "bg-transparent flex-col p-0 mx-0": Minify == true,
