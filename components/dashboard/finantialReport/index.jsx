@@ -9,6 +9,7 @@ import BagTick_Icon from "../../../assets/common/bag-tick2.svg";
 import CartTotal_Icon from "../../../assets/common/card-receive2.svg";
 import search_Icon from "../../../assets/common/searchIcon3.svg";
 import logout_Icon from "../../../assets/common/logoutIconRed.svg";
+// import datebg from "../../../assets/common/date.png";
 import { finantialReport } from "@/services/finantialReport/finantialReport";
 const startDate = new Date("2022-04-04");
 const endDate = new Date();
@@ -260,7 +261,7 @@ export default function index() {
       {/* summary Information */}
       <div className="flex flex-col lg:flex-row items-stretch lg:justify-center mt-10">
         {/* orders sum */}
-        <div className="order-2 lg:order-1 w-full lg:w-1/4 h-full flex flex-row-reverse lg:flex-col justify-between items-stretch bg-white px-6 py-5 lg:py-7.5 my-1 rounded-[15px] lg:rounded-[25px] shadow-shadowB">
+        <div className="order-2 lg:order-1 w-full lg:w-1/4 h-full flex flex-row-reverse lg:flex-col justify-between items-stretch bg-white px-6 py-5 lg:py-7.5  rounded-[15px] lg:rounded-[25px] shadow-shadowB ">
           <Image src={CartTotal_Icon} alt="CartTotalIcon" />
           <div className="text-right flex flex-col lg:mt-10">
             <p className="text-base lg:text-lg text-[#3A4750] font-bold leading-6">
@@ -277,7 +278,7 @@ export default function index() {
         {/* Date Show Box  */}
         <div
           className={clsx(
-            "order-1 lg:order-2 w-full lg:w-2/4 h-full flex-col justify-between items-stretch relative bg-white py-3 px-7 lg:px-10 lg:mr-5 my-1 lg:my-0 lg:mx-5 rounded-[15px] lg:rounded-[25px] shadow-shadowB",
+            "order-1 lg:order-2 w-full lg:w-2/4 h-full flex-col justify-between items-stretch relative  py-3 px-7 lg:px-10 lg:mr-5 my-1 lg:my-0 lg:mx-5 rounded-[15px] lg:rounded-[25px] shadow-shadowB imgBg",
             {
               flex: dateShowBox,
               hidden: dateShowBox == false,
@@ -316,10 +317,13 @@ export default function index() {
                 setMonthSelectorBox(false);
                 setDateShowBox(true);
               }}
-              className={clsx("text-base lg:text-xl font-medium leading-7", {
-                "text-primary": item.name == monthSelected.name,
-                "text-black": item.name !== monthSelected.name,
-              })}
+              className={clsx(
+                "text-base lg:text-xl font-medium cursor-pointer leading-7",
+                {
+                  "text-primary": item.name == monthSelected.name,
+                  "text-black": item.name !== monthSelected.name,
+                }
+              )}
             >
               <bdi>{item.name}</bdi>
             </p>
@@ -337,7 +341,7 @@ export default function index() {
         {/* Year Selector Box  */}
         <div
           className={clsx(
-            "order-1 lg:order-2 w-full lg:w-2/4 h-full grid-cols-4 justify-between items-stretch relative bg-white p-6 lg:p-10 lg:mr-5 my-1 lg:my-0 lg:mx-5 border-[1px] border-primary rounded-[15px] lg:rounded-[25px] shadow-shadowB",
+            "order-1 lg:order-2 w-full lg:w-2/4 h-full  grid-cols-4 justify-between items-stretch relative bg-white p-6 lg:p-10 lg:mr-5 my-1 lg:my-0 lg:mx-5 border-[1px] border-primary rounded-[15px] lg:rounded-[25px] shadow-shadowB",
             {
               grid: yearselectorBox,
               hidden: yearselectorBox == false,
@@ -352,17 +356,20 @@ export default function index() {
                 setMonthSelectorBox(true);
                 setYearSelectorBox(false);
               }}
-              className={clsx("text-base lg:text-xl font-medium leading-7", {
-                "text-primary": item == yearSelected,
-                "text-black": item !== yearSelected,
-              })}
+              className={clsx(
+                "text-base lg:text-xl cursor-pointer font-medium leading-7",
+                {
+                  "text-primary": item == yearSelected,
+                  "text-black": item !== yearSelected,
+                }
+              )}
             >
               <bdi>{item}</bdi>
             </p>
           ))}
         </div>
         {/* orders number */}
-        <div className="order-2 lg:order-3 w-full lg:w-1/4 h-full flex flex-row-reverse lg:flex-col justify-between items-stretch bg-white px-6 py-5 lg:py-7.5 my-1 rounded-[15px] lg:rounded-[25px] shadow-shadowB">
+        <div className="order-2 lg:order-3 w-full lg:w-1/4 h-full flex flex-row-reverse lg:flex-col justify-between items-stretch bg-white px-6 py-5 lg:py-7.5  rounded-[15px] lg:rounded-[25px] shadow-shadowB">
           <Image src={BagTick_Icon} alt="BagTickIcon" />
           <div className="text-right flex flex-col lg:mt-10">
             <p className="text-base lg:text-lg text-[#3A4750] font-bold leading-6">

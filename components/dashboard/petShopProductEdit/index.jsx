@@ -59,7 +59,7 @@ export default function EditProduct({ query }) {
         {/* Summary box */}
         <div className="w-full flex flex-col lg:flex-row lg:justify-evenly items-stretch py-5 lg:py-10 border-b-[2px] border-secondary">
           {/* Gallery */}
-          <div className="self-center w-full lg:w-[450px] h-[200px] lg:h-[400px] rounded-[15px] border-[2px] border-primary solid">
+          <div className="self-center w-full lg:w-[450px] h-[200px] lg:h-[400px] rounded-[5px] border-[2px] border-primary solid">
             <Image
               style={{ width: "100%", height: "100%" }}
               width={100}

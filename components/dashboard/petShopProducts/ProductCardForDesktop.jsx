@@ -85,13 +85,13 @@ export default function ProductCardForDesktop({ item }) {
       <td className="inline-block">
         <div className="flex items-center justify-center">
           <Link href={`/dashboard/products/edit/${item.id}`}>
-            <div className="bg-[#4DA4F41] p-1.5 border-[1px] border-info rounded-xl">
+            <div className="bg-[#4DA4F41] p-1.5 border-[1px] border-info cursor-pointer rounded-xl">
               <Image src={Edit2_Icon} alt="Edit Icon" />
             </div>
           </Link>
           <div
             onClick={deleteHandlear}
-            className="p-1.5 border-[1px] border-error rounded-xl mr-2"
+            className="p-1.5 border-[1px] border-error cursor-pointer rounded-xl mr-2"
           >
             <Image src={TrashRed_Icon} alt="Trash Icon" />
           </div>
