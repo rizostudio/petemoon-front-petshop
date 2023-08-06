@@ -278,7 +278,7 @@ const DashboardLayout = ({ children }) => {
             </div> */}
 
             <Link href={"/dashboard/products/add"}>
-              <button className="text-base text-white font-bold leading-7 px-10 py-2.5 bg-primary rounded-[5px]">
+              <button className="text-base hover:bg-[#d85241] text-white font-bold leading-7 px-10 py-2.5 bg-primary rounded-[5px]">
                 <bdi>افزودن محصول</bdi>
               </button>
             </Link>
