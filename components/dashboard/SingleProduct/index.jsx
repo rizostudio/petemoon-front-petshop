@@ -80,15 +80,15 @@ export default function SingleProduct({ query }) {
   return (
     <>
       <ToastContainer />
-      <div className="w-full h-full flex flex-col justify-between items-stretch lg:px-10 lg:py-5">
+      <div className="w-full h-full flex flex-col justify-between items-stretch lg:px-[6%] lg:py-5">
         {/* Main */}
         <div className="flex flex-col justify-between items-stretch w-full">
           {/*Heading for mobile */}
           <HeadingForMobile data={data} />
           {/* Summary box */}
-          <div className="w-full flex flex-col lg:flex-row lg:justify-evenly items-stretch py-5 lg:py-10 border-b-[2px] border-secondary">
+          <div className="w-full flex flex-col lg:flex-row lg:justify-evenly items-stretch py-5 lg:py-10 ">
             {/* Gallery */}
-            <div className="self-center w-full lg:w-[450px] h-[200px] lg:h-[400px] rounded-[15px] border-[2px] border-primary solid">
+            <div className="self-center w-full lg:w-[800px] h-[200px] lg:h-[auto] rounded-[15px]  ">
               <Image
                 style={{ width: "100%", height: "100%" }}
                 width={100}
@@ -111,7 +111,7 @@ export default function SingleProduct({ query }) {
                     </h2>
                   </div>
                 </div>
-                <div className="flex flex-row lg:flex-col justify-between items-center lg:items-start lg:mt-10">
+                {/* <div className="flex flex-row lg:flex-col justify-between items-center lg:items-start lg:mt-10">
                   <div className="hidden lg:flex flex-row items-center">
                     <div className="flex flex-row items-center">
                       {data.rating
@@ -126,9 +126,9 @@ export default function SingleProduct({ query }) {
                     href="#cutomersComent"
                     className="text-base lg:text-lg text-info font-normal leading-6 lg:mt-2"
                   >
-                    {/* <bdi>{`${data.comments?.length} دیدگاه`}</bdi> */}
+                    <bdi>{`${data.comments?.length} دیدگاه`}</bdi>
                   </Link>
-                </div>
+                </div> */}
               </div>
               <div className="flex flex-col justify-between mt-5">
                 {/* Summary Propertiese */}
@@ -177,7 +177,7 @@ export default function SingleProduct({ query }) {
                 <div className="hidden lg:flex flex-col items-stretch order-1 w-full mb-3 py-5">
                   <div className="flex items-center justify-between w-full my-2 px-5 py-0.5 border-[1px] border-primary rounded-[15px]">
                     <p className="text-lg text-primary font-bold leading-7">
-                      <bdi>قیمت را وارد نمایید:</bdi>
+                      <bdi> * قیمت را وارد نمایید:</bdi>
                     </p>
                     <div className="flex items-center">
                       <input
@@ -194,7 +194,7 @@ export default function SingleProduct({ query }) {
                   </div>
                   <div className="flex items-center justify-between w-full my-2 px-5 py-0.5 border-[1px] border-primary rounded-[15px]">
                     <p className="text-lg text-primary font-bold leading-7">
-                      <bdi>قیمت با تخفیف را وارد نمایید:</bdi>
+                      <bdi> قیمت با تخفیف را وارد نمایید:</bdi>
                     </p>
                     <div className="flex items-center">
                       <input
@@ -211,7 +211,7 @@ export default function SingleProduct({ query }) {
                   </div>
                   <div className="flex items-center justify-between w-full my-2 px-5 py-0.5 border-[1px] border-primary rounded-[15px]">
                     <p className="text-lg text-primary font-bold leading-7">
-                      <bdi>موجودی را وارد نمایید:</bdi>
+                      <bdi> * موجودی را وارد نمایید:</bdi>
                     </p>
                     <div className="flex items-center">
                       <input
@@ -228,7 +228,7 @@ export default function SingleProduct({ query }) {
                   </div>
                   <button
                     onClick={formik.handleSubmit}
-                    className="text-base text-white font-bold leading-7 w-full px-5 py-3 mt-5 bg-primary rounded-[15px]"
+                    className="text-base text-white font-bold leading-7 w-[50%] px-5 py-3 mt-5 bg-primary mr-auto rounded-[5px]"
                   >
                     <bdi>افزودن به محصولات</bdi>
                   </button>
@@ -241,7 +241,7 @@ export default function SingleProduct({ query }) {
             <div className="flex flex-col items-stretch">
               <div className="flex items-center justify-between w-full my-2 px-5 py-0.5 border-[1px] border-primary rounded-[15px]">
                 <p className="text-base lg:text-lg text-primary font-bold leading-7">
-                  <bdi>قیمت را وارد نمایید:</bdi>
+                  <bdi> * قیمت را وارد نمایید:</bdi>
                 </p>
                 <div className="flex items-center">
                   <input
@@ -258,7 +258,7 @@ export default function SingleProduct({ query }) {
               </div>
               <div className="flex items-center justify-between w-full my-2 px-5 py-0.5 border-[1px] border-primary rounded-[15px]">
                 <p className="text-base lg:text-lg text-primary font-bold leading-7">
-                  <bdi>موجودی را وارد نمایید:</bdi>
+                  <bdi> * موجودی را وارد نمایید:</bdi>
                 </p>
                 <div className="flex items-center">
                   <input

@@ -4,26 +4,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import clsx from "clsx";
 import { v4 } from "uuid";
-
 //component
 import DashboardLayout from "@/layout/DashboardLayout";
 import FilterBoxDialog from "@/components/dashboard/orders/FilterBoxDialog";
-
 //media
-import search_Icon from "@/assets/common/SearchRedIcon.svg";
-import logout_Icon from "@/assets/common/logoutIconRed.svg";
 import boxRed_Icon from "@/assets/common/box-addIconRed.svg";
 import boxWhite_Icon from "@/assets/common/box-addWhiteIcon.svg";
-import product_Image from "@/assets/common/ProductPic1.svg";
-import Filter_Icon from "@/assets/common/filterIcon.svg";
-import DownArrow_Icon from "@/assets/common/downArrow.svg";
-import Sort_Icon from "@/assets/common/sortIcon.svg";
-import leftArrow_Icon from "@/assets/common/leftArrowWhite.svg";
-import more_Icon from "@/assets/common/more.svg";
-import TrashRed_Icon from "../../../assets/common/TrashIconRed.svg";
-import CloseButton_Icon from "../../../assets/common/close-button.svg";
-import Edit2_Icon from "../../../assets/common/EditIcon2.svg";
-import addProduct_Icon from "../../../assets/common/shop-addPrimaryIcon.svg";
 import FilterPage from "./FilterPage";
 import SortPage from "./SortPage";
 import HeadingForMobile from "./HeadingForMobile";
@@ -36,13 +22,6 @@ import { getProductFilter } from "@/services/petemoonProducts/getProductFilters"
 export default function PetShopProducts() {
   const router = useRouter();
   const [data, setData] = useState([]);
-  // const brand = [
-  //   { name: "پت بازار", id: "petBazzar" },
-  //   { name: "پت شاپ۱", id: "petShop1" },
-  //   { name: "پت ایران", id: "petIran" },
-  //   { name: "تهران پت", id: "tehranPet" },
-  //   { name: "کافه پت", id: "petCafe" },
-  // ];
   const petKind = ["سگ خانگی", "سگ شکارچی", "سگ وحشی", "سگ گله", "سگ نگهبان"];
   // the array of sort options
   const [sortArr, setSortArr] = useState([

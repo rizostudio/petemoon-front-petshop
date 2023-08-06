@@ -26,7 +26,7 @@ export default function ShopInfo({ errors, setStep, handleChange, values }) {
           onChange={handleChange}
           value={values.store_name}
           required={true}
-          h={"h-[12%] lg:h-[15%]"}
+          h={"h-12"}
         />
         {errors.store_name ? (
           <p className="text-[12px] text-error font-semibold leading-5  ml-auto">
@@ -40,7 +40,7 @@ export default function ShopInfo({ errors, setStep, handleChange, values }) {
           onChange={handleChange}
           value={values.city}
           required={true}
-          h={"h-[12%] lg:h-[15%]"}
+          h={"h-12"}
         />
         {errors.city ? (
           <p className="text-[12px] text-error font-semibold leading-5  ml-auto">
@@ -54,7 +54,7 @@ export default function ShopInfo({ errors, setStep, handleChange, values }) {
           onChange={handleChange}
           value={values.postal_region}
           required={true}
-          h={"h-[12%] lg:h-[15%]"}
+          h={"h-12"}
         />
         {errors.postal_region ? (
           <p className="text-[12px] text-error font-semibold leading-5  ml-auto">
@@ -68,7 +68,7 @@ export default function ShopInfo({ errors, setStep, handleChange, values }) {
           onChange={handleChange}
           value={values.address}
           required={true}
-          h={"h-[12%] lg:h-[15%]"}
+          h={"h-[150px]"}
           py={"py-4"}
         />
         {errors.address ? (

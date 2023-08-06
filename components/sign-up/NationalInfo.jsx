@@ -29,7 +29,7 @@ export default function NationalInfo({
           onChange={handleChange}
           value={values.first_name}
           required={true}
-          h={"h-[12%] lg:h-[15%]"}
+          h={"h-12"}
         />
         {errors.first_name ? (
           <p className="text-[12px] text-error font-semibold leading-5  ml-auto">
@@ -43,7 +43,7 @@ export default function NationalInfo({
           onChange={handleChange}
           value={values.last_name}
           required={true}
-          h={"h-[12%] lg:h-[15%]"}
+          h={"h-12"}
         />
         {errors.last_name ? (
           <p className="text-[12px] text-error font-semibold leading-5  ml-auto">
@@ -51,14 +51,18 @@ export default function NationalInfo({
           </p>
         ) : null}
         <FloatLabelInput
-          type={"text"}
+          type={"select"}
           placeholder={"جنسیت"}
           name="gender"
           onChange={handleChange}
           value={values.gender}
-          required={true}
-          h={"h-[12%] lg:h-[15%]"}
-        />
+          h={"h-12"}
+          py={"3"}
+          dir={"rtl"}
+        >
+          <option value={"مرد"}>مرد</option>
+          <option value={"زن"}>زن</option>
+        </FloatLabelInput>
         {errors.gender ? (
           <p className="text-[12px] text-error font-semibold leading-5  ml-auto">
             <bdi>{errors.gender}</bdi>
@@ -71,7 +75,7 @@ export default function NationalInfo({
           onChange={handleChange}
           value={values.national_id}
           required={true}
-          h={"h-[12%] lg:h-[15%]"}
+          h={"h-12"}
         />
         {errors.national_id ? (
           <p className="text-[12px] text-error font-semibold leading-5  ml-auto">

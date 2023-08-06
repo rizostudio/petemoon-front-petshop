@@ -47,14 +47,35 @@ const DashboardLayout = ({ children }) => {
   };
   //dashboard menu
   const menuArr = [
-    { id: "", name: "داشبورد", icon: HomeWhite_Icon },
-    { id: "products", name: "محصولات", icon: ShopWhite_Icon, notification: 0 },
-    { id: "orders", name: "سفارش های من", icon: OrdersWhite_Icon },
-    { id: "wallet", name: " گزارشات مالی", icon: WalletWhite_Icon },
+    {
+      id: "",
+      name: "داشبورد",
+      icon: HomeWhite_Icon,
+      Activeicon: "/assets/common/home-active.svg",
+    },
+    {
+      id: "products",
+      name: "محصولات",
+      icon: ShopWhite_Icon,
+      Activeicon: "../assets/common/shop-active.svg ",
+    },
+    {
+      id: "orders",
+      name: "سفارش های من",
+      icon: OrdersWhite_Icon,
+      Activeicon: "../assets/common/shopping-cart-active.svg ",
+    },
+    {
+      id: "wallet",
+      name: " گزارشات مالی",
+      icon: WalletWhite_Icon,
+      Activeicon: "../assets/common/empty-wallet-active.svg",
+    },
     {
       id: "my-messages",
       name: "پیام های من",
       icon: MessageWhite_Icon,
+      Activeicon: "../assets/common/sms-active.svg",
       notification: 10,
     },
     { id: "support", name: "پشتیبانی", icon: SupportWhite_Icon },
@@ -106,46 +127,56 @@ const DashboardLayout = ({ children }) => {
             <li
               key={v4()}
               className={clsx(
-                "border-b-[1px] border-silver solid lg:border-[#eeeeee26] lg:my-0 lg:mx-9 py-4 px-8 lg:px-0",
+                "border-b-[1px] border-silver transition ease-in-out solid lg:border-[#eeeeee26] lg:my-0 lg:mx-9 py-4 px-8 lg:px-0",
                 {
                   "": Minify == false,
-                  "lg:border-none": Minify == true,
+                  "lg:border-none ": Minify == true,
                 }
               )}
             >
               <Link
                 href={`/dashboard/${item.id}`}
                 onClick={openHandler}
-                className={clsx("flex justify-between items-center w-full", {
-                  "flex-row": Minify == false,
-                  "flex-row lg:flex-col": Minify == true,
-                })}
+                className={clsx(
+                  "flex justify-between transition ease-in-out items-center w-full ",
+                  {
+                    "flex-row ": Minify == false,
+                    "flex-row lg:flex-col": Minify == true,
+                  }
+                )}
               >
                 <div className="flex flex-row items-stretch relative">
                   <Image
-                    src={item.icon}
+                    src={
+                      router.asPath === `/dashboard/${item.id}`
+                        ? item.Activeicon
+                        : item.icon
+                    }
                     alt={item.name}
                     width="20"
                     height="20"
-                    className={clsx("", {})}
                   />
-                  <h3
+                  <p
                     className={clsx(
-                      "text-base text-black lg:text-secondary font-bold w-full mr-3",
+                      "text-base text-black transition ease-in-out hover:text-primary font-bold w-full mr-3",
                       {
                         block: Minify == false,
                         "lg:hidden": Minify == true,
+                        "lg:text-primary":
+                          router.asPath === `/dashboard/${item.id}`,
+                        "lg:text-secondary":
+                          router.asPath !== `/dashboard/${item.id}`,
                       }
                     )}
                   >
                     {item.name}
-                  </h3>
+                  </p>
                 </div>
                 {/* showing notification numbers for each section */}
                 {item.notification > 0 && (
                   <p
                     className={clsx(
-                      "absolute left-20 lg:relative lg:left-0 text-white text-center text-xs bg-primary px-[5px] py-[3px] rounded-[5px]",
+                      "hidden absolute transition ease-in-out left-20 lg:relative lg:left-0 text-white text-center text-xs bg-primary px-[5px] py-[3px] rounded-[5px]",
                       {
                         "lg:block": Minify == false,
                         "lg:hidden": Minify == true,
@@ -221,9 +252,9 @@ const DashboardLayout = ({ children }) => {
             alt="ArrowLeftIcon"
             onClick={() => setMinify(!Minify)}
             className={clsx(
-              "bg-[#eee] p-3 rounded-full w-10 h-10 absolute top-[25%] right-[-2%] rotate-180",
+              "bg-[#eee] p-3 rounded-full w-10 h-10 absolute top-[25%] right-[-2%] transition ease-in-out cursor-pointer rotate-180",
               {
-                "rotate-0": Minify == true,
+                "rotate-[-180]": Minify == true,
               }
             )}
           />
@@ -237,17 +268,17 @@ const DashboardLayout = ({ children }) => {
             </p>
           </div>
           <div className="flex flex-row items-center">
-            <div className="flex flex-row h-12 px-5 bg-[#eee] rounded-[10px]">
+            {/* <div className="flex flex-row h-12 px-5 bg-[#eee] rounded-[10px]">
               <Image src={Search_Icon} alt="SearchIcon" className="invert" />
               <input
                 type="text"
                 placeholder="جستجو"
                 className="text-base text-right text-black opacity-[0.8] font-bold p-2 w-full border-none bg-transparent peer-focus:border-none"
               />
-            </div>
-            <div className="w-0.5 h-10 bg-[#3A4750] opacity-50 mx-2.5 rounded-[5px]"></div>
+            </div> */}
+
             <Link href={"/dashboard/products/add"}>
-              <button className="text-base text-white font-bold leading-7 px-10 py-2.5 bg-primary rounded-[15px]">
+              <button className="text-base hover:bg-[#d85241] text-white font-bold leading-7 px-10 py-2.5 bg-primary rounded-[5px]">
                 <bdi>افزودن محصول</bdi>
               </button>
             </Link>

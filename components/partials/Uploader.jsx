@@ -25,7 +25,9 @@ const Uploader = ({
   const handleUploadBtnClick = () => {
     fileInputField.current.click();
   };
-
+  const handleDelete = () => {
+    setFieldValue(id, "");
+  };
   // const addNewFiles = (newFiles) => {
   //   for (let file of newFiles) {
   //     if (file.size <= maxFileSizeInBytes) {
@@ -38,7 +40,6 @@ const Uploader = ({
   const handleNewFileUpload = (e) => {
     if (fileInputField.current) {
       const file = fileInputField.current.files;
-
       // setFiles(file[0]);
       setFieldValue(id, file[0]);
     }
@@ -113,7 +114,13 @@ const Uploader = ({
                 {/* <Image src={progressBar} alt="progressBar" className="mt-2" /> */}
               </div>
             </div>
-            <Image src={tick_Icon} />
+            <div className="ml-auto">
+              <Image
+                onClick={handleDelete}
+                className="ml-auto cursor-pointer"
+                src={close_Icon}
+              />
+            </div>
           </div>
         ) : null}
       </div>
