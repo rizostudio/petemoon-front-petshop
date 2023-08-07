@@ -18,7 +18,7 @@ export default function SignUpForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const toggleSubmitState = () => setIsSubmitting((currState) => !currState);
   const router = useRouter();
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(1);
   const backHandler = () => {
     step > 1 ? setStep(step - 1) : router.push("/");
   };
@@ -162,7 +162,7 @@ export default function SignUpForm() {
             </p>
             <button
               onClick={() => router.push("/dashboard")}
-              className={`btn md:h-[12%] lg:h-[15%] border-0 bg-primary hover:bg-primary-dark active:bg-primary focus:bg-primary w-full mt-4 lg:mt-0 rounded-lg text-base text-white md:text-xl font-normal ${
+              className={`btn md:h-[12%] lg:h-[15%] border-0 bg-primary hover:bg-[#d85241] active:bg-primary focus:bg-primary w-full mt-4 lg:mt-0 rounded-lg text-base text-white md:text-xl font-normal ${
                 isSubmitting && "loading"
               }`}
             >

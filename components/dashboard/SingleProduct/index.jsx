@@ -38,9 +38,13 @@ export default function SingleProduct({ query }) {
     getData();
   }, [query]);
   const product = Yup.object().shape({
-    price: Yup.string().required("فیلد الزامی است"),
-    inventory: Yup.string().required("فیلد الزامی است"),
-    price_after_sale: Yup.string(),
+    price: Yup.string()
+      .required("فیلد الزامی است")
+      .length(8, "قیمت بیشتذ از ۸ رقم"),
+    inventory: Yup.string()
+      .required("فیلد الزامی است")
+      .length(4, "قیمت بیشتذ از ۴ رقم"),
+    price_after_sale: Yup.string().length(8, "قیمت بیشتذ از ۸ رقم"),
   });
   const formik = useFormik({
     enableReinitialize: true,
