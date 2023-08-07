@@ -48,7 +48,8 @@ export default function ContractConfirmation({ setStep }) {
         </div>
         <button
           onClick={hanleSubmit}
-          className={`btn md:h-[12%] lg:h-[15%] border-0 bg-primary hover:bg-primary-dark active:bg-primary focus:bg-primary w-full mt-4 lg:mt-0 rounded-lg text-base md:text-xl text-white mb-4 font-normal `}
+          className={`btn h-12 disabled:text-primary border-0 disabled:border disabled:border-primary bg-primary disabled:bg-white hover:bg-[#d85241] text-[#fff] active:bg-primary focus:bg-primary w-full rounded-lg text-base md:text-xl font-normal 
+`}
         >
           ادامه
         </button>

@@ -16,7 +16,7 @@ export default function CommercialInfo({
   return (
     <div
       // onSubmit={formik.handleSubmit}
-      className="w-full h-[60%] lg:h-[50%] lg:w-[80%]"
+      className="w-full h-[60%] lg:h-[30%] lg:w-[80%]"
     >
       <div className="flex flex-col h-full items-center justify-between">
         <FloatLabelInput
@@ -26,7 +26,7 @@ export default function CommercialInfo({
           onChange={handleChange}
           value={values.sheba_number}
           required={true}
-          h={"h-[12%] lg:h-[15%]"}
+          h={"h-12"}
         />
         {errors.sheba_number ? (
           <p className="text-[12px] text-error font-semibold leading-5  ml-auto">
@@ -40,7 +40,7 @@ export default function CommercialInfo({
           onChange={handleChange}
           value={values.estimated_item_count}
           required={true}
-          h={"h-[12%] lg:h-[15%]"}
+          h={"h-12"}
         />
         {errors.estimated_item_count ? (
           <p className="text-[12px] text-error font-semibold leading-5  ml-auto">
@@ -49,9 +49,8 @@ export default function CommercialInfo({
         ) : null}
         <button
           onClick={handleSubmit}
-          className={`btn md:h-[12%] lg:h-[15%] border-0 bg-primary hover:bg-primary-dark active:bg-primary focus:bg-primary w-full  lg:mt-1 rounded-lg text-base md:text-xl text-white mb-4 font-normal ${
-            isSubmitting && "loading"
-          }`}
+          className={`btn h-12 disabled:text-primary border-0 disabled:border disabled:border-primary bg-primary disabled:bg-white hover:bg-[#d85241] text-[#fff] active:bg-primary focus:bg-primary w-full rounded-lg text-base md:text-xl font-normal 
+`}
         >
           ادامه
         </button>

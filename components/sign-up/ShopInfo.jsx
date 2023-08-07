@@ -1,22 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 //component
 import FloatLabelInput from "../partials/input";
+import data from "../../staticJsonData/provinces.json";
 export default function ShopInfo({ errors, setStep, handleChange, values }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [cities, setCities] = useState([]);
   const handleSubbmit = () => {
     if (
       values.store_name &&
       values.city &&
       values.postal_region &&
-      values.address
+      values.address &&
+      values.province
     ) {
       setStep((prev) => prev + 1);
     }
   };
+  useEffect(() => {
+    data.find((item) => {
+      if (item.name === values.province) {
+        setCities(item.cities);
+        console.log(item.cities);
+      }
+    });
+  }, [values.province]);
   return (
     <div
       // onSubmit={formik.handleSubmit}
-      className="w-full h-[60%] lg:h-[50%] lg:w-[80%]"
+      className="w-full h-[60%] lg:h-[60%] lg:w-[80%]"
     >
       <div className="flex flex-col h-full items-center justify-between">
         <FloatLabelInput
@@ -34,14 +45,43 @@ export default function ShopInfo({ errors, setStep, handleChange, values }) {
           </p>
         ) : null}
         <FloatLabelInput
-          type={"text"}
-          placeholder={"استان / شهر"}
+          type={"select"}
+          placeholder={"  استان"}
+          name="province"
+          onChange={handleChange}
+          value={values.province}
+          required={true}
+          list="provinces"
+          h={"h-12"}
+        >
+          {data.map((item) => (
+            <option id={item.id} key={item.id}>
+              {item.name}
+            </option>
+          ))}
+        </FloatLabelInput>
+        {/* </select> */}
+        {errors.province && (
+          <p className="text-[12px] text-error font-semibold leading-5 mt-1">
+            <bdi>{errors.province}</bdi>
+          </p>
+        )}
+
+        <FloatLabelInput
+          type={"select"}
+          placeholder={"  شهر"}
           name="city"
           onChange={handleChange}
           value={values.city}
           required={true}
           h={"h-12"}
-        />
+        >
+          {cities.map((item) => (
+            <option id={item.id} key={item.id}>
+              {item.name}
+            </option>
+          ))}
+        </FloatLabelInput>
         {errors.city ? (
           <p className="text-[12px] text-error font-semibold leading-5  ml-auto">
             <bdi>{errors.city}</bdi>
@@ -78,10 +118,8 @@ export default function ShopInfo({ errors, setStep, handleChange, values }) {
         ) : null}
         <button
           onClick={handleSubbmit}
-          // type="submit"
-          className={`btn md:h-[12%] lg:h-[15%] border-0 bg-primary hover:bg-primary-dark active:bg-primary focus:bg-primary w-full mt-4 lg:mt-0 rounded-lg text-base md:text-xl text-white mb-4 font-normal ${
-            isSubmitting && "loading"
-          }`}
+          className={`btn h-12 disabled:text-primary border-0 disabled:border disabled:border-primary bg-primary disabled:bg-white hover:bg-[#d85241] text-[#fff] active:bg-primary focus:bg-primary w-full rounded-lg text-base md:text-xl font-normal 
+`}
         >
           ادامه
         </button>

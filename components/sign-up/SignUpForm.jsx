@@ -18,7 +18,7 @@ export default function SignUpForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const toggleSubmitState = () => setIsSubmitting((currState) => !currState);
   const router = useRouter();
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(4);
   const backHandler = () => {
     step > 1 ? setStep(step - 1) : router.push("/");
   };
@@ -31,6 +31,7 @@ export default function SignUpForm() {
       .max(10, "کد ملی ۱۰ رقمی است")
       .required("فیلد الزامی است"),
     city: Yup.string().required("فیلد الزامی است"),
+    province: Yup.string().required("فیلد الزامی است"),
     postal_region: Yup.string().required("فیلد الزامی است"),
     address: Yup.string().required("فیلد الزامی است"),
     store_name: Yup.string().required("فیلد الزامی است"),
@@ -52,6 +53,7 @@ export default function SignUpForm() {
         last_name: "",
         gender: "",
         national_id: "",
+        province: "",
         city: "",
         postal_region: "",
         address: "",
