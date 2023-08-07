@@ -31,6 +31,7 @@ export default function SignUpForm() {
       .max(10, "کد ملی ۱۰ رقمی است")
       .required("فیلد الزامی است"),
     city: Yup.string().required("فیلد الزامی است"),
+    province: Yup.string().required("فیلد الزامی است"),
     postal_region: Yup.string().required("فیلد الزامی است"),
     address: Yup.string().required("فیلد الزامی است"),
     store_name: Yup.string().required("فیلد الزامی است"),
@@ -52,6 +53,7 @@ export default function SignUpForm() {
         last_name: "",
         gender: "",
         national_id: "",
+        province: "",
         city: "",
         postal_region: "",
         address: "",
@@ -160,7 +162,7 @@ export default function SignUpForm() {
             </p>
             <button
               onClick={() => router.push("/dashboard")}
-              className={`btn md:h-[12%] lg:h-[15%] border-0 bg-primary hover:bg-primary-dark active:bg-primary focus:bg-primary w-full mt-4 lg:mt-0 rounded-lg text-base text-white md:text-xl font-normal ${
+              className={`btn md:h-[12%] lg:h-[15%] border-0 bg-primary hover:bg-[#d85241] active:bg-primary focus:bg-primary w-full mt-4 lg:mt-0 rounded-lg text-base text-white md:text-xl font-normal ${
                 isSubmitting && "loading"
               }`}
             >

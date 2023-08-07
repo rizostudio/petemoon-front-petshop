@@ -13,7 +13,7 @@ export default function ProductList({ data }) {
       {data.map((item, index) => (
         <div
           key={item.id}
-          className="flex lg:flex-col items-stretch lg:justify-between w-full lg:w-[270px] p-4 lg:p-5 m-2 bg-white rounded-[15px] lg:rounded-[25px] shadow-shadowB"
+          className="flex lg:flex-col items-stretch lg:justify-between w-full lg:w-[270px] p-4 lg:p-5 m-2 bg-white rounded-[15px] lg:rounded-[15px] shadow-shadowB"
         >
           <div className="w-[120px] lg:w-full h-[120px] lg:h-[220px] overflow-hidden   rounded-[5px] lg:rounded-[25px]">
             <Image
@@ -53,7 +53,7 @@ export default function ProductList({ data }) {
 
             <Link
               href={`/dashboard/products/add/${item.slug}`}
-              className="text-sm lg:text-base text-center text-primary font-medium leading-6 w-full mt-2 lg:mt-5 px-5 transition ease-in-out py-1 bg-[#EA635233] hover:bg-primary hover:text-white rounded-[10px]"
+              className="text-sm lg:text-base text-center text-primary font-medium leading-6 w-full mt-2 lg:mt-5 px-5 transition ease-in-out py-1 bg-[#EA635233] hover:bg-primary hover:text-white rounded-[5px]"
             >
               <bdi>افزودن</bdi>
             </Link>

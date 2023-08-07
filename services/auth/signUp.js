@@ -8,6 +8,7 @@ export const Register = async (signupData) => {
   form.append("gender", signupData.gender);
   form.append("national_id", signupData.national_id);
   form.append("city", signupData.city);
+  form.append("province", signupData.province);
   form.append("postal_region", signupData.postal_region);
   form.append("address", signupData.address);
   form.append("store_name", signupData.store_name);

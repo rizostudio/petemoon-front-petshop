@@ -38,9 +38,13 @@ export default function SingleProduct({ query }) {
     getData();
   }, [query]);
   const product = Yup.object().shape({
-    price: Yup.string().required("فیلد الزامی است"),
-    inventory: Yup.string().required("فیلد الزامی است"),
-    price_after_sale: Yup.string(),
+    price: Yup.string()
+      .required("فیلد الزامی است")
+      .length(8, "قیمت بیشتذ از ۸ رقم"),
+    inventory: Yup.string()
+      .required("فیلد الزامی است")
+      .length(4, "قیمت بیشتذ از ۴ رقم"),
+    price_after_sale: Yup.string().length(8, "قیمت بیشتذ از ۸ رقم"),
   });
   const formik = useFormik({
     enableReinitialize: true,
@@ -75,6 +79,9 @@ export default function SingleProduct({ query }) {
       }
     },
     validationSchema: product,
+    validateOnMount: false,
+    validateOnChange: false,
+    validateOnBlur: false,
   });
 
   return (
@@ -192,6 +199,9 @@ export default function SingleProduct({ query }) {
                       </p>
                     </div>
                   </div>
+                  <p className="text-[12px] text-error font-semibold leading-5 ml-auto ">
+                    <bdi>{formik.errors.price}</bdi>
+                  </p>
                   <div className="flex items-center justify-between w-full my-2 px-5 py-0.5 border-[1px] border-primary rounded-[15px]">
                     <p className="text-lg text-primary font-bold leading-7">
                       <bdi> قیمت با تخفیف را وارد نمایید:</bdi>
@@ -209,6 +219,9 @@ export default function SingleProduct({ query }) {
                       </p>
                     </div>
                   </div>
+                  <p className="text-[12px] text-error font-semibold leading-5 ml-auto ">
+                    <bdi>{formik.errors.price_after_sale}</bdi>
+                  </p>
                   <div className="flex items-center justify-between w-full my-2 px-5 py-0.5 border-[1px] border-primary rounded-[15px]">
                     <p className="text-lg text-primary font-bold leading-7">
                       <bdi> * موجودی را وارد نمایید:</bdi>
@@ -226,6 +239,9 @@ export default function SingleProduct({ query }) {
                       </p>
                     </div>
                   </div>
+                  <p className="text-[12px] text-error font-semibold leading-5 ml-auto ">
+                    <bdi>{formik.errors.inventory}</bdi>
+                  </p>
                   <button
                     onClick={formik.handleSubmit}
                     className="text-base text-white font-bold leading-7 w-[50%] px-5 py-3 mt-5 bg-primary mr-auto rounded-[5px]"
