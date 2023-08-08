@@ -7,6 +7,7 @@ export default function UploadDocument({
   isSubmitting,
   values,
   handleSubmit,
+  errors,
 }) {
   const [tab, setTab] = useState("national_card"); //toggle between Tabs
   return (
@@ -63,43 +64,82 @@ export default function UploadDocument({
             switch (tab) {
               case "national_card":
                 return (
-                  <Uploader
-                    values={values}
-                    id={"national_card"}
-                    setFieldValue={setFieldValue}
-                  />
+                  <>
+                    <Uploader
+                      values={values}
+                      id={"national_card"}
+                      setFieldValue={setFieldValue}
+                      errors={errors.national_card}
+                    />
+                    {errors.national_card ? (
+                      <p className="text-[12px] text-error font-semibold leading-5  ml-auto">
+                        <bdi>{errors.national_card}</bdi>
+                      </p>
+                    ) : null}
+                  </>
                 );
               case "birth_certificate":
                 return (
-                  <Uploader
-                    values={values}
-                    id={"birth_certificate"}
-                    setFieldValue={setFieldValue}
-                  />
+                  <>
+                    <Uploader
+                      values={values}
+                      id={"birth_certificate"}
+                      setFieldValue={setFieldValue}
+                      errors={errors.birth_certificate}
+                    />
+                    {errors.birth_certificate ? (
+                      <p className="text-[12px] text-error font-semibold leading-5  ml-auto">
+                        <bdi>{errors.birth_certificate}</bdi>
+                      </p>
+                    ) : null}
+                  </>
                 );
               case "business_license":
                 return (
-                  <Uploader
-                    values={values}
-                    id={"business_license"}
-                    setFieldValue={setFieldValue}
-                  />
+                  <>
+                    <Uploader
+                      values={values}
+                      id={"business_license"}
+                      setFieldValue={setFieldValue}
+                      errors={errors.business_license}
+                    />
+                    {errors.business_license ? (
+                      <p className="text-[12px] text-error font-semibold leading-5  ml-auto">
+                        <bdi>{errors.business_license}</bdi>
+                      </p>
+                    ) : null}
+                  </>
                 );
               case "union_license":
                 return (
-                  <Uploader
-                    values={values}
-                    id={"union_license"}
-                    setFieldValue={setFieldValue}
-                  />
+                  <>
+                    <Uploader
+                      values={values}
+                      id={"union_license"}
+                      setFieldValue={setFieldValue}
+                      errors={errors.union_license}
+                    />
+                    {errors.union_license ? (
+                      <p className="text-[12px] text-error font-semibold leading-5  ml-auto">
+                        <bdi>{errors.union_license}</bdi>
+                      </p>
+                    ) : null}
+                  </>
                 );
               case "tax_certificate":
                 return (
-                  <Uploader
-                    values={values}
-                    id={"tax_certificate"}
-                    setFieldValue={setFieldValue}
-                  />
+                  <>
+                    <Uploader
+                      values={values}
+                      id={"tax_certificate"}
+                      setFieldValue={setFieldValue}
+                    />
+                    {errors.tax_certificate ? (
+                      <p className="text-[12px] text-error font-semibold leading-5  ml-auto">
+                        <bdi>{errors.tax_certificate}</bdi>
+                      </p>
+                    ) : null}
+                  </>
                 );
             }
           })()}
