@@ -23,7 +23,7 @@ export default function ProductCardForDesktop({ item }) {
   };
   return (
     <tr className="border-b-[1px] border-[#D9D9D9] mx-5 p-5">
-      <td className="inline-block m-1 w-[100px] h-[100px] border-[1px] border-primary rounded-[12px] overflow-hidden">
+      <td className="inline-block m-1 w-[100px] h-[100px] rounded-[12px] overflow-hidden">
         <Image
           src={
             item.picture

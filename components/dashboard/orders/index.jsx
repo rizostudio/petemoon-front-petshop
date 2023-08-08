@@ -6,20 +6,9 @@ import { v4 } from "uuid";
 import { useRouter } from "next/router";
 //component
 import DashboardLayout from "@/layout/DashboardLayout";
-import FilterBoxDialog from "@/components/dashboard/orders/FilterBoxDialog";
 //media
 import search_Icon from "@/assets/common/SearchRedIcon.svg";
 import logout_Icon from "@/assets/common/logoutIconRed.svg";
-import product_Image from "@/assets/common/ProductPic1.svg";
-import Filter_Icon from "@/assets/common/filterIcon.svg";
-import downArrowBlack_Icon from "../../../assets/common/downArrowBlackIcon.svg";
-import Sort_Icon from "@/assets/common/sortIcon.svg";
-import leftArrow_Icon from "@/assets/common/leftArrowWhite.svg";
-import tick_Icon from "../../../assets/common/tickIcon3.png";
-import setting_Icon from "../../../assets/common/settingIconBlack.svg";
-import calendar_Icon from "../../../assets/common/calendar-search.svg";
-import FilterPage from "./FilterPage";
-import SortPage from "./SortPage";
 import OrderItemsForMobile from "./OrderItemsForMobile";
 import OrderItemsForDesktop from "./OrderItemsForDesktop";
 import { getListorders } from "@/services/order/getListOfOrders";

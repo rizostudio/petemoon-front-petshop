@@ -43,8 +43,20 @@ export default function SingleProduct({ query }) {
       .length(8, "قیمت بیشتذ از ۸ رقم"),
     inventory: Yup.string()
       .required("فیلد الزامی است")
-      .length(4, "قیمت بیشتذ از ۴ رقم"),
-    price_after_sale: Yup.string().length(8, "قیمت بیشتذ از ۸ رقم"),
+      .test(
+        "len",
+        " موجودی باید کمتر از ۴ رقم باشد",
+        (val) =>
+          val != undefined &&
+          (val.length == 0 || (val.length >= 1 && val.length <= 4))
+      ),
+    price_after_sale: Yup.string().test(
+      "len",
+      "قیمت باید کمتر از ۸ کاراکتر باشد",
+      (val) =>
+        val != undefined &&
+        (val.length == 0 || (val.length >= 2 && val.length <= 8))
+    ),
   });
   const formik = useFormik({
     enableReinitialize: true,
@@ -192,7 +204,7 @@ export default function SingleProduct({ query }) {
                         type="number"
                         value={formik.values.price}
                         onChange={formik.handleChange}
-                        className="text-2xl text-primary font-medium leading-10 opacity-90 w-[100px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
+                        className="text-2xl text-primary font-medium leading-10 opacity-90 w-[180px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
                       />
                       <p className="text-sm text-primary font-normal leading-7">
                         <bdi>تومان</bdi>
@@ -212,7 +224,7 @@ export default function SingleProduct({ query }) {
                         type="number"
                         value={formik.values.price_after_sale}
                         onChange={formik.handleChange}
-                        className="text-2xl text-primary font-medium leading-10 opacity-90 w-[100px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
+                        className="text-2xl text-primary font-medium leading-10 opacity-90 w-[180px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
                       />
                       <p className="text-sm text-primary font-normal leading-7">
                         <bdi>تومان</bdi>
@@ -232,7 +244,7 @@ export default function SingleProduct({ query }) {
                         value={formik.values.inventory}
                         onChange={formik.handleChange}
                         type="number"
-                        className="text-2xl text-primary font-medium leading-10 opacity-90 w-[100px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
+                        className="text-2xl text-primary font-medium leading-10 opacity-90 w-[180px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
                       />
                       <p className="text-sm text-primary font-normal leading-7">
                         <bdi>عدد</bdi>
@@ -244,7 +256,7 @@ export default function SingleProduct({ query }) {
                   </p>
                   <button
                     onClick={formik.handleSubmit}
-                    className="text-base text-white font-bold leading-7 w-[50%] px-5 py-3 mt-5 bg-primary mr-auto rounded-[5px]"
+                    className="text-base hover:bg-[#d85241] text-white font-bold leading-7 w-[50%] px-5 py-3 mt-5 bg-primary mr-auto rounded-[5px]"
                   >
                     <bdi>افزودن به محصولات</bdi>
                   </button>
@@ -265,7 +277,24 @@ export default function SingleProduct({ query }) {
                     type="number"
                     value={formik.values.price}
                     onChange={formik.handleChange}
-                    className="text-base lg:text-2xl text-primary font-medium leading-10 opacity-90 w-[100px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
+                    className="text-base lg:text-2xl text-primary font-medium leading-10 opacity-90 w-[180px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
+                  />
+                  <p className="text-sm text-primary font-normal leading-7">
+                    <bdi>تومان</bdi>
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center justify-between w-full my-2 px-5 py-0.5 border-[1px] border-primary rounded-[15px]">
+                <p className="text-base lg:text-lg text-primary font-bold leading-7">
+                  <bdi> * قیمت با تخفیف را وارد نمایید:</bdi>
+                </p>
+                <div className="flex items-center">
+                  <input
+                    name="price_after_sale"
+                    type="number"
+                    value={formik.values.price_after_sale}
+                    onChange={formik.handleChange}
+                    className="text-base lg:text-2xl text-primary font-medium leading-10 opacity-90 w-[180px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
                   />
                   <p className="text-sm text-primary font-normal leading-7">
                     <bdi>تومان</bdi>
@@ -282,7 +311,7 @@ export default function SingleProduct({ query }) {
                     value={formik.values.inventory}
                     onChange={formik.handleChange}
                     type="number"
-                    className="text-base lg:text-2xl text-primary font-medium leading-10 opacity-90 w-[100px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
+                    className="text-base lg:text-2xl text-primary font-medium leading-10 opacity-90 w-[180px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
                   />
                   <p className="text-sm text-primary font-normal leading-7">
                     <bdi>عدد</bdi>
@@ -292,7 +321,7 @@ export default function SingleProduct({ query }) {
             </div>
             <button
               onClick={formik.handleSubmit}
-              className="text-base text-white font-bold leading-7 w-full px-5 py-3 mt-5 bg-primary rounded-[15px]"
+              className="text-base hover:bg-[#d85241] text-white font-bold leading-7 w-full px-5 py-3 mt-5 bg-primary rounded-[15px]"
             >
               <bdi>افزودن به محصولات</bdi>
             </button>

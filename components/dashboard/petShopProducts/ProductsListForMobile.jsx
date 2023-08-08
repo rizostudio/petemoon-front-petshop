@@ -34,9 +34,15 @@ export default function ProductsListForMobile({ data }) {
             key={v4()}
             className="flex w-full my-1 px-5 py-4 bg-white border-[1px] border-secondary rounded-[15px] shadow-shadowB"
           >
-            <div className="w-[100px] h-[100px] border-[1px] border-primary rounded-[12px] overflow-hidden">
+            <div className="w-[100px] h-[100px]  rounded-[12px] overflow-hidden">
               <Image
-                src={product_Image}
+                src={
+                  item.picture
+                    ? `https://api.petemoon.com${item.picture}`
+                    : product_Image
+                }
+                width={100}
+                height={100}
                 alt="Product Image"
                 className="w-full h-full object-cover"
               />
