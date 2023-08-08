@@ -68,7 +68,7 @@ const Uploader = ({
           <bdi>انتخاب فایل</bdi>
         </button>
         <input
-          className="absolute text-[0px] border-none bg-transparent appearance-none focus:outline-none focus:ring-0 focus:border-none"
+          className="absolute hidden text-[0px] border-none bg-transparent appearance-none focus:outline-none focus:ring-0 focus:border-none"
           type="file"
           name={id}
           ref={fileInputField}

@@ -46,6 +46,11 @@ export default function ContractConfirmation({ setStep }) {
             className="h-4 w-4 text-primary border-primary focus:ring-transparent rounded-[4px]"
           />
         </div>
+        {!check ? (
+          <p className="text-[12px] text-error font-semibold leading-5  ml-auto">
+            <bdi>فیلد الزامی است </bdi>
+          </p>
+        ) : null}
         <button
           onClick={hanleSubmit}
           className={`btn h-12 disabled:text-primary border-0 disabled:border disabled:border-primary bg-primary disabled:bg-white hover:bg-[#d85241] text-[#fff] active:bg-primary focus:bg-primary w-full rounded-lg text-base md:text-xl font-normal 

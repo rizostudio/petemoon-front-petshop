@@ -60,6 +60,7 @@ export default function NationalInfo({
           py={"3"}
           dir={"rtl"}
         >
+          <option className="hidden" selected value={""}></option>
           <option value={"مرد"}>مرد</option>
           <option value={"زن"}>زن</option>
         </FloatLabelInput>

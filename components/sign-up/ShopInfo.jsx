@@ -62,7 +62,7 @@ export default function ShopInfo({ errors, setStep, handleChange, values }) {
         </FloatLabelInput>
         {/* </select> */}
         {errors.province && (
-          <p className="text-[12px] text-error font-semibold leading-5 mt-1">
+          <p className="text-[12px] text-error font-semibold leading-5 ml-auto ">
             <bdi>{errors.province}</bdi>
           </p>
         )}
