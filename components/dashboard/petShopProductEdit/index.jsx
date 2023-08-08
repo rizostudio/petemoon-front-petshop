@@ -27,9 +27,25 @@ export default function EditProduct({ query }) {
     getData();
   }, [query]);
   const product = Yup.object().shape({
-    price: Yup.string().required("فیلد الزامی است"),
-    inventory: Yup.string().required("فیلد الزامی است"),
-    price_after_sale: Yup.string(),
+    price: Yup.string()
+      .required("فیلد الزامی است")
+      .length(8, "قیمت بیشتذ از ۸ رقم"),
+    inventory: Yup.string()
+      .required("فیلد الزامی است")
+      .test(
+        "len",
+        " موجودی باید کمتر از ۴ رقم باشد",
+        (val) =>
+          val != undefined &&
+          (val.length == 0 || (val.length >= 1 && val.length <= 4))
+      ),
+    price_after_sale: Yup.string().test(
+      "len",
+      "قیمت باید کمتر از ۸ کاراکتر باشد",
+      (val) =>
+        val != undefined &&
+        (val.length == 0 || (val.length >= 2 && val.length <= 8))
+    ),
   });
   const formik = useFormik({
     enableReinitialize: true,
@@ -57,14 +73,14 @@ export default function EditProduct({ query }) {
         {/*Heading for mobile */}
         <HeadingForMobile data={data} />
         {/* Summary box */}
-        <div className="w-full flex flex-col lg:flex-row lg:justify-evenly items-stretch py-5 lg:py-10 border-b-[2px] border-secondary">
+        <div className="w-full flex flex-col lg:flex-row lg:justify-evenly items-stretch py-5 lg:py-10 border-b-[2px] ">
           {/* Gallery */}
-          <div className="self-center w-full lg:w-[450px] h-[200px] lg:h-[400px] rounded-[5px] border-[2px] border-primary solid">
+          <div className="self-center w-full lg:w-[450px] h-[200px] lg:h-[400px] rounded-[5px]  ">
             <Image
               style={{ width: "100%", height: "100%" }}
               width={100}
               height={100}
-              src={`https://api.petemoon.com${data.picture_url}`}
+              src={`https://api.petemoon.com${data.picture}`}
             />
           </div>
           <div className="xl:w-full flex flex-col lg:mr-10">
@@ -156,13 +172,16 @@ export default function EditProduct({ query }) {
                       type="number"
                       value={formik.values.price}
                       onChange={formik.handleChange}
-                      className="text-2xl text-primary font-medium leading-10 opacity-90 w-[100px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
+                      className="text-2xl text-primary font-medium leading-10 opacity-90 w-[180px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
                     />
                     <p className="text-sm text-primary font-normal leading-7">
                       <bdi>تومان</bdi>
                     </p>
                   </div>
                 </div>
+                <p className="text-[12px] text-error font-semibold leading-5 ml-auto ">
+                  <bdi>{formik.errors.price}</bdi>
+                </p>
                 <div className="flex items-center justify-between w-full my-2 px-5 py-0.5 border-[1px] border-primary rounded-[15px]">
                   <p className="text-lg text-primary font-bold leading-7">
                     <bdi>قیمت با تخفیف را وارد نمایید:</bdi>
@@ -173,13 +192,16 @@ export default function EditProduct({ query }) {
                       type="number"
                       value={formik.values.price_after_sale}
                       onChange={formik.handleChange}
-                      className="text-2xl text-primary font-medium leading-10 opacity-90 w-[100px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
+                      className="text-2xl text-primary font-medium leading-10 opacity-90 w-[180px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
                     />
                     <p className="text-sm text-primary font-normal leading-7">
                       <bdi>تومان</bdi>
                     </p>
                   </div>
                 </div>
+                <p className="text-[12px] text-error font-semibold leading-5 ml-auto ">
+                  <bdi>{formik.errors.price_after_sale}</bdi>
+                </p>
                 <div className="flex items-center justify-between w-full my-2 px-5 py-0.5 border-[1px] border-primary rounded-[15px]">
                   <p className="text-lg text-primary font-bold leading-7">
                     <bdi>موجودی را وارد نمایید:</bdi>
@@ -190,16 +212,19 @@ export default function EditProduct({ query }) {
                       value={formik.values.inventory}
                       onChange={formik.handleChange}
                       type="number"
-                      className="text-2xl text-primary font-medium leading-10 opacity-90 w-[100px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
+                      className="text-2xl text-primary font-medium leading-10 opacity-90 w-[180px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
                     />
                     <p className="text-sm text-primary font-normal leading-7">
                       <bdi>عدد</bdi>
                     </p>
                   </div>
                 </div>
+                <p className="text-[12px] text-error font-semibold leading-5 ml-auto ">
+                  <bdi>{formik.errors.inventory}</bdi>
+                </p>
                 <button
                   onClick={formik.handleSubmit}
-                  className="text-base text-white font-bold leading-7 w-full px-5 py-3 mt-5 bg-primary rounded-[15px]"
+                  className="text-base hover:bg-[#d85241] text-white font-bold leading-7 w-[50%] px-5 py-3 mt-5 bg-primary mr-auto rounded-[5px]"
                 >
                   <bdi>ویرایش محصول</bdi>
                 </button>
@@ -220,13 +245,16 @@ export default function EditProduct({ query }) {
                   type="number"
                   value={formik.values.price}
                   onChange={formik.handleChange}
-                  className="text-base lg:text-2xl text-primary font-medium leading-10 opacity-90 w-[100px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
+                  className="text-base lg:text-2xl text-primary font-medium leading-10 opacity-90 w-[180px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
                 />
                 <p className="text-sm text-primary font-normal leading-7">
                   <bdi>تومان</bdi>
                 </p>
               </div>
             </div>
+            <p className="text-[12px] text-error font-semibold leading-5 ml-auto ">
+              <bdi>{formik.errors.price}</bdi>
+            </p>
             <div className="flex items-center justify-between w-full my-2 px-5 py-0.5 border-[1px] border-primary rounded-[15px]">
               <p className="text-base lg:text-lg text-primary font-bold leading-7">
                 <bdi>قیمت با تخفیف را وارد نمایید:</bdi>
@@ -237,10 +265,13 @@ export default function EditProduct({ query }) {
                   type="number"
                   value={formik.values.price_after_sale}
                   onChange={formik.handleChange}
-                  className="text-base lg:text-2xl text-primary font-medium leading-10 opacity-90 w-[100px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
+                  className="text-base lg:text-2xl text-primary font-medium leading-10 opacity-90 w-[180px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
                 />
                 <p className="text-sm text-primary font-normal leading-7">
                   <bdi>تومان</bdi>
+                </p>
+                <p className="text-[12px] text-error font-semibold leading-5 ml-auto ">
+                  <bdi>{formik.errors.price_after_sale}</bdi>
                 </p>
               </div>
             </div>
@@ -254,7 +285,7 @@ export default function EditProduct({ query }) {
                   value={formik.values.inventory}
                   onChange={formik.handleChange}
                   type="number"
-                  className="text-base lg:text-2xl text-primary font-medium leading-10 opacity-90 w-[100px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
+                  className="text-base lg:text-2xl text-primary font-medium leading-10 opacity-90 w-[180px] bg-transparent appearance-none border-none focus:outline-none focus:ring-0 focus:border-none peer"
                 />
                 <p className="text-sm text-primary font-normal leading-7">
                   <bdi>عدد</bdi>
@@ -262,9 +293,12 @@ export default function EditProduct({ query }) {
               </div>
             </div>
           </div>
+          <p className="text-[12px] text-error font-semibold leading-5 ml-auto ">
+            <bdi>{formik.errors.inventory}</bdi>
+          </p>
           <button
             onClick={formik.handleSubmit}
-            className="text-base text-white font-bold leading-7 w-full px-5 py-3 mt-5 bg-primary rounded-[15px]"
+            className="text-base hover:bg-[#d85241] text-white font-bold leading-7 w-full px-5 py-3 mt-5 bg-primary rounded-[15px]"
           >
             <bdi>ویرایش محصول</bdi>
           </button>

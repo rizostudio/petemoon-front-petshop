@@ -46,11 +46,11 @@ export default function OrderItemsForDesktop({ data }) {
                 <p>
                   <bdi>تاریخ</bdi>
                 </p>
-                <Image
+                {/* <Image
                   src={downArrowBlack_Icon}
                   alt="Down Arrow Icon"
                   className="mr-1.5 cursor-pointer"
-                />
+                /> */}
               </div>
             </th>
             <th className="py-3">
@@ -58,11 +58,11 @@ export default function OrderItemsForDesktop({ data }) {
                 <p>
                   <bdi>مجموع خرید (تومان)</bdi>
                 </p>
-                <Image
+                {/* <Image
                   src={downArrowBlack_Icon}
                   alt="Down Arrow Icon"
                   className="mr-1.5 cursor-pointer"
-                />
+                /> */}
               </div>
             </th>
             <th className="py-3">
@@ -70,11 +70,11 @@ export default function OrderItemsForDesktop({ data }) {
                 <p>
                   <bdi>وضعیت سفارش</bdi>
                 </p>
-                <Image
+                {/* <Image
                   src={downArrowBlack_Icon}
                   alt="Down Arrow Icon"
                   className="mr-1.5 cursor-pointer"
-                />
+                /> */}
               </div>
             </th>
             <th className="py-3">شناسه سفارش</th>

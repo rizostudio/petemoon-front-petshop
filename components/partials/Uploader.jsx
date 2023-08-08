@@ -57,7 +57,7 @@ const Uploader = ({
         <div className="flex flex-col items-center">
           <Image src={upload_Icon} alt="Upload Icon" />
           <p className="text-sm text-center text-primary font-medium leading-6 mt-2.5">
-            <bdi>با کلیلک بر این قسمت فایل را انتخاب و بار گزاری نمایید</bdi>
+            <bdi>با کلیک بر این قسمت فایل را انتخاب و بار گزاری نمایید</bdi>
           </p>
         </div>
         <button
