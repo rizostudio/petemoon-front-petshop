@@ -27,9 +27,9 @@ export default function ShopInfo({ errors, setStep, handleChange, values }) {
   return (
     <div
       // onSubmit={formik.handleSubmit}
-      className="w-full h-[60%] lg:h-[60%] lg:w-[80%]"
+      className="w-full h-[60%] lg:h-[60%] lg:w-[100%]"
     >
-      <div className="flex flex-col h-full items-center justify-between">
+      <div className="flex flex-col h-full space-y-3 items-center space-y-3 justify-between">
         <FloatLabelInput
           type={"text"}
           placeholder={"نام فروشگاه"}
@@ -54,6 +54,7 @@ export default function ShopInfo({ errors, setStep, handleChange, values }) {
           list="provinces"
           h={"h-12"}
         >
+          <option selected className="hidden"></option>
           {data.map((item) => (
             <option id={item.id} key={item.id}>
               {item.name}
@@ -76,6 +77,7 @@ export default function ShopInfo({ errors, setStep, handleChange, values }) {
           required={true}
           h={"h-12"}
         >
+          <option selected className="hidden"></option>
           {cities.map((item) => (
             <option id={item.id} key={item.id}>
               {item.name}

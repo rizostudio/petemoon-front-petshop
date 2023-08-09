@@ -20,8 +20,8 @@ export default function NationalInfo({
     }
   };
   return (
-    <div className="w-full min-h-[50%]  lg:w-[80%]">
-      <div className="flex flex-col h-full items-center justify-between">
+    <div className="w-full min-h-[40%] space-y-3 lg:w-[100%]">
+      <div className="flex flex-col h-full items-center  justify-between">
         <FloatLabelInput
           type={"text"}
           placeholder={"نام"}
