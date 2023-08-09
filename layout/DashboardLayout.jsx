@@ -20,6 +20,8 @@ import MessageWhite_Icon from "../assets/common/messageWhiteIcon.svg";
 import SupportWhite_Icon from "../assets/common/supportWhiteIcon.svg";
 import { getOverview } from "@/services/overview/getOverview";
 import AuthContext from "@/store/AuthCtx/AuthContext";
+import { isLogin, refreshTokenLS, userDataStorage } from "@/localStorage/auth";
+import { logout } from "@/services/auth/logout";
 const DashboardLayout = ({ children }) => {
   const [openly, setOpenly] = useState(true); //for open and close dashboard in mobile
   const router = useRouter();
@@ -44,6 +46,15 @@ const DashboardLayout = ({ children }) => {
   }, [authCtx]);
   const openHandler = () => {
     setOpenly(true);
+  };
+  const handleLogout = async () => {
+    const response = await logout();
+    if (response.success) {
+      refreshTokenLS.remove();
+      userDataStorage.remove();
+      isLogin.remove();
+      router.push("/auth/login");
+    }
   };
   //dashboard menu
   const menuArr = [
@@ -212,6 +223,7 @@ const DashboardLayout = ({ children }) => {
           </div>
           {/* logout */}
           <div
+            onClick={handleLogout}
             className={clsx(
               "flex cursor-pointer justify-between items-center self-center w-3/4 mx-auto mt-2 py-2 rounded-[12px]",
               {

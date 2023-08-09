@@ -9,7 +9,7 @@ export default function CommercialInfo({
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const handleSubmit = () => {
-    if (values.sheba_number && values.estimated_item_count) {
+    if (!errors.sheba_number && !errors.estimated_item_count) {
       setStep((prev) => prev + 1);
     }
   };

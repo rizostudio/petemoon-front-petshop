@@ -18,7 +18,7 @@ export default function SignUpForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const toggleSubmitState = () => setIsSubmitting((currState) => !currState);
   const router = useRouter();
-  const [step, setStep] = useState(5);
+  const [step, setStep] = useState(1);
   const backHandler = () => {
     step > 1 ? setStep(step - 1) : router.push("/");
   };

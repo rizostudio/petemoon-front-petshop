@@ -19,7 +19,11 @@ export default function ProductList({ data }) {
             <Image
               width={100}
               height={100}
-              src={`https://api.petemoon.com${item.picture_url}`}
+              src={
+                item.picture_url
+                  ? `https://api.petemoon.com${item.picture_url}`
+                  : ""
+              }
               alt="Product Picture"
               className="w-full h-full object-cover"
             />
