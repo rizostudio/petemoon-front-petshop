@@ -28,7 +28,7 @@ export default function ProductCardForDesktop({ item }) {
           src={
             item.picture
               ? `https://api.petemoon.com${item.picture}`
-              : product_Image
+              : "/assets/common/product.jpg"
           }
           alt="Product Image"
           className="w-full h-full object-cover"
