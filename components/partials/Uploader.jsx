@@ -52,7 +52,7 @@ const Uploader = ({
   };
 
   return (
-    <div className="flex flex-col items-center justify-between">
+    <div className="flex flex-col items-center justify-between my-5">
       <div className="flex flex-col items-center justify-between relative w-full h-[200px] py-5 px-10 bg-[#EA63520D] border-[1px] border-dashed border-primary  rounded-[10px]">
         <div className="flex flex-col items-center">
           <Image src={upload_Icon} alt="Upload Icon" />

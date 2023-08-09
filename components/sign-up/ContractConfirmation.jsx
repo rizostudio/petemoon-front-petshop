@@ -10,7 +10,7 @@ export default function ContractConfirmation({ setStep }) {
   return (
     <div
       // onSubmit={formik.handleSubmit}
-      className="w-full h-[60%] lg:h-[50%] lg:w-[80%]"
+      className="w-full h-[60%] lg:h-[50%] lg:w-[100%]"
     >
       <div className="flex flex-col h-full items-center justify-between">
         <div className="w-full h-[75%] p-3 lg:p-5 border-[1px] border-gray-400 rounded-[12px] overflow-y-scroll">

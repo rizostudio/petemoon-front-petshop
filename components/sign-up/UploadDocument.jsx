@@ -13,11 +13,11 @@ export default function UploadDocument({
   return (
     <form
       // onSubmit={formik.handleSubmit}
-      className="w-full h-[60%] lg:h-[50%] lg:w-[80%]"
+      className="w-full h-[60%] lg:h-[50%] lg:w-[100%]"
     >
       <div className="flex flex-col h-full items-center justify-between">
         {/* toggle between Tabs */}
-        <div className="tabs self-center flex flex-row justify-center  w-full text-xs xl:text-sm text-black font-medium leading-6 my-3">
+        <div className="tabs self-center flex flex-row justify-center w-full  w-full text-xs xl:text-sm text-black font-medium leading-6 my-3">
           <a
             className={clsx("tab tab-bordered", {
               "tab-active": tab == "national_card",
