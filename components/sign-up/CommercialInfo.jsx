@@ -16,7 +16,7 @@ export default function CommercialInfo({
   return (
     <div
       // onSubmit={formik.handleSubmit}
-      className="w-full h-[60%] lg:h-[30%] lg:w-[80%]"
+      className="w-full h-[full] lg:h-[70%] lg:w-[80%]"
     >
       <div className="flex flex-col h-full items-center justify-between">
         <FloatLabelInput

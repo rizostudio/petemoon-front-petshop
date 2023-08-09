@@ -10,7 +10,7 @@ import leftArrow from "@/assets/common/leftArrow.png";
 
 export default function SignUpLaypout({ children, backHandler, title, step }) {
   return (
-    <div className="flex flex-col lg:flex-row-reverse min-h-screen w-full bg-white lg:bg-[#F1F1F1] relative">
+    <div className="flex flex-col lg:flex-row-reverse h-screen w-full bg-white lg:bg-[#F1F1F1] relative">
       {/* <div className="avatar absolute left-0 bottom-0 lg:hidden">
         <div className="w-screen opacity-50">
           <img src={backgroundLines.src} />
@@ -23,18 +23,15 @@ export default function SignUpLaypout({ children, backHandler, title, step }) {
           </div>
         </div> */}
         <div className="flex justify-center z-10">
-          <div className="w-[90%] h-full">
-            <img
-              className="w-[90%] h-full "
-              src={"/assets/signup/signupImage.png"}
-            />
+          <div className="w-[90%] h-[80vh]">
+            <img className="h-full" src={"/assets/signup/signupImage.png"} />
           </div>
         </div>
       </div>
-      <div className="flex flex-col lg:w-[42%]  min-h-screen  lg:bg-white  justify-between items-center   z-10 px-8 lg:px-14 lg:py-16 py-12">
-        <div className="w-full  flex flex-col justify-between lg:justify-center items-center">
-          <div className="flex w-full justify-end ">
-            {1 < step < 6 ? (
+      <div className="flex flex-col lg:w-[42%] lg:bg-white h-full justify-between items-center z-10 px-8 lg:px-14 lg:py-16 ">
+        <div className="w-full h-[40%] lg:h-[30%] flex flex-col justify-between lg:justify-center items-center">
+          <div className="flex w-full justify-end lg:hidden">
+            {step < 6 ? (
               <button
                 onClick={backHandler}
                 className="btn btn-square btn-md md:btn-lg border-0 rounded-2xl bg-[#ECA299] active:bg-primary focus:bg-primary"

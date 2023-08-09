@@ -20,7 +20,7 @@ export default function NationalInfo({
     }
   };
   return (
-    <div className="w-full h-[60%] lg:h-[50%] lg:w-[80%]">
+    <div className="w-full min-h-[50%]  lg:w-[80%]">
       <div className="flex flex-col h-full items-center justify-between">
         <FloatLabelInput
           type={"text"}
