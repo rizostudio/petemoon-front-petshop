@@ -1,7 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-
+import clsx from "clsx";
+import { useRouter } from "next/router";
 //media
 import home_Icon from "../../assets/common/homeIcon2.svg";
 import category_Icon from "../../assets/common/categoryIcon.svg";
@@ -14,6 +15,7 @@ import prodcutsGray_Icon from "../../assets/common/shopGray.svg";
 import productAddGray_Icon from "../../assets/common/shop-addGray.svg";
 
 const BottomNavigation = () => {
+  const router = useRouter();
   const menuArr = [
     { id: "products", name: "محصولات", icon: prodcutsGray_Icon },
     { id: "orders", name: "سفارش ها", icon: ordersGray_Icon },
@@ -35,7 +37,15 @@ const BottomNavigation = () => {
           className="flex flex-col items-center"
         >
           <Image src={item.icon} alt="Home Icon" />
-          <h3 className="text-sm text-center text-gray-400 font-medium leading-5 mt-1">
+          <h3
+            className={clsx(
+              `text-sm text-center  font-medium leading-5 mt-1 `,
+              {
+                "text-primary": router.asPath === `/dashboard/${item.id}`,
+                "text-gray-400": router.asPath !== `/dashboard/${item.id}`,
+              }
+            )}
+          >
             <bdi>{item.name}</bdi>
           </h3>
         </Link>
