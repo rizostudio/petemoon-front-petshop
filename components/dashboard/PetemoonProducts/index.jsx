@@ -26,7 +26,8 @@ import ProductList from "./ProductList";
 import { getPetemoonProducts } from "@/services/petemoonProducts/getPetemoonProducts";
 import { getProductFilter } from "@/services/petemoonProducts/getProductFilters";
 import { search } from "@/services/petemoonProducts/search";
-
+import { logout } from "@/services/auth/logout";
+import { isLogin, refreshTokenLS, userDataStorage } from "@/localStorage/auth";
 export default function PetemoonProducts() {
   const router = useRouter();
   const [data, setData] = useState([]);
@@ -79,6 +80,15 @@ export default function PetemoonProducts() {
       performSearch(e.target.value);
     }
   };
+  const handleLogout = async () => {
+    const response = await logout();
+    if (response.success) {
+      refreshTokenLS.remove();
+      userDataStorage.remove();
+      isLogin.remove();
+      router.push("/auth/login");
+    }
+  };
   return (
     <div>
       {/* Filter Page */}
@@ -117,7 +127,10 @@ export default function PetemoonProducts() {
               />
               <Image src={search_Icon} alt="SearchIcon" />
             </div>
-            <div className="flex flex-col items-center justify-center w-1/5 h-full bg-[#F2CDC8] rounded-[15px]">
+            <div
+              onClick={handleLogout}
+              className="flex flex-col items-center justify-center w-1/5 h-full bg-[#F2CDC8] rounded-[15px]"
+            >
               <Image src={logout_Icon} alt="LogOut Icon" />
             </div>
           </div>

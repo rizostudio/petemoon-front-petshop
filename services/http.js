@@ -33,7 +33,7 @@ httpRequest.interceptors.response.use(
             refreshTokenLS.remove();
             userDataStorage.remove();
             isLogin.remove();
-            window.location.href = "https://app.petemoon.com/auth/login";
+            window.location.href = "https://seller.petemoon.com/auth/login";
           }
         });
     }

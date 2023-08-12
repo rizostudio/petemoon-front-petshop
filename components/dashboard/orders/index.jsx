@@ -12,7 +12,9 @@ import logout_Icon from "@/assets/common/logoutIconRed.svg";
 import OrderItemsForMobile from "./OrderItemsForMobile";
 import OrderItemsForDesktop from "./OrderItemsForDesktop";
 import { getListorders } from "@/services/order/getListOfOrders";
+import { logout } from "@/services/auth/logout";
 
+import { isLogin, refreshTokenLS, userDataStorage } from "@/localStorage/auth";
 export default function OrdersList() {
   const router = useRouter();
   const [data, setData] = useState([]);
@@ -51,6 +53,15 @@ export default function OrdersList() {
     };
     getDta();
   }, [router.query]);
+  const handleLogout = async () => {
+    const response = await logout();
+    if (response.success) {
+      refreshTokenLS.remove();
+      userDataStorage.remove();
+      isLogin.remove();
+      router.push("/auth/login");
+    }
+  };
   return (
     <div>
       {/* Filter Page */}
@@ -80,15 +91,24 @@ export default function OrdersList() {
         >
           {/* Heading for mobiel */}
           <div className="lg:hidden flex items-center">
-            <div className="flex h-12 w-full px-5 py-3 bg-[#F2CDC8] rounded-[15px]">
-              <input
-                type="text"
-                placeholder="جستجوی محصول، فروشگاه و..."
-                className="h-full w-full text-base text-right text-white placeholder:text-primary placeholder:opacity-50 font-bold border-none bg-transparent appearance-none focus:ring-0 focus:outline-none focus:border-none peer"
-              />
-              <Image src={search_Icon} alt="SearchIcon" />
+            <div className="w-full flex">
+              <p className="text-lg ml-2">اعتبار فروشگاه : </p>
+              <p className="text-primary text-lg"> 2.250.000 تومان</p>
             </div>
-            <div className="p-3 bg-[#F2CDC8] rounded-[15px] mr-1">
+            <Link href={"/dashboard/support"}>
+              <div className="p-3 bg-[#F2CDC8] rounded-[15px] mr-1">
+                <Image
+                  width={30}
+                  height={30}
+                  src={"/assets/common/headphones.svg"}
+                  alt="LogOut Icon"
+                />
+              </div>
+            </Link>
+            <div
+              onClick={handleLogout}
+              className="p-3 bg-[#F2CDC8] rounded-[15px] mr-1"
+            >
               <Image src={logout_Icon} alt="LogOut Icon" />
             </div>
           </div>

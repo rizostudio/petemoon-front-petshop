@@ -36,8 +36,8 @@ export default function SignUpForm() {
     address: Yup.string().required("فیلد الزامی است"),
     store_name: Yup.string().required("فیلد الزامی است"),
     sheba_number: Yup.string()
-      .min(26, " شماره شبا ۲۶ رقمی است")
-      .max(26, "شماره شبا ۲۶ رقمی است")
+      .min(24, " شماره شبا ۲۶ رقمی است")
+      .max(24, "شماره شبا ۲۶ رقمی است")
       .required("فیلد الزامی است"),
     estimated_item_count: Yup.string().required("فیلد الزامی است"),
     national_card: Yup.string().required("فیلد الزامی است"),

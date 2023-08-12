@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import clsx from "clsx";
 import { v4 } from "uuid";
+import Link from "next/link";
 
 //media
 import product_Image from "@/assets/common/ProductPic1.svg";
@@ -9,8 +10,8 @@ import more_Icon from "@/assets/common/more.svg";
 import TrashRed_Icon from "../../../assets/common/TrashIconRed.svg";
 import CloseButton_Icon from "../../../assets/common/close-button.svg";
 import Edit2_Icon from "../../../assets/common/EditIcon2.svg";
-
-export default function ProductsListForMobile({ data }) {
+import { deleteSingleProduct } from "@/services/petShopProducts/deleteSingleProduct";
+export default function ProductsListForMobile({ data, setDeleted }) {
   const [price, setPrice] = useState("");
   const [inventory, setInventory] = useState("");
   const [editMode, setEditMode] = useState({ status: false, index: "" });
@@ -26,6 +27,15 @@ export default function ProductsListForMobile({ data }) {
       console.log(response.success);
     }
   };
+  const deleteHandlear = async (id) => {
+    const response = await deleteSingleProduct(id);
+    if (response.success) {
+      console.log(response);
+      setDeleted((prev) => !prev);
+    } else {
+      console.log(response.errors);
+    }
+  };
   return (
     <div className="flex lg:hidden flex-col mt-4">
       {data &&
@@ -37,9 +47,9 @@ export default function ProductsListForMobile({ data }) {
             <div className="w-[100px] h-[100px]  rounded-[12px] overflow-hidden">
               <Image
                 src={
-                  item.picture
-                    ? `https://api.petemoon.com${item.picture}`
-                    : product_Image
+                  item.picture_url && item.picture_url !== null
+                    ? `https://api.petemoon.com${item.picture_url}`
+                    : "/assets/common/product.jpg"
                 }
                 width={100}
                 height={100}
@@ -50,7 +60,7 @@ export default function ProductsListForMobile({ data }) {
             <div className="flex flex-col justify-between w-full mr-3.5">
               <div className="flex flex-row justify-between items-start w-full">
                 <h1 className="text-base text-black font-medium leading-5">
-                  <bdi>{item.title}</bdi>
+                  <bdi>{item.name}</bdi>
                 </h1>
                 <label htmlFor="More-modal">
                   <Image src={more_Icon} alt="More Icon" className="" />
@@ -58,12 +68,12 @@ export default function ProductsListForMobile({ data }) {
               </div>
               <div className="flex justify-between w-full mt-2">
                 <div className="flex flex-col">
-                  <p className="text-xs text-primary font-medium leading-4 opacity-90 mb-2">
+                  {/* <p className="text-xs text-primary font-medium leading-4 opacity-90 mb-2">
                     <bdi>{`شناسه: ${item.code}`}</bdi>
-                  </p>
+                  </p> */}
                   <p
                     className={clsx(
-                      "text-xs text-primary font-medium leading-4 opacity-90",
+                      " text-primary text-md font-medium leading-4 opacity-90",
                       {
                         "border-b-[1px] border-gray-800":
                           editMode.status && editMode.index == index,
@@ -73,12 +83,12 @@ export default function ProductsListForMobile({ data }) {
                     <bdi>
                       موجودی:
                       <span
-                        className={clsx("mr-1", {
+                        className={clsx("mr-1 ", {
                           inline: editMode.status == false,
                           hidden: editMode.status && editMode.index == index,
                         })}
                       >
-                        {item.availabilityAmount}
+                        {item.inventory}
                       </span>
                       <input
                         type="number"
@@ -158,21 +168,23 @@ export default function ProductsListForMobile({ data }) {
                       htmlFor="More-modal"
                       className="w-full flex flex-row items-center px-9 py-3"
                     >
-                      <button
-                        // htmlFor='More-modal'
-                        // onClick={() => setEditMode({status:true, index})}
-                        className="flex flex-row"
-                      >
-                        <Image
-                          src={Edit2_Icon}
-                          alt="EditIcon"
-                          width={15}
-                          height={15}
-                        />
-                        <p className="text-base text-black font-medium leading-8 mr-2">
-                          ویرایش محصول
-                        </p>
-                      </button>
+                      <Link href={`/dashboard/products/edit/${item.id}`}>
+                        <button
+                          // htmlFor='More-modal'
+                          // onClick={() => setEditMode({status:true, index})}
+                          className="flex flex-row"
+                        >
+                          <Image
+                            src={Edit2_Icon}
+                            alt="EditIcon"
+                            width={15}
+                            height={15}
+                          />
+                          <p className="text-base text-black font-medium leading-8 mr-2">
+                            ویرایش محصول
+                          </p>
+                        </button>
+                      </Link>
                     </label>
                   </div>
                 </label>
@@ -197,10 +209,12 @@ export default function ProductsListForMobile({ data }) {
                     <p className="text-base lg:text-xl text-gray-400 text-right font-medium leading-8 my-2 lg:my-5">
                       آیا از حذف این محصول از لیست محصول ها، اطمینان دارید؟
                     </p>
-                    <div className="flex flex-row items-center justify-between w-full lg:w-1/2">
+                    <div
+                      onClick={() => deleteHandlear(item.id)}
+                      className="flex flex-row items-center justify-between w-full lg:w-1/2"
+                    >
                       <label
                         htmlFor="Trash-modal"
-                        onClick={() => TrashHandler(index)}
                         className="w-full text-sm text-white text-center font-semibold py-3 lg:py-2 rounded-[5px] bg-error ml-2 border-[2px] solid border-error"
                       >
                         حذف محصول
