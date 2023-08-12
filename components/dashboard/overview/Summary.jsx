@@ -64,7 +64,7 @@ export default function Summary({ data }) {
             تعداد پیام های فروشگاه
           </p>
           <p className='text-xl lg:text-2xl text-[#3A4750] font-extrabold leading-10 mt-1.5 after:content-["عدد"] after:text-sm after:mr-2'>
-            <bdi>{data.messages ? data.messages : 0}</bdi>
+            <bdi>{data.messages?.length ? data.messages?.length : 0}</bdi>
           </p>
         </div>
         <p className="hidden lg:block text-base text-black font-noramal opacity-60 mt-4 self-end">

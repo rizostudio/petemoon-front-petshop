@@ -16,9 +16,9 @@ export default function AuthLayout({ children, text }) {
       <ToatContainer />
       <div className="flex flex-col lg:flex-row w-full bg-white min-h-screen max-h-auto lg:bg-[#F1F1F1]">
         <div className="flex relative justify-center items-center lg:hidden w-full p-10  z-10 from-primary via-primary to-[#acd4f7]">
-          <div className="absolute left-10 top-10 lg:hidden">
+          <div className="absolute left-10 top-10 lg:hidden ">
             <Link href={"https://petemoon.com"}>
-              <button className="btn btn-square btn-md md:btn-lg border-0 rounded-2xl bg-primary-light active:bg-primary-light focus:bg-primary-light">
+              <button className="btn btn-square btn-md md:btn-lg border-0 rounded-2xl   bg-primary">
                 <img src={leftArrow.src} className="w-[15%]" />
               </button>
             </Link>

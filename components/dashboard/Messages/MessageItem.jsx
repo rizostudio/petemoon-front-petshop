@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 //media
 import Trash_Icon from "../../../assets/common/trash.svg";
+import moment from "jalali-moment";
 export default function MessageItem({ item }) {
   return (
     <div className="w-full h-auto flex flex-col justify-between items-stretch my-2 lg:my-4 px-4 lg:px-10 py-2 lg:py-8 bg-white rounded-[15px] lg:rounded-3xl border-[1px] solid lg:border-none border-secondary lg:shadow-shadowB">
