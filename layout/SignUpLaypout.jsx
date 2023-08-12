@@ -38,7 +38,7 @@ export default function SignUpLaypout({ children, backHandler, title, step }) {
             {step < 6 ? (
               <button
                 onClick={backHandler}
-                className="btn w-full btn-square btn-md md:btn-lg border-0 rounded-2xl bg-[#ECA299] active:bg-primary mr-auto focus:bg-primary"
+                className="btn w-full btn-square btn-md md:btn-lg border-0 rounded-2xl bg-[#ECA299] hover:bg-primary"
               >
                 <img src={leftArrow.src} className="w-[15%]" />
               </button>
