@@ -56,13 +56,7 @@ export default function SingleProduct({ query }) {
           val != undefined &&
           (val.length == 1 || (val.length >= 1 && val.length <= 4))
       ),
-    price_after_sale: Yup.string().test(
-      "len",
-      "قیمت باید کمتر از ۸ کاراکتر باشد",
-      (val) =>
-        val != undefined &&
-        (val.length == 0 || (val.length >= 2 && val.length <= 8))
-    ),
+    price_after_sale: Yup.string().max(),
   });
   const formik = useFormik({
     enableReinitialize: true,

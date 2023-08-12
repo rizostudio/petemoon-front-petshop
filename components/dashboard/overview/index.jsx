@@ -41,7 +41,9 @@ export default function OverView() {
       <div className="lg:hidden flex items-center">
         <div className="w-full flex">
           <p className="text-lg ml-2">اعتبار فروشگاه : </p>
-          <p className="text-primary text-lg"> 2.250.000 تومان</p>
+          <p className="text-primary text-lg">
+            {(data.income ? data.income : 0).toLocaleString()}{" "}
+          </p>
         </div>
         <Link href={"/dashboard/support"}>
           <div className="p-3 bg-[#F2CDC8] rounded-[15px] mr-1">

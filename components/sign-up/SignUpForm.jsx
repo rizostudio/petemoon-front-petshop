@@ -14,6 +14,7 @@ import ContractConfirmation from "./ContractConfirmation";
 import UploadDocument from "./UploadDocument";
 //services
 import { Register } from "@/services/auth/signUp";
+import Link from "next/link";
 export default function SignUpForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const toggleSubmitState = () => setIsSubmitting((currState) => !currState);
@@ -160,14 +161,14 @@ export default function SignUpForm() {
               <span className="text-verify">تایید</span>، حساب کاربری شما فعال
               خواهد شد.
             </p>
-            <button
-              onClick={() => router.push("/dashboard")}
+            <Link
+              href={"https://petemoon.com"}
               className={`btn md:h-[12%] lg:h-[15%] border-0 bg-primary hover:bg-[#d85241] active:bg-primary focus:bg-primary w-full mt-4 lg:mt-0 rounded-lg text-base text-white md:text-xl font-normal ${
                 isSubmitting && "loading"
               }`}
             >
               بازگشت به صفحه اصلی
-            </button>
+            </Link>
           </div>
         </SignUpLaypout>
       );

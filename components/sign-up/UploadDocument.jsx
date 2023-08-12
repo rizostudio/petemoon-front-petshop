@@ -145,6 +145,10 @@ export default function UploadDocument({
           })()}
         </div>
 
+        <p className="text-[12px] text-gray-600 font-semibold leading-5  ml-auto">
+          <bdi>{"لطفا فایل تکراری اپلود نکنید"}</bdi>
+        </p>
+
         <button
           onClick={handleSubmit}
           // type="submit"

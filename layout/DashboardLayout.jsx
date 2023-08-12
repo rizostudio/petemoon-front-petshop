@@ -28,6 +28,7 @@ const DashboardLayout = ({ children }) => {
   const [Minify, setMinify] = useState(false); // for minify dashboard
   const [data, setData] = useState({});
   const [user, setuser] = useState({});
+
   const authCtx = useContext(AuthContext);
   useEffect(() => {
     const getDate = async () => {
@@ -184,7 +185,7 @@ const DashboardLayout = ({ children }) => {
                   </p>
                 </div>
                 {/* showing notification numbers for each section */}
-                {item.notification > 0 && (
+                {item.id === "my-messages" && (
                   <p
                     className={clsx(
                       "hidden absolute transition ease-in-out left-20 lg:relative lg:left-0 text-white text-center text-xs bg-primary px-[5px] py-[3px] rounded-[5px]",
@@ -194,7 +195,7 @@ const DashboardLayout = ({ children }) => {
                       }
                     )}
                   >
-                    {item.notification}
+                    {data.messages?.length ? data.messages?.length : 0}
                   </p>
                 )}
                 <Image

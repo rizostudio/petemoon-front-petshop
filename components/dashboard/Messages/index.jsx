@@ -7,14 +7,26 @@ import logout_Icon from "../../../assets/common/logoutIconRed.svg";
 import MessageItem from "./MessageItem";
 import { logout } from "@/services/auth/logout";
 import { isLogin, refreshTokenLS, userDataStorage } from "@/localStorage/auth";
+import { getOverview } from "@/services/overview/getOverview";
 export default function Messages() {
   const [messageList, setMessageList] = useState([]);
+  const [income, setIncom] = useState("");
   const router = useRouter();
   useEffect(() => {
     const getData = async () => {
       const response = await getListMessage();
       setMessageList(response.data);
     };
+    const getIncome = async () => {
+      const response = await getOverview();
+      if (response.success) {
+        console.log(response.data);
+        setIncom(response.data);
+      } else {
+        console.log(response.errors);
+      }
+    };
+    getIncome();
     getData();
   }, []);
   const handleLogout = async () => {
@@ -31,7 +43,10 @@ export default function Messages() {
       <div className="lg:hidden flex items-center">
         <div className="w-full flex">
           <p className="text-lg ml-2">اعتبار فروشگاه : </p>
-          <p className="text-primary text-lg"> 2.250.000 تومان</p>
+          <p className="text-primary text-lg">
+            {" "}
+            {(income.income ? income.income : 0).toLocaleString()}
+          </p>
         </div>
         <Link href={"/dashboard/support"}>
           <div className="p-3 bg-[#F2CDC8] rounded-[15px] mr-1">

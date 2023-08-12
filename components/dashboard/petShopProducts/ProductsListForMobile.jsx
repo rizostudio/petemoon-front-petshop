@@ -47,8 +47,8 @@ export default function ProductsListForMobile({ data, setDeleted }) {
             <div className="w-[100px] h-[100px]  rounded-[12px] overflow-hidden">
               <Image
                 src={
-                  item.picture_url && item.picture_url !== null
-                    ? `https://api.petemoon.com${item.picture_url}`
+                  item.picture && item.picture !== null
+                    ? `https://api.petemoon.com${item.picture}`
                     : "/assets/common/product.jpg"
                 }
                 width={100}
