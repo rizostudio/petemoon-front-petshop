@@ -12,11 +12,12 @@ import { editProduct } from "@/services/petShopProducts/editProduct";
 import Link from "next/link";
 import { deleteSingleProduct } from "@/services/petShopProducts/deleteSingleProduct";
 
-export default function ProductCardForDesktop({ item }) {
+export default function ProductCardForDesktop({ item, setDeleted }) {
   const deleteHandlear = async () => {
     const response = await deleteSingleProduct(item.id);
     if (response.success) {
       console.log(response);
+      setDeleted((prev) => !prev);
     } else {
       console.log(response.errors);
     }
@@ -26,8 +27,8 @@ export default function ProductCardForDesktop({ item }) {
       <td className="inline-block m-1 w-[100px] h-[100px] rounded-[12px] overflow-hidden">
         <Image
           src={
-            item.picture
-              ? `https://api.petemoon.com${item.picture}`
+            item.picture_url && item.picture_url !== null
+              ? `https://api.petemoon.com${item.picture_url}`
               : "/assets/common/product.jpg"
           }
           alt="Product Image"

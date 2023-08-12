@@ -6,7 +6,12 @@ import * as queryString from "@/services/queryString";
 //media
 import addProduct_Icon from "../../../assets/common/shop-addPrimaryIcon.svg";
 import ProductCardForDesktop from "./ProductCardForDesktop";
-export default function ProductsListForDesktop({ data, brand, petCategory }) {
+export default function ProductsListForDesktop({
+  data,
+  brand,
+  petCategory,
+  setDeleted,
+}) {
   const router = useRouter();
   const filterProducts = (title, slug) => {
     console.log(slug);
@@ -87,7 +92,11 @@ export default function ProductsListForDesktop({ data, brand, petCategory }) {
         <tbody className="text-base text-center text-black font-bold leading-7">
           {data &&
             data.map((item) => (
-              <ProductCardForDesktop key={item.id} item={item} />
+              <ProductCardForDesktop
+                setDeleted={setDeleted}
+                key={item.id}
+                item={item}
+              />
             ))}
         </tbody>
       </table>

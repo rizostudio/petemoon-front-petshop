@@ -35,6 +35,7 @@ export default function PetShopProducts() {
   const [petCategory, setPetCategory] = useState([]);
   // for change the color of choosen option in sorting
   const [sortValue, setSortValue] = useState("پرفروش ترین");
+  const [deleted, setDeleted] = useState(false);
   //Dynamic
   const [MainPageOpen, setMainPageOpen] = useState(true); //for open & close Main Page in mobile
   const [FilterPageOpen, setFilterPageOpen] = useState(false); //for open & close filter Page in mobile
@@ -49,7 +50,7 @@ export default function PetShopProducts() {
       }
     };
     getDate();
-  }, [router.query]);
+  }, [router.query, deleted]);
   useEffect(() => {
     const getData = async () => {
       const response = await getProductFilter();
@@ -117,12 +118,13 @@ export default function PetShopProducts() {
                       setMainPageOpen={setMainPageOpen}
                     />
                   </div>
-                  <ProductsListForMobile data={data} />
+                  <ProductsListForMobile setDeleted={setDeleted} data={data} />
                 </div>
                 <ProductsListForDesktop
                   brand={brand}
                   petCategory={petCategory}
                   data={data}
+                  setDeleted={setDeleted}
                 />
               </div>
             )}

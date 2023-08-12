@@ -15,14 +15,14 @@ export default function ProductList({ data }) {
           key={item.id}
           className="flex lg:flex-col items-stretch lg:justify-between w-full lg:w-[270px] p-4 lg:p-5 m-2 bg-white rounded-[15px] lg:rounded-[15px] shadow-shadowB"
         >
-          <div className="w-[120px] lg:w-full h-[120px] lg:h-[220px] overflow-hidden   rounded-[5px] lg:rounded-[25px]">
+          <div className="w-[120px] lg:w-full h-[120px] lg:h-[220px] overflow-hidden  ml-3 rounded-[5px] lg:rounded-[25px]">
             <Image
               width={100}
               height={100}
               src={
-                item.picture_url
+                item.picture_url && item.picture_url !== null
                   ? `https://api.petemoon.com${item.picture_url}`
-                  : ""
+                  : "/assets/common/product.jpg"
               }
               alt="Product Picture"
               className="w-full h-full object-cover"

@@ -3,17 +3,22 @@ import Image from "next/image";
 import clsx from "clsx";
 import { v4 } from "uuid";
 import moment from "jalali-moment";
-
+import Link from "next/link";
+import { useRouter } from "next/router";
 //media
 import BagTick_Icon from "../../../assets/common/bag-tick2.svg";
 import CartTotal_Icon from "../../../assets/common/card-receive2.svg";
 import search_Icon from "../../../assets/common/searchIcon3.svg";
 import logout_Icon from "../../../assets/common/logoutIconRed.svg";
+
 // import datebg from "../../../assets/common/date.png";
 import { finantialReport } from "@/services/finantialReport/finantialReport";
+import { logout } from "@/services/auth/logout";
+import { isLogin, refreshTokenLS, userDataStorage } from "@/localStorage/auth";
 const startDate = new Date("2022-04-04");
 const endDate = new Date();
 export default function index() {
+  const router = useRouter();
   const [data, setData] = useState([
     {
       month: "فروردین",
@@ -242,26 +247,44 @@ export default function index() {
     };
     getData();
   }, [monthSelected]);
+  const handleLogout = async () => {
+    const response = await logout();
+    if (response.success) {
+      refreshTokenLS.remove();
+      userDataStorage.remove();
+      isLogin.remove();
+      router.push("/auth/login");
+    }
+  };
   return (
     <div className="h-screen lg:h-full flex flex-col items-stretch">
       {/* Heading for mobile  */}
       <div className="lg:hidden flex items-center">
-        <div className="flex h-12 w-full px-5 py-3 bg-[#F2CDC8] rounded-[15px]">
-          <input
-            type="text"
-            placeholder="جستجوی محصول، فروشگاه و..."
-            className="h-full w-full text-base text-right text-white placeholder:text-primary placeholder:opacity-50 font-bold border-none bg-transparent appearance-none focus:ring-0 focus:outline-none focus:border-none peer"
-          />
-          <Image src={search_Icon} alt="SearchIcon" />
+        <div className="w-full flex">
+          <p className="text-lg ml-2">اعتبار فروشگاه : </p>
+          <p className="text-primary text-lg"> 2.250.000 تومان</p>
         </div>
-        <div className="p-3 bg-[#F2CDC8] rounded-[15px] mr-1">
+        <Link href={"/dashboard/support"}>
+          <div className="p-3 bg-[#F2CDC8] rounded-[15px] mr-1">
+            <Image
+              width={30}
+              height={30}
+              src={"/assets/common/headphones.svg"}
+              alt="LogOut Icon"
+            />
+          </div>
+        </Link>
+        <div
+          onClick={handleLogout}
+          className="p-3 bg-[#F2CDC8] rounded-[15px] mr-1"
+        >
           <Image src={logout_Icon} alt="LogOut Icon" />
         </div>
       </div>
       {/* summary Information */}
       <div className="flex flex-col lg:flex-row items-stretch lg:justify-center mt-10">
         {/* orders sum */}
-        <div className="order-2 lg:order-1 w-full lg:w-1/4 h-full flex flex-row-reverse lg:flex-col justify-between items-stretch bg-white px-6 py-5 lg:py-7.5  rounded-[15px] lg:rounded-[25px] shadow-shadowB ">
+        <div className="order-2 lg:order-1 w-full lg:w-1/4 h-full flex flex-row-reverse lg:flex-col justify-between items-stretch bg-white px-6 py-5 lg:py-7.5  rounded-[15px] lg:rounded-[25px] shadow-shadowB my-2 ">
           <Image src={CartTotal_Icon} alt="CartTotalIcon" />
           <div className="text-right flex flex-col lg:mt-10">
             <p className="text-base lg:text-lg text-[#3A4750] font-bold leading-6">
